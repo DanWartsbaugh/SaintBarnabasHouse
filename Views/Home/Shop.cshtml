@@ -1,0 +1,24 @@
+@{
+    ViewData["Title"] = "Saint Barnabas House Shop";
+}
+<div class="shop-main text-center">
+    <h2 class="display-6 text-center">Saint Barnabas House Craft Shop</h2>
+    <div class="shop-categories">
+        <button class="shop-cats-left" onclick="location.href='@Url.Action("Index")'"></button>
+        <button class="shop-cats-mid" onclick="location.href='@Url.Action("Blog")'"></button>
+        <button class="shop-cats-right" onclick="location.href='@Url.Action("Event")'"></button>
+        @* for the opening animation *@
+        <div class="overlay"></div>
+    </div>
+    <div class="cat-titles d-flex ">
+        <h4>INDEX</h4>
+        <h4 style="margin-top:30px;">BLOG</h4>
+        <h4 style="margin-top:60px">EVENTS</h4>
+    </div>
+    <form class="search-form" asp-action="">
+        <div class="search-wrap">
+            <input class="search-bar" type="search" name="search-shop" id="" placeholder="Search for something!">
+        </div>
+        <input class="bttn" type="submit" value="Search">
+    </form>
+</div>

@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h2 class="display-5">Welcome to Saint Barnabas House</h2>
+    <div class="main-nav container d-flex justify-content-evenly mt-3">
+        <a class=nav-link asp-action="Shop" style="text-decoration:none">
+            <div class=nav-card>
+                <img src="~/images/shop.png" alt="a pile of scones">
+                <h4>Visit our shop</h4>
+            </div>
+        </a>
+        <div class="boundary" style="width:1px; border-left:solid #91818A 1px;"></div>
+        <a class=nav-link asp-action="Blog" style="text-decoration:none">
+            <div class=nav-card>
+                <img src="~/images/blog.png" alt="Saint Barnabas House chapel">
+                <h4>Read our blog</h4>
+            </div>
+        </a>
+        <div class="boundary" style="width:1px; border-left:solid #91818A 1px;"></div>
+
+        <a class=nav-link asp-action="Event" style="text-decoration:none">
+            <div class=nav-card>
+                <img src="~/images/events.png" alt="four cakes">
+                <h4>Schedule an event</h4>
+            </div>
+        </a>
+    </div>
+    <h3 class="display-6" style="margin-top:10px">About us</h3>
+    @* Styling below (using a series of nested divs and breaks instead of p-tags) is necessary to position picture at
+    bottom right of text *@
+    <div class="about-wrap">
+        <div class="about">
+            <div class="float-img"><img src="~/images/founder.png" alt="Our founder" style="width:120px;height:120px">
+            </div>
+            Saint Barnabas House was formed in 2019 to be a hub for Catholic formation and
+            community. For our members it became a place to pray, to grow in faith, and to practice reaching out to
+            our
+            neighbors. For those outside our house it became a place to meet, to learn, and to stretch their
+            understanding of what it means to live out their faith in their whole lives.
+            <br><br>
+            We invite you to visit our shop, which features products we make here in the house. You can also check
+            out
+            our blog to get a sample of some of the teaching offered at the house. We are also happy to work with
+            you to
+            schedule an event on our grounds or to have one of us come to give a talk at your parish or for a small
+            group.
+            <br><br>
+            God bless you as you seek to grow nearer to our Lord!
+
+        </div>
+    </div>
+</div>
