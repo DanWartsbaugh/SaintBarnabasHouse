@@ -5,7 +5,8 @@ html {
 
 body {
   /* background-color: rgb(230,230,230); */
-  background-color: #FFE19C; /*yellow*/
+  background-color: #FFE19C;
+  /*yellow*/
 }
 
 @media (min-width: 768px) {
@@ -16,38 +17,39 @@ body {
 
 /*Small screen*/
 @media (max-width: 550px) {
+
   /*front page*/
-  .main-nav{
-    flex-direction:column;
-    align-items:center;
-  }
-  
-  .main-nav .nav-card{
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content:space-evenly;
-    max-width:500px;
-    width:300px;
-    height:100px;
-    margin-top:10px;
+  .main-nav {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .main-nav .nav-card img{
-    width:76px;
-    height:76px;  
-    padding:2px;
+  .main-nav .nav-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    max-width: 500px;
+    width: 300px;
+    height: 100px;
+    margin-top: 10px;
   }
 
-    .main-nav .nav-card h4 {
-      height:fit-content;
-      padding:0;
-      margin:0;
-      justify-content:center;
-    }
+  .main-nav .nav-card img {
+    width: 76px;
+    height: 76px;
+    padding: 2px;
+  }
+
+  .main-nav .nav-card h4 {
+    height: fit-content;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+  }
 
   .boundary {
-    display:none;
+    display: none;
   }
 
   /*shop front*/
@@ -55,7 +57,7 @@ body {
     display:none;
   } */
 
-  
+
 }
 
 /*built-in*/
@@ -70,175 +72,286 @@ body {
 
 /*--FRONT PAGE--*/
 
+/* #askButton {
+  background-color: red;
+  color: white;
+  padding: 4px;
+  border: none;
+  box-shadow: 6px 6px 6px pink;
+  cursor: pointer;
+}
+
+#askButton:active {
+  box-shadow: 3px 3px 3px pink;
+  transform: translate(2px, 2px);
+} */
+
 .nav-card {
-  max-width:170px;
-  height:240px;
-  margin:15px 0px;
-  background-color:#AD5D4E; /*red*/
-  border:solid #91818A 2px; /*gray*/
-  border-radius:8px;
-  padding:10px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  /* box-shadow:lightgray 2px 2px 2px 2px; */
+  max-width: 170px;
+  height: 240px;
+  margin: 15px 0px;
+  background-color: #AD5D4E;
+  /*red*/
+  border: solid #91818A 2px;
+  /*gray*/
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 6px 6px 6px #462914;
+}
+
+.nav-card:hover {
+  box-shadow: 3px 3px 3px #462914;
+  transform: translate(2px, 2px);
 }
 
 .nav-card img {
-  width:150px;
-  padding:3px;
-  background-color:#91818A;
-  border-radius:3px;
+  width: 150px;
+  padding: 3px;
+  background-color: #91818A;
+  border-radius: 3px;
 }
 
 .nav-card h4 {
-  height:100%;
-  margin-top:10px;
-  color:rgb(235, 236, 237)
+  height: 100%;
+  margin-top: 10px;
+  color: rgb(235, 236, 237)
 }
 
 /*About section*/
-.about-wrap{
-  margin-top:20px;
-  display:flex;
+.about-wrap {
+  margin-top: 20px;
+  display: flex;
 }
 
-.about{
-  text-align:left;
+.about {
+  text-align: left;
 }
 
-.float-img{
+.float-img {
   float: right;
-  margin-left:5px;
-  height:100%;
-  display:flex;
+  margin-left: 5px;
+  height: 100%;
+  display: flex;
   align-items: flex-end;
-  shape-outside:inset(calc(100% - 120px) 0 0);
+  shape-outside: inset(calc(100% - 120px) 0 0);
 }
 
+/*TODO: add hover animations to shop-cats 
+so that the hovered element takes more of the view*/
 /* --SHOP-- */
 .shop-main {
-  position:relative;
+  position: relative;
   /* animation-name: openShop;
   animation-duration:1s; */
 }
 
 .shop-main .overlay {
-  position:absolute;
-  width:0%;
-  height:100%;
-  background-color:#FFE19C;
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  background-color: #FFE19C;
   animation-name: openShop;
-  animation-duration:1s;
-  z-index:7;
+  animation-duration: 1s;
+  z-index: 7;
 }
 
 @keyframes openShop {
-  from {width:100%;}
-  to {width:0%;}
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0%;
+  }
 }
 
 .shop-categories {
-  margin-top:10px;
-  width:100%;
-  height:300px;
-  display:flex;
-  justify-content:space-between;
+  margin-top: 10px;
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .shop-cats-left {
-width:50%;
-background:url("../images/founder.png");
-background-size: cover;
-background-repeat:no-repeat;
-transform: translateZ(-10px);
-border:none;
+  width: 50%;
+  background: url("../images/founder.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: translateZ(-10px);
+  border: none;
+  text-align:left;
 }
 
-.cat-title {
-  transform:skew(-30deg)
+.shop-cats-left h4 {
+  padding-bottom:75px;
+  margin-left:20px;
 }
 
 .shop-cats-mid {
-  width:32%;
-  height:300px;
-  background-image:url("../images/blog-skewed.png");
+  width: 32%;
+  height: 300px;
+  background-image: url("../images/blog-skewed.png");
   background-size: stretch;
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   transform: skew(-30deg);
-  position:absolute;
-  left:27%;
-  border-left:solid #FFE19C 3px;
-  border-right:solid #FFE19C 3px;
-  border-top:none;
-  border-bottom:none;
+  position: absolute;
+  left: 27%;
+  border-left: solid #FFE19C 3px;
+  border-right: solid #FFE19C 3px;
+  border-top: none;
+  border-bottom: none;
+}
+
+@media (max-width:770px) {
+  .shop-cats-mid {
+    width: 46%
   }
-  @media (max-width:770px){
-    .shop-cats-mid{
-      width:46%
-    }
-  }
+}
+
+.shop-cats-mid h4 {
+  transform: skew(30deg)
+}
 
 
+.shop-cats-right {
+  width: 60%;
+  justify-content: right;
+  border: none;
+  background: url("../images/events.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align:right;
+}
+
+.shop-cats-right h4 {
+  padding-top:75px;
+  margin-right:20px;
+}
+
+@media (max-width:770px) {
   .shop-cats-right {
-    width:60%;
-    justify-content:right;
-    border:none;
-    background:url("../images/events.png");
-    background-size: cover;
-    background-repeat:no-repeat;
-    }
-    @media (max-width:770px){
-      .shop-cats-right{
-        width:50%
-      }
-    }
+    width: 50%
+  }
+}
 
-    .cat-titles {
-      position:absolute;
-      top:100px;
-      width:100%;
-      justify-content:space-around;
-      pointer-events:none;
-    }
+.cat-titles {
+  position: absolute;
+  top: 100px;
+  width: 100%;
+  justify-content: space-around;
+  pointer-events: none;
+}
 
-    .cat-titles h4 {
-      height:fit-content;
-      padding-left:20px;
-      font-weight: bold;
-      color:black;
-      font-style:oblique;
-    }
+.cat-titles h4 {
+  height: fit-content;
+  padding-left: 20px;
+  font-weight: bold;
+  color: black;
+  font-style: oblique;
+}
 
-    /*search bar*/
-    .search-form {
-      position:absolute;
-      right:0;
-      bottom:0;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      width:100%;
-      margin:10px;
-    }
+/*search bar*/
+.search-form {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 10px;
+}
 
-    .search-wrap {
-      width:60%;
-      border:solid #91818A 1px;
-      border-radius:15px;
-      background-color:white;
-      padding:3px 10px;
-    }
+.search-wrap {
+  width: 60%;
+  border: solid #91818A 1px;
+  border-radius: 15px;
+  background-color: white;
+  padding: 3px 10px;
+}
 
-    .search-bar {
-      width:100%;
-      border:none;
-      outline:none;
-    }
+.search-bar {
+  width: 100%;
+  border: none;
+  outline: none;
+}
 
-    .search-form .bttn{
-      border:solid #91818A 1px;
-      border-radius:3px;
-      padding:0px 5px;
-      margin-left:10px;
-    }
+.search-form .bttn {
+  border: solid #91818A 1px;
+  border-radius: 3px;
+  padding: 0px 5px;
+  margin-left: 10px;
+}
+
+
+
+/*Blog post*/
+
+/*Credit to Martin Wolf (@martinwolf) for the paper hover effect below
+Taken from https://codepen.io/martinwolf/pen/GRaWPy*/
+.blog-main {
+  position: relative;
+  margin: 40px auto;
+  width: 90%;
+  height: 100%;
+  /* background: white; */
+  border-radius: 2px;
+  padding: 10px;
+}
+
+.blog-main::before,
+.blog-main::after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  width: 40%;
+  height: 10px;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, .7);
+  z-index: -1;
+  transition: all .3s ease-in-out;
+}
+
+.blog-main::before {
+  left: 15px;
+  transform: skew(-5deg) rotate(-5deg);
+}
+
+.blog-main::after {
+  right: 15px;
+  transform: skew(5deg) rotate(5deg);
+}
+
+.blog-main:hover::before,
+.blog-main:hover::after {
+  box-shadow: 0 2px 14px rgba(0, 0, 0, .4);
+}
+
+.blog-main:hover::before {
+  left: 5px;
+}
+
+.blog-main:hover::after {
+  right: 5px;
+}
+
+/*end hover effect*/
+
+/*dark mode for blog post*/
+.dark-mode {
+  background: black;
+  color: white;
+}
+
+.blog-main.light-mode {
+  background: white;
+  color: black;
+}
+
+.blog-main.dark-mode {
+  background: black;
+  color: white;
+}

@@ -8,9 +8,15 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    private MyContext _context;
+
+
+    public HomeController(ILogger<HomeController> logger, MyContext context)
     {
         _logger = logger;
+
+        _context = context;
+
     }
 
     public IActionResult Index()
@@ -35,13 +41,19 @@ public class HomeController : Controller
         return View("Blog");
     }
 
-        [HttpGet("shop")]
+    [HttpGet("blogpost")]
+    public IActionResult BlogPost()
+    {
+        return View("BlogPost");
+    }
+
+    [HttpGet("shop")]
     public IActionResult Shop()
     {
         return View("Shop");
     }
 
-        [HttpGet("event")]
+    [HttpGet("event")]
     public IActionResult Event()
     {
         return View("Event");
