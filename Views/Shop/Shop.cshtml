@@ -1,3 +1,5 @@
+@model List<Product>
+
 @{
     ViewData["Title"] = "Saint Barnabas House Shop";
 }
@@ -17,4 +19,14 @@
         </div>
         <input class="bttn" type="submit" value="Search">
     </form>
+</div>
+<div class="d-flex flex-wrap">
+    @foreach(Product prod in Model)
+    {
+        {<div class="prodCard @prod.MainCat">
+            <p>@prod.Name</p>
+            <p>$@prod.Price.ToString("0.00")</p>
+        </div>}
+        
+    }
 </div>

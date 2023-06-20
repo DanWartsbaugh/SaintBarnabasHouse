@@ -1,0 +1,47 @@
+@model Product
+
+<h5>@Model.Name</h5>
+<p>@Model.Description</p>
+<p>@Model.Price.ToString("0.00")</p>
+
+<div class="d-flex">
+    <div class="left">
+        <h4>Categories</h4>
+        <ul>
+            @foreach (ProductCategoryAssoc cat in Model.ProductCategoryAssocs)
+            {
+                <li>@cat.Category.Name</li>
+            }
+        </ul>
+    </div>
+
+    <div class="right">
+        <h4>Add Category</h4>
+        <form asp-action="AddCatToProd" asp-route-productId="@Model.ProductId" method="POST">
+            <select name="CategoryId" id="">
+                @{
+                    List<int> catIDs = new();
+                    foreach (ProductCategoryAssoc assoc in Model.ProductCategoryAssocs)
+                    {
+                        catIDs.Add(assoc.CategoryId);
+                    }
+                }
+                @foreach (Category category in ViewBag.AllCategories)
+                {
+                    if (!catIDs.Contains(category.CategoryId))
+                    {
+                        <option value="@category.CategoryId">@category.Name</option>
+                    }
+                }
+            </select>
+            <input type="hidden" name="ProductId" value=@Model.ProductId>
+            <input type="submit" value="Add">
+        </form>
+        <div class="d-flex">
+            <a class="btn btn-secondary" asp-controller=Product asp-action="RenderNewProduct" style="text-decoration:none">
+                Add another product</a>
+            <a class="btn btn-secondary" asp-controller=Shop asp-action="Shop" style="text-decoration:none">
+                Finish</a>
+        </div>
+    </div>
+</div>

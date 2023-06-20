@@ -21,7 +21,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        return View("Index");
     }
 
     public IActionResult Privacy()
@@ -45,12 +45,6 @@ public class HomeController : Controller
     public IActionResult BlogPost()
     {
         return View("BlogPost");
-    }
-
-    [HttpGet("shop")]
-    public IActionResult Shop()
-    {
-        return View("Shop");
     }
 
     [HttpGet("event")]

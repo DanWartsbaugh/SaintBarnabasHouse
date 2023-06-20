@@ -151,7 +151,7 @@ so that the hovered element takes more of the view*/
 .shop-main .overlay {
   position: absolute;
   width: 0%;
-  height: 100%;
+  height: 300px;
   background-color: #FFE19C;
   animation-name: openShop;
   animation-duration: 1s;
@@ -238,22 +238,6 @@ so that the hovered element takes more of the view*/
   }
 }
 
-.cat-titles {
-  position: absolute;
-  top: 100px;
-  width: 100%;
-  justify-content: space-around;
-  pointer-events: none;
-}
-
-.cat-titles h4 {
-  height: fit-content;
-  padding-left: 20px;
-  font-weight: bold;
-  color: black;
-  font-style: oblique;
-}
-
 /*search bar*/
 .search-form {
   position: absolute;
@@ -286,6 +270,34 @@ so that the hovered element takes more of the view*/
   padding: 0px 5px;
   margin-left: 10px;
 }
+
+.prodCard {
+  width:200px;
+  height:250px;
+  margin:5px;
+  padding:10px;
+  border:solid #91818A 1px;
+  border-radius:3px;
+  box-shadow: 4px 4px 4px #462914;
+}
+
+.prodCard:hover {
+  box-shadow: 7px 7px 7px #462914;
+  transform: translate(2px, -2px);
+}
+
+.Books {
+  background-color:#0c7c59
+}
+
+.Food {
+  background-color:#AD5D4E
+}
+
+.Crafts {
+  background-color:#91818A
+}
+
 
 
 

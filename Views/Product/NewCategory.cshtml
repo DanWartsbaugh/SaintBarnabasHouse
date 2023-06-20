@@ -1,0 +1,14 @@
+@model Category
+
+<form asp-controller="Product" asp-action="CreateCategory" method="POST">
+    <label asp-controller="Product" asp-for="Name"></label>
+    <input asp-controller="Product" asp-for="Name">
+    <input type="submit" value="Submit">
+</form>
+<h3>Existing Categories</h3>
+<ul>
+    @foreach(Category category in ViewBag.AllCats)
+    {
+        <li>@category.Name</li>
+    }
+</ul>
