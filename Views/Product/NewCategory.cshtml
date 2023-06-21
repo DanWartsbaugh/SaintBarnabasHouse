@@ -1,14 +1,16 @@
 @model Category
 
+<div class="form-sheet">
 <form asp-controller="Product" asp-action="CreateCategory" method="POST">
-    <label asp-controller="Product" asp-for="Name"></label>
-    <input asp-controller="Product" asp-for="Name">
-    <input type="submit" value="Submit">
+    <label asp-controller="Product" asp-for="Name"></label><br>
+    <input class="form-control" asp-controller="Product" asp-for="Name">
+    <input class="bttn" type="submit" value="Submit">
 </form>
-<h3>Existing Categories</h3>
+<h4>Existing Categories</h4>
 <ul>
     @foreach(Category category in ViewBag.AllCats)
     {
         <li>@category.Name</li>
     }
 </ul>
+</div>

@@ -35,7 +35,9 @@ public class ProductController : Controller
     public IActionResult CreateProduct(Product newProduct)
     {
         if (ModelState.IsValid)
-        {
+        {   
+            
+            newProduct.PriceAsInt=(int)(newProduct.Price*100);
             _context.Add(newProduct);
             _context.SaveChanges();
             return AddCategory(newProduct.ProductId);
@@ -56,7 +58,7 @@ public class ProductController : Controller
             return RedirectToAction("Index");
         }
 
-        ViewBag.AllCategories = _context.Categories.ToList();
+        ViewBag.AllCategories = _context.Categories.OrderBy(c => c.Name).ToList();
 
         return View("AddCategory", OneProduct);
     }

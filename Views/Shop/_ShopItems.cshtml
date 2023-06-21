@@ -1,0 +1,141 @@
+@model List<Product>
+
+@*Populate category list through data received from the model*@
+@{
+    List<Category> cats = new();
+    foreach (Product prod in Model)
+    {
+        foreach (ProductCategoryAssoc assoc in prod.ProductCategoryAssocs)
+        {
+            if (!cats.Contains(assoc.Category))
+            {
+                cats.Add(assoc.Category);
+            }
+        }
+
+    }
+}
+<div class="sheet">
+    <div class="shop-control-bar d-flex">
+        <label for="filter">Filter by category: </label>
+        <select name="filter" id="filter" onchange="filterSelection(value)">
+            <option value="all">Show all</option>
+            @foreach (Category cat in cats)
+            {
+                <option value="@cat.Name">@cat.Name</option>
+            }
+        </select>
+        <label for="orderby">Sort by price: </label>
+        <select name="orderby" id="orderby" onchange="SortByPrice(value)">
+            <option value="hidden">Select a direction</option>
+            <option value="asc">Low to High</option>
+            <option value="desc">High to Low</option>
+        </select>
+
+
+    </div>
+    <div class="items-view">
+        @foreach (Product prod in Model)
+        {
+            string catstring = "";
+            foreach (ProductCategoryAssoc assoc in prod.ProductCategoryAssocs)
+            {
+                catstring += " " + @assoc.Category.Name;
+            }
+
+            <a class="prodCard @prod.MainCat @catstring" asp-controller="Shop" asp-action="ShowProduct"
+                asp-route-productId="@prod.ProductId">
+                <p>@prod.Name</p>
+                <p>$@prod.Price.ToString("0.00")</p>
+                <p style="display:none">@prod.Price</p>
+            </a>
+
+        }
+        @if (Model.Count == 0)
+        {
+            <p style="height:400px">No products were found matching your search</p>
+        }
+    </div>
+</div>
+
+<script>
+    //filter functionality from w3schools
+    filterSelection("all")
+    function filterSelection(c) {
+        var x, i;
+        x = document.getElementsByClassName("prodCard");
+        if (c == "all") c = "";
+        // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+        for (i = 0; i < x.length; i++) {
+            w3RemoveClass(x[i], "show");
+            if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+        }
+    }
+
+    // Show filtered elements
+    function w3AddClass(element, name) {
+        var i, arr1, arr2;
+        arr1 = element.className.split(" ");
+        arr2 = name.split(" ");
+        for (i = 0; i < arr2.length; i++) {
+            if (arr1.indexOf(arr2[i]) == -1) {
+                element.className += " " + arr2[i];
+            }
+        }
+    }
+
+    // Hide elements that are not selected
+    function w3RemoveClass(element, name) {
+        var i, arr1, arr2;
+        arr1 = element.className.split(" ");
+        arr2 = name.split(" ");
+        for (i = 0; i < arr2.length; i++) {
+            while (arr1.indexOf(arr2[i]) > -1) {
+                arr1.splice(arr1.indexOf(arr2[i]), 1);
+            }
+        }
+        element.className = arr1.join(" ");
+    }
+
+    // Add active class to the current control button (highlight it)
+    var filter = document.getElementById("filter");
+    for (var i = 0; i < filter.length; i++) {
+        filter.addEventListener("change", function () {
+            var current = document.getElementsByClassName("active");
+            current[0].className = current[0].className.replace(" active", "");
+            this.className += " active";
+        });
+    }
+
+    //sort functionality
+    //special thanks to nickf on StackOverflow and Spencer Rauch
+    function SortByPrice(direction) {
+
+        let list = document.querySelector('.items-view');
+        let items = document.querySelectorAll('.show')
+        //list all the items that are currently in the DOM
+        let itemsArr = [];
+        for (let i in items) {
+            if (items[i].nodeType == 1) { // get rid of the whitespace text nodes
+                itemsArr.push(items[i]);
+            }
+        }
+        //particular sort functions for ascending and descending
+        if (direction == "asc") {
+            itemsArr.sort(function (a, b) {
+                return a.lastElementChild.innerText - b.lastElementChild.innerText;
+            });
+        }
+        if (direction == "desc") {
+            itemsArr.sort(function (a, b) {
+                return b.lastElementChild.innerText - a.lastElementChild.innerText;
+            });
+        }
+        //repopulates the DOM with the newly ordered list
+        for (i = 0; i < itemsArr.length; ++i) {
+            list.appendChild(itemsArr[i]);
+        }
+    }
+
+
+</script>

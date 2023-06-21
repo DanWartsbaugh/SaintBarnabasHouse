@@ -1,0 +1,30 @@
+<div class="shop-main text-center">
+    <h2 class="display-4 text-center">Saint Barnabas House Craft Shop</h2>
+    <div class="shop-categories">
+        <a class="shop-cats-left" asp-controller="Shop" asp-action="FilterCat" asp-route-mainCat="Books"><h4 class="display-6">BOOKS</h4></a>
+        <a class="shop-cats-mid" asp-controller="Shop" asp-action="FilterCat" asp-route-mainCat="Crafts"><h4 class="display-6">CRAFTS</h4></a>
+        <a class="shop-cats-right" asp-controller="Shop" asp-action="FilterCat" asp-route-mainCat="Food"><h4 class="display-6">FOOD</h4></a>
+        @* for the opening animation *@
+        <div class="overlay"></div>
+    </div>
+
+    <form class="search-form" asp-controller="Shop" asp-action="Search" method="POST">
+        <div class="search-wrap">
+            <input class="search-bar" type="search" name="query" id="searchbar" onkeyup="enable()" placeholder="Search for something!">
+        </div>
+        <input class="bttn" type="submit" value="Search" id="searchbutton" disabled>
+    </form>
+</div>
+
+<script>
+    function enable() {
+        if (document.getElementById("searchbar").value==="")
+        {
+            document.getElementById("searchbutton").disabled = true;
+        }
+        else
+        {
+            document.getElementById("searchbutton").disabled = false;
+        }
+    }
+</script>

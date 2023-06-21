@@ -3,30 +3,5 @@
 @{
     ViewData["Title"] = "Saint Barnabas House Shop";
 }
-<div class="shop-main text-center">
-    <h2 class="display-4 text-center">Saint Barnabas House Craft Shop</h2>
-    <div class="shop-categories">
-        <button class="shop-cats-left" onclick="location.href='@Url.Action("Index")'"><h4 class="display-6">INDEX</h4></button>
-        <button class="shop-cats-mid" onclick="location.href='@Url.Action("Blog")'"><h4 class="display-6">BLOG</h4></button>
-        <button class="shop-cats-right" onclick="location.href='@Url.Action("Event")'"><h4 class="display-6">EVENTS</h4></button>
-        @* for the opening animation *@
-        <div class="overlay"></div>
-    </div>
-
-    <form class="search-form" asp-action="">
-        <div class="search-wrap">
-            <input class="search-bar" type="search" name="search-shop" id="" placeholder="Search for something!">
-        </div>
-        <input class="bttn" type="submit" value="Search">
-    </form>
-</div>
-<div class="d-flex flex-wrap">
-    @foreach(Product prod in Model)
-    {
-        {<div class="prodCard @prod.MainCat">
-            <p>@prod.Name</p>
-            <p>$@prod.Price.ToString("0.00")</p>
-        </div>}
-        
-    }
-</div>
+@await Html.PartialAsync("_ShopNavBar")
+@await Html.PartialAsync("_ShopItems")

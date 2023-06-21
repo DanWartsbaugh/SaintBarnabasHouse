@@ -1,19 +1,20 @@
 @model Product
 
-<div>
+<div class="form-sheet">
+    <h4>Add a product</h4>
     <form asp-controller="Product" asp-action="CreateProduct" method="POST">
         <label asp-controller="Product" asp-for="Name"></label><span asp-validation-for="Name"></span><br>
-        <input asp-controller="Product" asp-for="Name"><br>
+        <input class="form-control" asp-controller="Product" asp-for="Name"><br>
         <label asp-controller="Product" asp-for="Description"></label><span asp-validation-for="Description"></span><br>
-        <input asp-controller="Product" asp-for="Description"><br>
+        <input class="form-control" asp-controller="Product" asp-for="Description"><br>
+        <label asp-controller="Product" asp-for="Price"></label><span asp-validation-for="Price"></span><br>
+        <input class="form-control" asp-controller="Product" asp-for="Price"><br>
         <label asp-controller="Product" asp-for="MainCat"></label><span asp-validation-for="MainCat"></span><br>
-        <select asp-for="MainCat">
+        <select class="form-select" asp-for="MainCat">
             <option value="Books">Books</option>
             <option value="Food">Food</option>
             <option value="Crafts">Crafts</option>
-        </select>
-        <label asp-controller="Product" asp-for="Price"></label><span asp-validation-for="Price"></span><br>
-        <input asp-controller="Product" asp-for="Price"><br>
-        <input type="submit" value="Submit">
+        </select><br>
+        <input class="bttn" type="submit" value="Submit">
     </form>
 </div>

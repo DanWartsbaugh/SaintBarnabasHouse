@@ -1,0 +1,15 @@
+@model Product
+
+<div>
+    <h4>@Model.Name</h4>
+    <p>@Model.Description</p>
+    <p>$@Model.Price.ToString("0.00")</p>
+    @{
+        string catstring = "";
+        catstring += @Model.MainCat;
+        foreach(ProductCategoryAssoc assoc in Model.ProductCategoryAssocs){
+            catstring += ", " + assoc.Category.Name;
+        }
+    }
+    <p>Categories: @catstring</p>
+</div>

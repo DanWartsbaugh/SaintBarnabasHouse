@@ -154,7 +154,7 @@ so that the hovered element takes more of the view*/
   height: 300px;
   background-color: #FFE19C;
   animation-name: openShop;
-  animation-duration: 1s;
+  animation-duration: .7s;
   z-index: 7;
 }
 
@@ -176,6 +176,11 @@ so that the hovered element takes more of the view*/
   justify-content: space-between;
 }
 
+.shop-categories * {
+  color:black;
+  text-decoration:none;
+}
+
 .shop-cats-left {
   width: 50%;
   background: url("../images/founder.png");
@@ -187,7 +192,7 @@ so that the hovered element takes more of the view*/
 }
 
 .shop-cats-left h4 {
-  padding-bottom:75px;
+  padding-top:75px;
   margin-left:20px;
 }
 
@@ -213,7 +218,10 @@ so that the hovered element takes more of the view*/
 }
 
 .shop-cats-mid h4 {
-  transform: skew(30deg)
+  transform: skew(30deg);
+  text-align:center;
+  padding-top:100px;
+  padding-right:50px;
 }
 
 
@@ -228,7 +236,7 @@ so that the hovered element takes more of the view*/
 }
 
 .shop-cats-right h4 {
-  padding-top:75px;
+  padding-top:125px;
   margin-right:20px;
 }
 
@@ -264,10 +272,16 @@ so that the hovered element takes more of the view*/
   outline: none;
 }
 
-.search-form .bttn {
+.bttn {
   border: solid #91818A 1px;
   border-radius: 3px;
   padding: 0px 5px;
+  background-color:rgb(145, 129, 138, .5);
+  color:black
+}
+
+.search-form .bttn {
+
   margin-left: 10px;
 }
 
@@ -279,11 +293,19 @@ so that the hovered element takes more of the view*/
   border:solid #91818A 1px;
   border-radius:3px;
   box-shadow: 4px 4px 4px #462914;
+  display:none;
+  text-decoration:none;
+  color:black;
 }
 
 .prodCard:hover {
   box-shadow: 7px 7px 7px #462914;
   transform: translate(2px, -2px);
+  color:black;
+}
+
+.show {
+  display:block;
 }
 
 .Books {
@@ -296,6 +318,55 @@ so that the hovered element takes more of the view*/
 
 .Crafts {
   background-color:#91818A
+}
+
+.shop-control-bar {
+  padding:10px 5px;
+}
+
+.shop-control-bar select {
+  margin-left:5px;
+  margin-right:20px;
+}
+
+.items-view {
+  min-height:500px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+/* The parent div for all forms */
+.form-sheet, .sheet {
+  border:solid #91818A 1px;
+  border-radius:3px;
+  margin-top:10px;
+  padding:10px;
+  background-color:rgb(255,255,255,.5)
+}
+
+.form-sheet * {
+
+  padding:5px;
+  }
+
+  .form-sheet h4 {
+    text-align: center;
+  }
+
+  .form-sheet label {
+    font-weight:bold;
+  }
+.form-sheet .bttn {
+  margin-top:10px;
+}
+
+.form-sheet ul {
+  list-style:none;
+}
+
+.form-nav *{
+  margin-right:10px;
 }
 
 

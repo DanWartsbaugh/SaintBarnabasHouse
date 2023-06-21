@@ -1,0 +1,14 @@
+@model List<Product>
+
+@await Html.PartialAsync("_ShopNavBar")
+<h3 class="display-6 text-center" id="Heading">@ViewBag.Heading</h3>
+@await Html.PartialAsync("_ShopItems")
+
+<script>
+    function ScrollView()
+    {
+    let el = document.getElementById("Heading");
+    el.scrollIntoView();
+    }
+    window.onload = ScrollView;
+</script>
