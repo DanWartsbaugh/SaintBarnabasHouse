@@ -1,15 +1,80 @@
 @model Product
 
-<div>
-    <h4>@Model.Name</h4>
-    <p>@Model.Description</p>
-    <p>$@Model.Price.ToString("0.00")</p>
-    @{
-        string catstring = "";
-        catstring += @Model.MainCat;
-        foreach(ProductCategoryAssoc assoc in Model.ProductCategoryAssocs){
-            catstring += ", " + assoc.Category.Name;
-        }
+
+@* Image Carousel *@
+<div class="sheet">
+    <nav>
+        <a asp-controller="Shop" asp-action="Shop" class="bttn">Back to shop</a>
+        <a class="bttn" href="javascript:void(0);" onclick="history.go(-1);">Back</a>
+    </nav>
+    <a class="bttn" asp-controller="Product" asp-action="EditProduct" asp-route-ProductId=@Model.ProductId>Edit
+        Product</a>
+    @if (Model.ProductImageAssocs.Count() > 0)
+    {
+        <div id="productImageCarousel" class="carousel slide" data-bs-interval="false">
+            <div class="carousel-inner">
+                @{
+                    List<string> displayed = new();
+                }
+                @if (Model.MainImgUrl == null)
+                {
+                    <div class="carousel-item active">
+                        <img src="@Model.ProductImageAssocs[0].Image.ImageUrl" class="d-block w-100" alt="...">
+                    </div>
+                    displayed.Add(Model.ProductImageAssocs[0].Image.ImageUrl);
+                }
+                else
+                {
+                    <div class="carousel-item active">
+                        <img src="@Model.MainImgUrl" class="d-block w-100" alt="...">
+                    </div>
+                    displayed.Add(Model.MainImgUrl);
+                }
+                @foreach (ProductImageAssoc image in Model.ProductImageAssocs)
+                {
+                    if (!displayed.Contains(image.Image.ImageUrl))
+                    {
+                        <div class="carousel-item">
+                            <img src="@image.Image.ImageUrl" alt="" class="d-block w-100">
+                        </div>
+                        displayed.Add(@image.Image.ImageUrl);
+                    }
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#productImageCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#productImageCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
     }
-    <p>Categories: @catstring</p>
+
+    <div class="product-info">
+        <h4>@Model.Name</h4>
+        <p>@Model.Description</p>
+        <p>$@Model.Price.ToString("0.00")</p>
+        @{
+            string catstring = "";
+            catstring += @Model.MainCat;
+            foreach (ProductCategoryAssoc assoc in Model.ProductCategoryAssocs)
+            {
+                catstring += ", " + assoc.Category.Name;
+            }
+        }
+        <p>Categories: @catstring</p>
+    </div>
+    @*Cart controls*@
+    <div class="text-center">
+        <form action="" method="POST">
+            <label for="QTY">QTY: </label>
+            <input type="number" name="QTY" id="" style="width:50px">
+            <a href="" class="bttn">Add to cart</a>
+        </form>
+    </div>
+    <div>
+        <p style="max-width:450px;margin:0 auto"><i>Please note: Food items must be picked up from the house. Please select the "Pick up" option when you submit your order if your order contains food.</i></p>
+    </div>
 </div>

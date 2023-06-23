@@ -1,0 +1,133 @@
+@model Product
+
+@{
+    string catstring = "";
+    catstring += Model.MainCat;
+}
+@foreach (ProductCategoryAssoc? cat in Model.ProductCategoryAssocs)
+{
+    catstring += ", " + cat.Category.Name;
+}
+
+<!-- Set Main Image Modal -->
+<div class="modal fade" id="SetMainModal" tabindex="-1" aria-labelledby="SetMainModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="SetMainModalLabel">Set your display image</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="SetMainImage" asp-controller="Product" asp-action="SetMainImage" asp-route-productId="@Model.ProductId"
+                    method="POST">
+                    @if (Model.ProductImageAssocs.Count() > 0)
+                    {
+                        foreach (ProductImageAssoc? img in Model.ProductImageAssocs)
+                        {
+                            <input type="radio" name="url" value="@img.Image.ImageUrl">
+                            <img src="@img.Image.ImageUrl" alt="" style="width:150px;height:150px">
+                        }
+                    }
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="bttn" data-bs-dismiss="modal">Cancel</button>
+                <button form="SetMainImage" type="submit" class="bttn">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Upload Image Modal -->
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadModalLabel">New image URL</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="uploadImage" asp-controller="Product" asp-action="CreateImage">
+                    <input type="text" name="ImageUrl" class="form-control">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="bttn" data-bs-dismiss="modal">Cancel</button>
+                <button form="uploadImage" type="submit" class="bttn">Upload to database</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="form-sheet">
+    <h5>Product Name: @Model.Name</h5>
+    <p>Description: @Model.Description</p>
+    <p>Price: $@Model.Price.ToString("0.00")</p>
+    <p>Categories: @catstring</p>
+
+    <div>
+        @*Display images already associated with the product*@
+        <div class="add-image-top" style="border-bottom:solid black 1px">
+            <h4>Images</h4>
+            <form asp-controller="Product" asp-action="RemoveImgFromProd" asp-route-productId="@Model.ProductId"
+                method="POST">
+                @if (Model.ProductImageAssocs.Count() > 0)
+                {
+                    foreach (ProductImageAssoc? img in Model.ProductImageAssocs)
+                    {
+                        <input type="checkbox" name="ImgIds" value="@img.ImageId">
+                        <img src="@img.Image.ImageUrl" alt="" style="width:150px;height:150px">
+                    }
+                }<br>
+                <input class="bttn" type="submit" value="Remove Images">
+            </form>
+        </div>
+        @*Add a new image to the database*@
+        <div class="add-image-mid">
+            <button type="button" class="bttn" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                Upload new image
+            </button>
+            <button type="button" class="bttn" data-bs-toggle="modal" data-bs-target="#SetMainModal">
+                Set display image
+            </button>
+
+
+        </div>
+        @*Choose images to associate with the product*@
+        <div class="add-image-bottom">
+            <h4>Add Image</h4>
+            <form asp-action="AddImgToProd" asp-route-productId="@Model.ProductId" method="POST">
+
+                @{
+                    List<int> imgIDs = new();
+                    foreach (ProductImageAssoc assoc in Model.ProductImageAssocs)
+                    {
+                        imgIDs.Add(assoc.ImageId);
+                    }
+                }
+                @foreach (Image image in ViewBag.AllImages)
+                {
+                    if (!imgIDs.Contains(image.ImageId))
+                    {
+                        <div class="d-flex flex-wrap">
+                            <input type="checkbox" name="ImageIds" value="@image.ImageId">
+                            <img src="@image.ImageUrl" alt="" style="width:100px;height:100px">
+                        </div>
+                    }
+                }
+
+                <input type="hidden" name="ProductId" value=@Model.ProductId>
+                <input class="bttn" type="submit" value="Add">
+            </form>
+        </div>
+    </div>
+    <div class="form-nav d-flex">
+        <a class="bttn" asp-controller=Shop asp-action="Shop" style="text-decoration:none">
+            Add Images</a>
+        <a class="bttn" asp-controller=Product asp-action="RenderNewProduct" style="text-decoration:none">
+            Add another product</a>
+        <a class="bttn" asp-controller=Shop asp-action="Shop" style="text-decoration:none">
+            Finish</a>
+    </div>
+</div>

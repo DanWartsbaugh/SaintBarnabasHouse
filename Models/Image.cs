@@ -7,6 +7,9 @@ public class Image
 {
     [Key]
     public int ImageId {get;set;}
+
+    public string ImageUrl { get; set; }
     public DateTime CreatedAt {get;set;} = DateTime.Now;
-    public int? ProductId {get;set;}
+    public List<ProductImageAssoc> ProductImageAssocs { get; set; } = new();
+
 }

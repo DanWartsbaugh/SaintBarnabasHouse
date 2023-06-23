@@ -15,8 +15,10 @@
 
     }
 }
+
 <div class="sheet">
-    <div class="shop-control-bar d-flex">
+    <div class="shop-control-bar d-flex justify-content-between">
+        <div>
         <label for="filter">Filter by category: </label>
         <select name="filter" id="filter" onchange="filterSelection(value)">
             <option value="all">Show all</option>
@@ -31,8 +33,13 @@
             <option value="asc">Low to High</option>
             <option value="desc">High to Low</option>
         </select>
-
-
+        </div>
+        <div>
+            @if(Url.RouteUrl(ViewContext.RouteData.Values) != "/shop")
+            {
+                <a asp-controller="Shop" asp-action="Shop" class="bttn">Back to shop</a>
+            }
+        </div>
     </div>
     <div class="items-view">
         @foreach (Product prod in Model)
@@ -45,6 +52,18 @@
 
             <a class="prodCard @prod.MainCat @catstring" asp-controller="Shop" asp-action="ShowProduct"
                 asp-route-productId="@prod.ProductId">
+                <div class="text-center prodCard-img-holder">
+                @if(prod.MainImgUrl!=null)
+                {<img class="prodCard-img" src="@prod.MainImgUrl" alt="">}
+                else if(prod.ProductImageAssocs.Count()>0)
+                {
+                    <img class="prodCard-img" src="@prod.ProductImageAssocs[0].Image.ImageUrl" alt="">
+                }
+                else
+                {
+                    <img class="prodCard-img" src="" alt="Not pictured">
+                }
+                </div>
                 <p>@prod.Name</p>
                 <p>$@prod.Price.ToString("0.00")</p>
                 <p style="display:none">@prod.Price</p>

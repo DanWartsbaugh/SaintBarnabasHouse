@@ -17,6 +17,9 @@ public class Product
     [Required]
     [Display(Name="Main Category")]
     public string MainCat { get; set; }
+
+    [Display(Name="Main Image URL")]
+    public string? MainImgUrl {get; set;}
     
     [Required]
     public decimal Price { get; set; }
@@ -27,7 +30,7 @@ public class Product
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
     //Relationships
-    public List<Image> Images { get; set; } = new();
+    public List<ProductImageAssoc> ProductImageAssocs { get; set; } = new();
     public List<ProductCategoryAssoc> ProductCategoryAssocs {get; set;} = new();
 }
 

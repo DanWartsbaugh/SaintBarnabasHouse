@@ -35,9 +35,9 @@ public class ProductController : Controller
     public IActionResult CreateProduct(Product newProduct)
     {
         if (ModelState.IsValid)
-        {   
-            
-            newProduct.PriceAsInt=(int)(newProduct.Price*100);
+        {
+
+            newProduct.PriceAsInt = (int)(newProduct.Price * 100);
             _context.Add(newProduct);
             _context.SaveChanges();
             return AddCategory(newProduct.ProductId);
@@ -48,14 +48,58 @@ public class ProductController : Controller
         }
     }
 
+    // Render the edit page
+    [HttpGet("products/{ProductId}/edit")]
+    public IActionResult EditProduct(int ProductId)
+    {
+        Product? ProductToEdit = _context.Products.FirstOrDefault(i => i.ProductId == ProductId);
+
+        if (ProductToEdit == null)
+        {
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+
+        return View("UpdateProduct", ProductToEdit);
+    }
+
+    // Handle updating and redirect to Show page
+    [HttpPost("products/{ProductId}/update")]
+    public IActionResult ProductUpdate(Product newProduct, int ProductId)
+    {
+        if (!ModelState.IsValid)
+        {
+            return EditProduct(ProductId);
+        }
+
+        Product? OldProduct = _context.Products.FirstOrDefault(i => i.ProductId == ProductId);
+
+        if (OldProduct == null)
+        {
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+        newProduct.PriceAsInt = (int)(newProduct.Price * 100);
+        OldProduct.Name = newProduct.Name;
+        OldProduct.Description = newProduct.Description;
+        OldProduct.Price = newProduct.Price;
+        OldProduct.MainCat = newProduct.MainCat;
+        OldProduct.PriceAsInt = newProduct.PriceAsInt;
+        OldProduct.UpdatedAt = DateTime.Now;
+
+        _context.SaveChanges();
+
+        return Redirect(Request.Headers["Referer"].ToString());
+
+    }
+
+
     //Render add category to product form
-    [HttpGet("products/{productId}")]
+    [HttpGet("products/{productId}/addcat")]
     public IActionResult AddCategory(int productId)
     {
         Product? OneProduct = _context.Products.Include(p => p.ProductCategoryAssocs).ThenInclude(a => a.Category).FirstOrDefault(p => p.ProductId == productId);
         if (OneProduct == null)
         {
-            return RedirectToAction("Index");
+            return Redirect(Request.Headers["Referer"].ToString());
         }
 
         ViewBag.AllCategories = _context.Categories.OrderBy(c => c.Name).ToList();
@@ -65,10 +109,32 @@ public class ProductController : Controller
 
     //Add the category to the product, then reload the page
     [HttpPost("products/{productId}/addcat")]
-    public IActionResult AddCatToProd(ProductCategoryAssoc newAssoc, int productId)
+    public IActionResult AddCatToProd(int[] CatIds, int productId)
     {
-        _context.Add(newAssoc);
+        foreach (int cat in CatIds)
+        {
+            if (!_context.ProductCategoryAssocs.Any(pca => pca.CategoryId == cat && pca.ProductId == productId))
+            {
+                ProductCategoryAssoc newAssoc = new() { CategoryId = cat, ProductId = productId };
+                _context.Add(newAssoc);
+            }
+        }
         _context.SaveChanges();
+        return AddCategory(productId);
+    }
+
+    [HttpPost("products/{productId}/removecat")]
+    public IActionResult RemoveCatFromProd(int[] CatIds, int productId)
+    {
+        foreach (int cat in CatIds)
+        {
+            ProductCategoryAssoc assoc = _context.ProductCategoryAssocs.FirstOrDefault(pca => pca.CategoryId == cat && pca.ProductId == productId);
+            if (assoc != null)
+            {
+                _context.ProductCategoryAssocs.Remove(assoc);
+            }
+            _context.SaveChanges();
+        }
         return AddCategory(productId);
     }
 
@@ -89,6 +155,77 @@ public class ProductController : Controller
             _context.SaveChanges();
         }
         return RedirectToAction("RenderNewCategory");
+    }
+
+    //Render add Image to product form
+    [HttpGet("products/{productId}/addimg")]
+    public IActionResult AddImage(int productId)
+    {
+        Product? OneProduct = _context.Products.Include(p => p.ProductImageAssocs).ThenInclude(a => a.Image).FirstOrDefault(p => p.ProductId == productId);
+        if (OneProduct == null)
+        {
+            return RedirectToAction("Index");
+        }
+
+        ViewBag.AllImages = _context.Images.OrderByDescending(i => i.ImageId).ToList();
+
+        return View("AddImage", OneProduct);
+    }
+
+    //Add the Image to the product, then reload the page
+    //Uses checkboxes to populate a list
+    [HttpPost("products/{productId}/addimg")]
+    public IActionResult AddImgToProd(int[] ImageIds, int productId)
+    {
+        foreach (int img in ImageIds)
+        {
+            if (!_context.ProductImageAssocs.Any(pia => pia.ImageId == img && pia.ProductId == productId))
+            {
+                ProductImageAssoc newAssoc = new() { ImageId = img, ProductId = productId };
+                _context.Add(newAssoc);
+            }
+        }
+        _context.SaveChanges();
+        return AddImage(productId);
+    }
+
+    [HttpPost("Images/new")]
+    public IActionResult CreateImage(Image newImage)
+    {
+        if (!_context.Images.Any(img => img.ImageUrl == newImage.ImageUrl))
+        {
+            _context.Add(newImage);
+            _context.SaveChanges();
+        }
+        return Redirect(Request.Headers["Referer"].ToString());
+    }
+
+    [HttpPost("products/{productId}/removeimg")]
+    public IActionResult RemoveImgFromProd(int[] ImgIds, int productId)
+    {
+        foreach (int img in ImgIds)
+        {
+            ProductImageAssoc assoc = _context.ProductImageAssocs.FirstOrDefault(pca => pca.ImageId == img && pca.ProductId == productId);
+            if (assoc != null)
+            {
+                _context.ProductImageAssocs.Remove(assoc);
+            }
+            _context.SaveChanges();
+        }
+        return AddImage(productId);
+    }
+
+    [HttpPost("products/{productId}/setmainimage")]
+    public IActionResult SetMainImage(string url, int productId)
+    {
+        Console.WriteLine("Hit the route");
+        Product prod = _context.Products.FirstOrDefault(p => p.ProductId == productId);
+        prod.MainImgUrl = url;
+        prod.UpdatedAt = DateTime.Now;
+
+        _context.SaveChanges();
+
+        return Redirect(Request.Headers["Referer"].ToString());
     }
 }
 

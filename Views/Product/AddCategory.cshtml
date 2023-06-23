@@ -8,45 +8,46 @@
     <div class="d-flex">
         <div class="left">
             <h4>Categories</h4>
-            <ul>
+            <form asp-controller="Product" asp-action="RemoveCatFromProd" asp-route-productId="@Model.ProductId" method="POST">
                 @foreach (ProductCategoryAssoc cat in Model.ProductCategoryAssocs)
                 {
-                    <li>@cat.Category.Name</li>
-                }
-            </ul>
+                    <input type="checkbox" name="CatIds" id="@cat.Category.Name" value="@cat.CategoryId">
+                    <label for="@cat.Category.Name">@cat.Category.Name</label>
+                }<br>
+                <input type="submit" class="bttn" value="Remove Categories">
+            </form>
         </div>
 
         <div class="right">
             <h4>Add Category</h4>
-            <form asp-action="AddCatToProd" asp-route-productId="@Model.ProductId" method="POST">
-                <select class="form-select" name="CategoryId" id="">
-                    @{
-                        List<int> catIDs = new();
-                        foreach (ProductCategoryAssoc assoc in Model.ProductCategoryAssocs)
-                        {
-                            catIDs.Add(assoc.CategoryId);
-                        }
-                    }
-                    @foreach (Category category in ViewBag.AllCategories)
+            <form asp-controller="Product" asp-action="AddCatToProd" asp-route-productId="@Model.ProductId" method="POST">
+                @{
+                    List<int> catIDs = new();
+                    foreach (ProductCategoryAssoc assoc in Model.ProductCategoryAssocs)
                     {
-                        if (!catIDs.Contains(category.CategoryId))
-                        {
-                            <option value="@category.CategoryId">@category.Name</option>
-                        }
+                        catIDs.Add(assoc.CategoryId);
                     }
-                </select>
+                }
+                @foreach (Category category in ViewBag.AllCategories)
+                {
+                    if (!catIDs.Contains(category.CategoryId))
+                    {
+                        <input type="checkbox" name="CatIds" id="@category.Name" value="@category.CategoryId">
+                        <label style="font-weight:normal" for="@category.Name">@category.Name</label>
+                    }
+                }<br>
                 <input type="hidden" name="ProductId" value=@Model.ProductId>
-                <input class="bttn" type="submit" value="Add">
+                <input class="bttn" type="submit" value="Add Categories">
             </form>
-            </div>
         </div>
-            <div class="form-nav d-flex">
-                <a class="bttn" asp-controller=Shop asp-action="Shop" style="text-decoration:none">
-                    Add Images</a>
-                <a class="bttn" asp-controller=Product asp-action="RenderNewProduct"
-                    style="text-decoration:none">
-                    Add another product</a>
-                <a class="bttn" asp-controller=Shop asp-action="Shop" style="text-decoration:none">
-                    Finish</a>
+    </div>
+    <div class="form-nav d-flex">
+        <a class="bttn" asp-controller=Product asp-action="AddImage" asp-route-productId="@Model.ProductId"
+            style="text-decoration:none">
+            Add Images</a>
+        <a class="bttn" asp-controller=Product asp-action="RenderNewProduct" style="text-decoration:none">
+            Add another product</a>
+        <a class="bttn" asp-controller=Shop asp-action="Shop" style="text-decoration:none">
+            Finish</a>
     </div>
 </div>

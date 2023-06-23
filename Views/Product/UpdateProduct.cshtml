@@ -1,0 +1,23 @@
+@model Product
+
+<div class="form-sheet">
+    <h4>Edit a product</h4>
+    <form asp-controller="Product" asp-action="ProductUpdate" asp-route-ProductId="@Model.ProductId" method="POST">
+        <label asp-controller="Product" asp-for="Name"></label><span asp-validation-for="Name"></span><br>
+        <input class="form-control" asp-controller="Product" asp-for="Name"><br>
+        <label asp-controller="Product" asp-for="Description"></label><span asp-validation-for="Description"></span><br>
+        <input class="form-control" asp-controller="Product" asp-for="Description"><br>
+        <label asp-controller="Product" asp-for="Price"></label><span asp-validation-for="Price"></span><br>
+        <input class="form-control" asp-controller="Product" asp-for="Price"><br>
+        <label asp-controller="Product" asp-for="MainCat"></label><span asp-validation-for="MainCat"></span><br>
+        <select class="form-select" asp-for="MainCat">
+            <option value="Books">Books</option>
+            <option value="Food">Food</option>
+            <option value="Crafts">Crafts</option>
+        </select><br>
+        <input class="bttn" type="submit" value="Save changes">
+    </form><br>
+    <a class="bttn" asp-controller="Product" asp-action="AddCategory" asp-route-productId="@Model.ProductId">Edit Categories</a>
+    <a class="bttn" asp-controller="Product" asp-action="AddImage" asp-route-productId="@Model.ProductId">Edit Images</a>
+    <a class="bttn" asp-controller="Shop" asp-action="Shop">Finish</a>
+</div>

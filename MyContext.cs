@@ -13,6 +13,7 @@ public class MyContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<ProductCategoryAssoc> ProductCategoryAssocs { get; set; }
     public DbSet<Image> Images { get; set; }
-    
+    public DbSet<ProductImageAssoc> ProductImageAssocs { get; set; }
+
     
 }

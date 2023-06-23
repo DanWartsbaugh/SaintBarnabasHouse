@@ -18409,6 +18409,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\Views\\Product\\UpdateProduct.cshtml",
+      "TargetPath": "Views\\Product\\UpdateProduct.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\Views\\Product\\NewProduct.cshtml",
       "TargetPath": "Views\\Product\\NewProduct.cshtml",
       "FileKind": "mvc"
@@ -18461,6 +18466,16 @@
     {
       "FilePath": "c:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\Views\\Product\\AddImage.cshtml",
+      "TargetPath": "Views\\Product\\AddImage.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\Views\\Shop\\Cart.cshtml",
+      "TargetPath": "Views\\Shop\\Cart.cshtml",
       "FileKind": "mvc"
     }
   ],
