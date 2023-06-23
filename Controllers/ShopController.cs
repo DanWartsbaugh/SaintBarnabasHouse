@@ -41,6 +41,7 @@ public class ShopController : Controller
     [HttpPost("shop/searchresults")]
     public IActionResult Search(string query)
     {
+        //Add a line to remove whatever to prevent SQL injection
         List<Product> Results = _context.Products.Where(p => p.Name.Contains(query) || p.Description.Contains(query)).Include(p => p.ProductCategoryAssocs).ThenInclude(p => p.Category).ToList();
         ViewBag.Heading = "Search Results";
         ViewBag.Categories = _context.Categories.ToList();
@@ -50,7 +51,7 @@ public class ShopController : Controller
     [HttpGet("shop/products/{productId}")]
     public IActionResult ShowProduct(int productId)
     {
-        Product? OneProduct = _context.Products.Include(p => p.ProductCategoryAssocs).ThenInclude(p => p.Category).FirstOrDefault(p => p.ProductId == productId);
+        Product? OneProduct = _context.Products.Include(p => p.ProductCategoryAssocs).ThenInclude(p => p.Category).Include(p => p.ProductImageAssocs).ThenInclude(p => p.Image).FirstOrDefault(p => p.ProductId == productId);
         if (OneProduct == null)
         {
             return RedirectToAction("Shop");
