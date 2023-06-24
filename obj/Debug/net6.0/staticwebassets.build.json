@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FtFJmJQ/RkU7J88j+qLi1NXBIJ+J99h3etvZrnFt6ZQ=",
+  "Hash": "qDhAVHAGbnQUikjvR1R35z7AxtVAahhgbNo0lupXesg=",
   "Source": "SaintBarnabasHouse",
   "BasePath": "_content/SaintBarnabasHouse",
   "Mode": "Default",
@@ -119,6 +119,23 @@
       "OriginalItemSpec": "wwwroot\\images\\blog.png"
     },
     {
+      "Identity": "C:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\wwwroot\\images\\crafts-skewed.png",
+      "SourceId": "SaintBarnabasHouse",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\wwwroot\\",
+      "BasePath": "_content/SaintBarnabasHouse",
+      "RelativePath": "images/crafts-skewed.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\crafts-skewed.png"
+    },
+    {
       "Identity": "C:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\wwwroot\\images\\events.png",
       "SourceId": "SaintBarnabasHouse",
       "SourceType": "Discovered",
@@ -134,6 +151,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\events.png"
+    },
+    {
+      "Identity": "C:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\wwwroot\\images\\founder-wide.png",
+      "SourceId": "SaintBarnabasHouse",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\wwwroot\\",
+      "BasePath": "_content/SaintBarnabasHouse",
+      "RelativePath": "images/founder-wide.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\founder-wide.png"
     },
     {
       "Identity": "C:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\wwwroot\\images\\founder.png",
@@ -168,6 +202,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\Logo.png"
+    },
+    {
+      "Identity": "C:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\wwwroot\\images\\monkeybread-wide.png",
+      "SourceId": "SaintBarnabasHouse",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\wwwroot\\",
+      "BasePath": "_content/SaintBarnabasHouse",
+      "RelativePath": "images/monkeybread-wide.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\monkeybread-wide.png"
     },
     {
       "Identity": "C:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\wwwroot\\images\\shop.png",

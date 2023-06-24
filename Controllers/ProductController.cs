@@ -154,14 +154,14 @@ public class ProductController : Controller
             _context.Add(newCategory);
             _context.SaveChanges();
         }
-        return RedirectToAction("RenderNewCategory");
+        return Redirect(Request.Headers["Referer"].ToString());
     }
 
     //Render add Image to product form
     [HttpGet("products/{productId}/addimg")]
     public IActionResult AddImage(int productId)
     {
-        Product? OneProduct = _context.Products.Include(p => p.ProductImageAssocs).ThenInclude(a => a.Image).FirstOrDefault(p => p.ProductId == productId);
+        Product? OneProduct = _context.Products.Include(p => p.ProductImageAssocs).ThenInclude(a => a.Image).Include(p => p.ProductCategoryAssocs).ThenInclude(p => p.Category).FirstOrDefault(p => p.ProductId == productId);
         if (OneProduct == null)
         {
             return RedirectToAction("Index");

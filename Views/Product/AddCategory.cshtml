@@ -1,14 +1,42 @@
 @model Product
 
+<!-- Create Category Modal -->
+<div class="modal fade" id="CategoryModal" tabindex="-1" aria-labelledby="CategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="CategoryModalLabel">New category</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="newCategory" asp-controller="Product" asp-action="CreateCategory">
+                    <input type="text" name="Name" class="form-control">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="bttn" data-bs-dismiss="modal">Cancel</button>
+                <button form="newCategory" type="submit" class="bttn">Add category to database</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="form-sheet">
     <h5>@Model.Name</h5>
     <p>@Model.Description</p>
     <p>@Model.Price.ToString("0.00")</p>
 
+    <div class="category-mid">
+        <button type="button" class="bttn" data-bs-toggle="modal" data-bs-target="#CategoryModal">
+            Add a new category
+        </button>
+    </div>
+
     <div class="d-flex">
         <div class="left">
             <h4>Categories</h4>
-            <form asp-controller="Product" asp-action="RemoveCatFromProd" asp-route-productId="@Model.ProductId" method="POST">
+            <form asp-controller="Product" asp-action="RemoveCatFromProd" asp-route-productId="@Model.ProductId"
+                method="POST">
                 @foreach (ProductCategoryAssoc cat in Model.ProductCategoryAssocs)
                 {
                     <input type="checkbox" name="CatIds" id="@cat.Category.Name" value="@cat.CategoryId">
@@ -20,7 +48,8 @@
 
         <div class="right">
             <h4>Add Category</h4>
-            <form asp-controller="Product" asp-action="AddCatToProd" asp-route-productId="@Model.ProductId" method="POST">
+            <form asp-controller="Product" asp-action="AddCatToProd" asp-route-productId="@Model.ProductId"
+                method="POST">
                 @{
                     List<int> catIDs = new();
                     foreach (ProductCategoryAssoc assoc in Model.ProductCategoryAssocs)

@@ -11,8 +11,8 @@ using SaintBarnabasHouse.Models;
 namespace SaintBarnabasHouse.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20230622125625_Images")]
-    partial class Images
+    [Migration("20230624182333_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,6 +51,10 @@ namespace SaintBarnabasHouse.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.HasKey("ImageId");
 
                     b.ToTable("Images");
@@ -71,6 +75,9 @@ namespace SaintBarnabasHouse.Migrations
 
                     b.Property<string>("MainCat")
                         .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MainImgUrl")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Name")
