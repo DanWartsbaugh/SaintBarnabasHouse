@@ -54,7 +54,7 @@
 
     <div class="product-info">
         <h4>@Model.Name</h4>
-        <p>@Model.Description</p>
+        <p class="prod-desc">@Model.Description</p>
         <p>$@Model.Price.ToString("0.00")</p>
         @{
             string catstring = "";
@@ -68,10 +68,10 @@
     </div>
     @*Cart controls*@
     <div class="text-center">
-        <form action="" method="POST">
-            <label for="QTY">QTY: </label>
-            <input type="number" name="QTY" id="" style="width:50px">
-            <a href="" class="bttn">Add to cart</a>
+        <form asp-controller="Order" asp-action="AddToCart" asp-route-productId=@Model.ProductId method="POST">
+            <label for="Qty">QTY: </label>
+            <input type="number" name="Qty" id="" value="1" style="width:50px">
+            <input class="bttn" type="submit" value="Add to Cart">
         </form>
     </div>
     <div>

@@ -1,0 +1,71 @@
+@model formObj
+
+<!-- New Address Modal -->
+<div class="modal fade" id="newAddressModal" tabindex="-1" aria-labelledby="newAddressLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newAddressLabel">Add a new address</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="newAddress" asp-controller="Order" asp-action="CreateAddress">
+                    <input type="text" name="Street" class="form-control">
+                    <input type="text" name="Street2" class="form-control">
+                    <input type="text" name="City" class="form-control">
+                    <input type="text" name="State" class="form-control">
+                    <input type="text" name="Zip" class="form-control">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="bttn" data-bs-dismiss="modal">Cancel</button>
+                <button form="newAddress" type="submit" class="bttn">Save address</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="sheet">
+    <button type="button" class="bttn" data-bs-toggle="modal" data-bs-target="#newAddressModal">
+        Add a new address
+    </button>
+    <h5>Shipping Address:</h5>
+    @if (ViewBag.Addresses.Count != 0)
+    {
+        <form asp-controller="Order" asp-action="SetShipping" method="POST">
+            @foreach (Address address in ViewBag.Addresses)
+            {
+                <input type="radio" name="ship" value="@address.AddressId">
+                <label for="ship">
+                    @address.Street
+                    @address.Street2<br>
+                    @address.City, @address.State @address.Zip
+                </label>
+            }
+            <label for="UseAsBilling">Also use this as my billing address</label>
+            <input type="checkbox" name="UseAsBilling" id="">
+            <input type="submit" value="Submit">
+
+        </form>
+    }
+    else
+    {
+        <form asp-controller="Order" asp-action="NewShipping" method="POST">
+            <label asp-for="formAddress.Street"></label><span asp-validation-for="formAddress.Street"></span><br>
+            <input class="form-control" asp-for="formAddress.Street">
+            <label asp-for="formAddress.Street2"></label><br>
+            <input class="form-control" asp-for="formAddress.Street2">
+            <label asp-for="formAddress.City"></label><span asp-validation-for="formAddress.City"></span><br>
+            <input class="form-control" asp-for="formAddress.City">
+            <label asp-for="formAddress.State"></label><span asp-validation-for="formAddress.State"></span><br>
+            <input class="form-control" asp-for="formAddress.State">
+            <label asp-for="formAddress.Zip"></label><span asp-validation-for="formAddress.Zip"></span><br>
+            <input class="form-control" asp-for="formAddress.Zip">
+            <label asp-for="UseAsBilling">Also use this as my billing address</label>
+            <input type="checkbox" asp-for="UseAsBilling" id="">
+            <input type="submit" value="Submit">
+
+        </form>
+    }
+
+</div>

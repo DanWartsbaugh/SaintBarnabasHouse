@@ -32,5 +32,6 @@ public class Product
     //Relationships
     public List<ProductImageAssoc> ProductImageAssocs { get; set; } = new();
     public List<ProductCategoryAssoc> ProductCategoryAssocs {get; set;} = new();
+    public List<CartProductAssoc> CartProductAssocs {get; set;} = new();
 }
 

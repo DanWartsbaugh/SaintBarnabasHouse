@@ -37,6 +37,9 @@ public class User
     public bool IsAdmin {get;set;} = false;
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
+
+    public List<Address> UserAddresses { get; set; } = new();
+    public List<Order> UserOrders { get; set; }= new();
 }
 
 //Verify that the email address being registered is not already in database

@@ -14,6 +14,11 @@ public class MyContext : DbContext
     public DbSet<ProductCategoryAssoc> ProductCategoryAssocs { get; set; }
     public DbSet<Image> Images { get; set; }
     public DbSet<ProductImageAssoc> ProductImageAssocs { get; set; }
+    public DbSet<Address> Addresses { get; set; }
+    public DbSet<Cart> Carts { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<CartProductAssoc> CartProductAssocs { get; set; }
+    public DbSet<OrderProductAssoc> OrderProductAssocs { get; set; }
 
     
 }

@@ -1,0 +1,66 @@
+@model Address
+
+<!-- New Address Modal -->
+<div class="modal fade" id="newAddressModal" tabindex="-1" aria-labelledby="newAddressLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newAddressLabel">Add a new address</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="newAddress" asp-controller="Order" asp-action="CreateAddress">
+                    <input type="text" name="Street" class="form-control">
+                    <input type="text" name="Street2" class="form-control">
+                    <input type="text" name="City" class="form-control">
+                    <input type="text" name="State" class="form-control">
+                    <input type="text" name="Zip" class="form-control">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="bttn" data-bs-dismiss="modal">Cancel</button>
+                <button form="newAddress" type="submit" class="bttn">Save address</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="sheet">
+    <button type="button" class="bttn" data-bs-toggle="modal" data-bs-target="#newAddressModal">
+        Add a new address
+    </button>
+    <h5>Billing Address:</h5>
+    @if (ViewBag.Addresses.Count != 0)
+    {
+        <form asp-controller="Order" asp-action="SetBilling" method="POST">
+            @foreach (Address address in ViewBag.Addresses)
+            {
+                <input type="radio" name="bill" value="@address.AddressId">
+                <label for="bill">
+                    @address.Street
+                    @address.Street2
+                    @address.City, @address.State @address.Zip
+                </label>
+            }
+            <input type="submit" value="Submit">
+        </form>
+    }
+    else
+    {
+        <form asp-controller="Order" asp-action="NewBilling" method="POST">
+            <label asp-for="Street"></label><span asp-validation-for="Street"></span><br>
+            <input class="form-control" asp-for="Street">
+            <label asp-for="Street2"></label><br>
+            <input class="form-control" asp-for="Street2">
+            <label asp-for="City"></label><span asp-validation-for="City"></span><br>
+            <input class="form-control" asp-for="City">
+            <label asp-for="State"></label><span asp-validation-for="State"></span><br>
+            <input class="form-control" asp-for="State">
+            <label asp-for="Zip"></label><span asp-validation-for="Zip"></span><br>
+            <input class="form-control" asp-for="Zip">
+            <input type="submit" value="Submit">
+
+        </form>
+    }
+
+</div>

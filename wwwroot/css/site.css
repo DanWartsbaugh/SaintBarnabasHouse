@@ -5,7 +5,7 @@ html {
 
 body {
   /* background-color: rgb(230,230,230); */
-  background-color: #FFE19C;
+  background-color: #FFCE5C;
   /*yellow*/
 }
 
@@ -90,7 +90,7 @@ body {
   max-width: 170px;
   height: 240px;
   margin: 15px 0px;
-  background-color: #AD5D4E;
+  background-color: #BC3908;
   /*red*/
   border: solid #91818A 2px;
   /*gray*/
@@ -152,7 +152,7 @@ so that the hovered element takes more of the view*/
   position: absolute;
   width: 0%;
   height: 300px;
-  background-color: #FFE19C;
+  background-color: #FFCE5C;
   animation-name: openShop;
   animation-duration: .7s;
   z-index: 7;
@@ -206,8 +206,8 @@ so that the hovered element takes more of the view*/
   transform: skew(-30deg);
   position: absolute;
   left: 27%;
-  border-left: solid #FFE19C 3px;
-  border-right: solid #FFE19C 3px;
+  border-left: solid #FFCE5C 3px;
+  border-right: solid #FFCE5C 3px;
   border-top: none;
   border-bottom: none;
 }
@@ -304,7 +304,7 @@ so that the hovered element takes more of the view*/
   box-shadow: 4px 4px 4px #462914;
   display: none;
   text-decoration: none;
-  color: black;
+  color: rgb(35, 35, 35);
 }
 
 .prodCard:hover {
@@ -318,12 +318,16 @@ so that the hovered element takes more of the view*/
   margin: 0px 15px;
   background-color: #91818A;
   border-radius: 3px;
+  border:solid #462914 1px;
 }
 
 .prodCard-img {
   width: 140px;
   height: 140px;
   margin-top: 5px;
+  border:solid #462914 1px;
+  border-radius:3px;
+
   /* padding:5px;
   background-color:#91818A */
 }
@@ -339,15 +343,17 @@ so that the hovered element takes more of the view*/
 }
 
 .Books {
-  background-color: #0c7c59
+  background-color: #462914;
+  color: rgb(95,95,95)
 }
 
 .Food {
-  background-color: #AD5D4E
+  /* background-color: #AD5D4E; */
+  background-color: #BC3908
 }
 
 .Crafts {
-  background-color: #91818A
+  background-color: #BB1F1F
 }
 
 .shop-control-bar {
@@ -419,6 +425,16 @@ so that the hovered element takes more of the view*/
   width: fit-content
 }
 
+.prod-desc {
+  white-space: pre-wrap;
+}
+
+.reviewItem {
+  display:flex;
+  justify-content:space-between;
+  padding: 10px 10%;
+  border-bottom: solid #91818A 1px;
+}
 
 
 
@@ -488,3 +504,4 @@ Taken from https://codepen.io/martinwolf/pen/GRaWPy*/
   background: black;
   color: white;
 }
+

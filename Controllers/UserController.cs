@@ -1,0 +1,92 @@
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using SaintBarnabasHouse.Models;
+
+namespace SaintBarnabasHouse.Controllers;
+
+public class UserController : Controller
+{
+    private readonly ILogger<UserController> _logger;
+
+    private MyContext _context;
+
+
+    public UserController(ILogger<UserController> logger, MyContext context)
+    {
+        _logger = logger;
+
+        _context = context;
+
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    //Render Login/Reg page
+    [HttpGet("user/login")]
+    public IActionResult LoginReg()
+    {
+        return View("LoginReg");
+    }
+
+    //Post route for registration (redirect to success page)
+    [HttpPost("register")]
+    public IActionResult Register(User newUser)
+    {
+        if (!ModelState.IsValid)
+        {
+            return LoginReg();
+        }
+
+        PasswordHasher<User> hashedpwd = new PasswordHasher<User>();
+        newUser.Password = hashedpwd.HashPassword(newUser, newUser.Password);
+        //add to db
+        _context.Users.Add(newUser);
+        _context.SaveChanges();
+
+        //log in (add to session)
+        HttpContext.Session.SetInt32("UUID", newUser.UserId);
+        return RedirectToAction("Success");
+    }
+
+    //Post route for LogIn (redirect to success page)
+    [HttpPost("login")]
+    public IActionResult Login(LoginUser loginUser)
+    {
+        if (!ModelState.IsValid)
+        {
+            return LoginReg();
+        }
+
+        User? dbUser = _context.Users.FirstOrDefault(u => u.Email == loginUser.LoginEmail);
+
+        if (dbUser == null)
+        {
+            ModelState.AddModelError("Email", "not a valid email/password combo");
+            return LoginReg();
+        }
+
+        PasswordHasher<LoginUser> hashedpwd = new PasswordHasher<LoginUser>();
+        PasswordVerificationResult pwCompareResult = hashedpwd.VerifyHashedPassword(loginUser, dbUser.Password, loginUser.LoginPassword);
+
+        if (pwCompareResult == 0)
+        {
+            ModelState.AddModelError("Password", "not a valid email/password combo");
+            return LoginReg();
+        }
+
+        HttpContext.Session.SetInt32("UUID", dbUser.UserId);
+        return RedirectToAction("Success");
+    }
+
+    [HttpPost("logout")]
+    public IActionResult Logout()
+    {
+        HttpContext.Session.Clear();
+        return RedirectToAction("LoginReg");
+    }
+}

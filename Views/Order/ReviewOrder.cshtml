@@ -1,0 +1,31 @@
+@model Order
+
+    <div class="sheet">
+@{
+    decimal total = 0;
+    foreach (OrderProductAssoc item in Model.OrderProductAssocs)
+    {
+        decimal price = (item.Product.Price * (int)item.Qty);
+        total += price;
+        <div class="reviewItem">
+            <img src="@item.Product.MainImgUrl" style="width:50px">
+            <p><b>@item.Product.Name</b></p>
+            <p>Qty: @item.Qty</p>
+            <p>$@price.ToString("0.00")</p>
+        </div>
+    }
+    <div style="text-align:right;padding-right:10%;font-weight:bold;margin:20px 0px;">Order Total: $@total.ToString("0.00")</div>
+    <div class="orderRvwAddresses d-flex justify-content-evenly">
+        <div>
+            <h5>Shipping Address</h5>
+            <p>@ViewBag.Shipping.Street, @ViewBag.Shipping.Street2</p>
+            <p>@ViewBag.Shipping.City, @ViewBag.Shipping.State, @ViewBag.Shipping.Zip</p>
+        </div>
+        <div>
+            <h5>Billing Address</h5>
+            <p>@ViewBag.Billing.Street, @ViewBag.Billing.Street2</p>
+            <p>@ViewBag.Billing.City, @ViewBag.Billing.State, @ViewBag.Billing.Zip</p>
+        </div>
+    </div>
+}
+    </div>

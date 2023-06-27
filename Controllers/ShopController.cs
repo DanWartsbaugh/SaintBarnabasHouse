@@ -27,13 +27,6 @@ public class ShopController : Controller
         return View("Shop", AllProducts);
     }
 
-    //Render shopping cart
-    [HttpGet("shop/cart")]
-    public IActionResult ShowCart()
-    {
-        return View("Cart");
-    }
-
     //Render shop page filtered by main category (books, crafts, food)
     [HttpGet("shop/category/{mainCat}")]
     public IActionResult FilterCat(string mainCat)
