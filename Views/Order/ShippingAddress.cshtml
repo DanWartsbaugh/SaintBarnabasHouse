@@ -10,10 +10,15 @@
             </div>
             <div class="modal-body">
                 <form id="newAddress" asp-controller="Order" asp-action="CreateAddress">
-                    <input type="text" name="Street" class="form-control">
-                    <input type="text" name="Street2" class="form-control">
-                    <input type="text" name="City" class="form-control">
-                    <input type="text" name="State" class="form-control">
+                    <label for="Street">Street</label><br>
+                    <input type="text" name="Street" class="form-control"><br>
+                    <label for="Street2">Street 2</label><br>
+                    <input type="text" name="Street2" class="form-control"><br>
+                    <label for="City">City</label><br>
+                    <input type="text" name="City" class="form-control"><br>
+                    <label for="State">State</label><br>
+                    <input type="text" name="State" class="form-control"><br>
+                    <label for="Zip">Zip</label><br>
                     <input type="text" name="Zip" class="form-control">
                 </form>
             </div>
@@ -26,25 +31,29 @@
 </div>
 
 <div class="sheet">
-    <button type="button" class="bttn" data-bs-toggle="modal" data-bs-target="#newAddressModal">
+    <button type="button" class="bttn" data-bs-toggle="modal" data-bs-target="#newAddressModal" style="margin-bottom:10px;">
         Add a new address
     </button>
     <h5>Shipping Address:</h5>
     @if (ViewBag.Addresses.Count != 0)
     {
         <form asp-controller="Order" asp-action="SetShipping" method="POST">
+            <div class="d-flex align-items:center">
             @foreach (Address address in ViewBag.Addresses)
             {
-                <input type="radio" name="ship" value="@address.AddressId">
-                <label for="ship">
+                <div class="sheet d-flex" style="border:solid black 1px; border-radius:3px;width:fit-content; padding:5px;margin-right:5px;align-items:center">
+                <input id="@address.AddressId"type="radio" name="ship" value="@address.AddressId" style="margin-right:5px">
+                <label for="@address.AddressId">
                     @address.Street
                     @address.Street2<br>
                     @address.City, @address.State @address.Zip
                 </label>
+                </div>
             }
-            <label for="UseAsBilling">Also use this as my billing address</label>
-            <input type="checkbox" name="UseAsBilling" id="">
-            <input type="submit" value="Submit">
+            </div>
+            @* <label for="UseAsBilling">Also use this as my billing address</label>
+            <input type="checkbox" name="UseAsBilling" id=""><br> *@
+            <input class="bttn" type="submit" value="Submit" style="margin-top:10px">
 
         </form>
     }
@@ -62,8 +71,8 @@
             <label asp-for="formAddress.Zip"></label><span asp-validation-for="formAddress.Zip"></span><br>
             <input class="form-control" asp-for="formAddress.Zip">
             <label asp-for="UseAsBilling">Also use this as my billing address</label>
-            <input type="checkbox" asp-for="UseAsBilling" id="">
-            <input type="submit" value="Submit">
+            <input type="checkbox" asp-for="UseAsBilling" id=""><br>
+            <input class="bttn" type="submit" value="Submit" style="margin-top:10px">
 
         </form>
     }

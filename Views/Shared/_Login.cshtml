@@ -1,0 +1,17 @@
+@* Log in form *@
+
+@model LoginUser
+<form asp-action="Login" asp-controller="User" method="post">
+<div class="mb-3">
+        <label asp-for="LoginEmail"></label> <span asp-validation-for="LoginEmail" class="text-danger"></span>
+        <input asp-for="LoginEmail" class="form-control">
+        
+    </div>
+    <div class="mb-3">
+        <label asp-for="LoginPassword"></label> <span asp-validation-for="LoginPassword" class="text-danger"></span>
+        <input asp-for="LoginPassword" class="form-control">
+        
+    </div>
+        <input class="bttn" type="submit" value="Log In">
+
+</form>

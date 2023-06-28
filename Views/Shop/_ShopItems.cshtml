@@ -12,8 +12,8 @@
                 cats.Add(assoc.Category);
             }
         }
-
     }
+    List<Category> orderedCats = cats.OrderBy(c => c.Name).ToList();
 }
 
 <div class="sheet">
@@ -22,7 +22,7 @@
         <label for="filter">Filter by category: </label>
         <select name="filter" id="filter" onchange="filterSelection(value)">
             <option value="all">Show all</option>
-            @foreach (Category cat in cats)
+            @foreach (Category cat in orderedCats)
             {
                 <option value="@cat.Name">@cat.Name</option>
             }
@@ -72,7 +72,7 @@
         }
         @if (Model.Count == 0)
         {
-            <p style="height:400px">No products were found matching your search</p>
+            <h4 style="padding-top:10px">No products were found matching your search</h4>
         }
     </div>
 </div>

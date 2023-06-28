@@ -50,13 +50,18 @@ public class UserController : Controller
 
         //log in (add to session)
         HttpContext.Session.SetInt32("UUID", newUser.UserId);
-        return RedirectToAction("Success");
+        return RedirectToAction("Index","Home");
     }
 
     //Post route for LogIn (redirect to success page)
     [HttpPost("login")]
     public IActionResult Login(LoginUser loginUser)
     {
+        User user = _context.Users.FirstOrDefault(u => u.Email == loginUser.LoginEmail);
+        if(user.IsAdmin)
+        {
+            HttpContext.Session.SetString("Admin", "Admin");
+        }
         if (!ModelState.IsValid)
         {
             return LoginReg();
@@ -80,13 +85,24 @@ public class UserController : Controller
         }
 
         HttpContext.Session.SetInt32("UUID", dbUser.UserId);
-        return RedirectToAction("Success");
+        return RedirectToAction("Index","Home");
     }
 
     [HttpPost("logout")]
     public IActionResult Logout()
     {
         HttpContext.Session.Clear();
-        return RedirectToAction("LoginReg");
+        return RedirectToAction("Index","Home");
+    }
+
+    [HttpGet("admin/dashboard")]
+    public IActionResult Dashboard()
+    {
+        if(HttpContext.Session.GetString("Admin")=="Admin")
+        {
+        return View("Dashboard");
+        }
+        
+        return RedirectToAction("Index","Home");
     }
 }

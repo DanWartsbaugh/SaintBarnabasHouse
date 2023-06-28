@@ -31,7 +31,7 @@ public class User
     [NotMapped]
     [Compare("Password")]
     [DataType(DataType.Password)]
-    [Display(Name = "PW Confirm")]
+    [Display(Name = "Confirm password")]
     public string PasswordConfirm { get; set; }
 
     public bool IsAdmin {get;set;} = false;

@@ -1,7 +1,7 @@
 @model Address
 
 <!-- New Address Modal -->
-<div class="modal fade" id="newAddressModal" tabindex="-1" aria-labelledby="newAddressLabel" aria-hidden="true">
+<div class="modal fade sheet" id="newAddressModal" tabindex="-1" aria-labelledby="newAddressLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -26,23 +26,29 @@
 </div>
 
 <div class="sheet">
-    <button type="button" class="bttn" data-bs-toggle="modal" data-bs-target="#newAddressModal">
+    <button type="button" class="bttn" data-bs-toggle="modal" data-bs-target="#newAddressModal" style="margin-bottom:10px;">
         Add a new address
     </button>
     <h5>Billing Address:</h5>
     @if (ViewBag.Addresses.Count != 0)
     {
         <form asp-controller="Order" asp-action="SetBilling" method="POST">
-            @foreach (Address address in ViewBag.Addresses)
-            {
-                <input type="radio" name="bill" value="@address.AddressId">
-                <label for="bill">
-                    @address.Street
-                    @address.Street2
-                    @address.City, @address.State @address.Zip
-                </label>
-            }
-            <input type="submit" value="Submit">
+            <div class="d-flex align-items:center">
+
+                @foreach (Address address in ViewBag.Addresses)
+                {
+                    <div class="sheet d-flex" style="border:solid black 1px; border-radius:3px;width:fit-content; padding:5px;margin-right:5px;align-items:center">
+
+                        <input type="radio" name="bill" id="@address.AddressId" value="@address.AddressId" style="margin-right:5px">
+                        <label for="@address.AddressId">
+                            @address.Street
+                            @address.Street2<br>
+                            @address.City, @address.State @address.Zip
+                        </label>
+                    </div>
+                }
+            </div>
+                <input class="bttn" type="submit" value="Submit" style="margin-top:10px">
         </form>
     }
     else
@@ -57,8 +63,8 @@
             <label asp-for="State"></label><span asp-validation-for="State"></span><br>
             <input class="form-control" asp-for="State">
             <label asp-for="Zip"></label><span asp-validation-for="Zip"></span><br>
-            <input class="form-control" asp-for="Zip">
-            <input type="submit" value="Submit">
+            <input class="form-control" asp-for="Zip"><br>
+            <input class="bttn" type="submit" value="Submit">
 
         </form>
     }

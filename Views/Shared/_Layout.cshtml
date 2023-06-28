@@ -18,6 +18,8 @@
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/images/Logo.png"
                         alt="Saint Barnabas House logo" style="width:100px"></a>
                 @*Admin features*@
+                @if(Context.Session.GetString("Admin")=="Admin")
+                {
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
                         <a class="nav-link text-light" asp-controller="Product" asp-action="RenderNewProduct">Add a
@@ -27,7 +29,11 @@
                         <a class="nav-link text-light" asp-controller="Product" asp-action="RenderNewCategory">Add a
                             category</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" asp-controller="User" asp-action="Dashboard">Dashboard</a>
+                    </li>
                 </ul>
+                }
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -44,12 +50,26 @@
                             <a class="nav-link text-light" asp-controller="Home" asp-action="Blog">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-controller="Home" asp-action="Event">Schedule an
-                                event</a>
+                            <a class="nav-link text-light" asp-controller="Home" asp-action="Event">Events</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-controller="Order" asp-action="ShowCart">Your Cart</a>
                         </li>
+                        @if (Context.Session.GetInt32("UUID") != null)
+                        {
+                            <li class="nav-item">
+                                <form asp-controller="User" asp-action="Logout" method="POST">
+                                    <input class="nav-link text-light" type="submit" value="Log out"
+                                        style="background:none;border:none">
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-controller="User" asp-action="LoginReg">Log in</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -64,7 +84,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - Saint Barnabas House - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - Saint Barnabas House
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

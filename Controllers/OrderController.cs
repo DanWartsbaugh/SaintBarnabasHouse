@@ -71,6 +71,7 @@ public class OrderController : Controller
         if (HttpContext.Session.GetInt32("OrderId") == null)
         {
             Order newOrder = new Order();
+            newOrder.CartId = (int)HttpContext.Session.GetInt32("CartId");
             _context.Add(newOrder);
             _context.SaveChanges();
             HttpContext.Session.SetInt32("OrderId", newOrder.OrderId);
@@ -138,6 +139,10 @@ public class OrderController : Controller
         order.PickUp = PickUp;
         order.OrderComments = OrderComments;
         _context.SaveChanges();
+        if(order.PickUp == true)
+        {
+            return RedirectToAction("Billing");
+        }
 
         return RedirectToAction("Shipping");
     }
@@ -157,6 +162,11 @@ public class OrderController : Controller
     [HttpPost("shop/order/shipping")]
     public IActionResult SetShipping(int ship, bool UseAsBilling)
     {
+        if(!ModelState.IsValid)
+        {
+            return Shipping();
+        }
+
         Order order = _context.Orders.FirstOrDefault(o => o.OrderId == HttpContext.Session.GetInt32("OrderId"));
         order.ShippingAddressId = ship;
 
@@ -186,6 +196,10 @@ public class OrderController : Controller
     [HttpPost("shop/order/Billing")]
     public IActionResult SetBilling(int bill)
     {
+        if(!ModelState.IsValid)
+        {
+            return Billing();
+        }
         Order order = _context.Orders.FirstOrDefault(o => o.OrderId == HttpContext.Session.GetInt32("OrderId"));
 
         order.BillingAddressId = bill;
@@ -215,9 +229,12 @@ public class OrderController : Controller
     [HttpPost("addresses/new")]
     public IActionResult CreateAddress(Address newAddress)
     {
+        if(ModelState.IsValid)
+        {
         newAddress.UserId = (int)HttpContext.Session.GetInt32("UUID");
         _context.Add(newAddress);
         _context.SaveChanges();
+        }
 
         return Redirect(Request.Headers["Referer"].ToString());
     }
@@ -226,6 +243,10 @@ public class OrderController : Controller
     [HttpPost("addresses/newshipping")]
     public IActionResult NewShipping(formObj newAddress)
     {
+        if(!ModelState.IsValid)
+        {
+            return Shipping();
+        }
         if (HttpContext.Session.GetInt32("UUID") != null)
         {
             newAddress.formAddress.UserId = (int)HttpContext.Session.GetInt32("UUID");
@@ -250,6 +271,10 @@ public class OrderController : Controller
     [HttpPost("addresses/newbilling")]
     public IActionResult NewBilling(Address newAddress)
     {
+        if(!ModelState.IsValid)
+        {
+            return Billing();
+        }
         if (HttpContext.Session.GetInt32("UUID") != null)
         {
             newAddress.UserId = (int)HttpContext.Session.GetInt32("UUID");
@@ -264,4 +289,61 @@ public class OrderController : Controller
         return RedirectToAction("ReviewOrder");
     }
 
+    //Update Cart
+    [HttpPost("cart/{ItemId}/update")]
+    public IActionResult UpdateCart(CartProductAssoc newItem, int ItemId)
+    {
+        if(!ModelState.IsValid)
+        {
+        return Redirect(Request.Headers["Referer"].ToString());
+        }
+
+        CartProductAssoc? OldItem = _context.CartProductAssocs.FirstOrDefault(i => i.CartProductAssocId == ItemId);
+        
+        if(OldItem == null)
+        {
+        return Redirect(Request.Headers["Referer"].ToString());
+        }
+            OldItem.Qty = newItem.Qty;
+            OldItem.UpdatedAt = DateTime.Now;
+
+            _context.SaveChanges();
+
+        return Redirect(Request.Headers["Referer"].ToString());
+        
+    }
+
+
+    //Remove item from cart
+    [HttpPost("cart/{ItemId}/delete")]
+    public IActionResult RemoveFromCart(int ItemId)
+    {
+        CartProductAssoc? item = _context.CartProductAssocs.FirstOrDefault(d => d.CartProductAssocId == ItemId);
+
+        if(item != null)
+        {
+            _context.CartProductAssocs.Remove(item);
+            _context.SaveChanges();
+        }
+        return Redirect(Request.Headers["Referer"].ToString());
+    }
+
+    [HttpPost("order/complete/{OrderId}")]
+    public IActionResult CompleteOrder(int OrderId)
+    {
+        Order order = _context.Orders.FirstOrDefault(o => o.OrderId == OrderId);
+        Cart cart = _context.Carts.FirstOrDefault(c => c.CartId == order.CartId);
+        _context.Carts.Remove(cart);
+        _context.SaveChanges();
+        HttpContext.Session.Remove("OrderId");
+        HttpContext.Session.Remove("CartId");
+        return RedirectToAction("ThankYou");
+    }
+
+    [HttpGet("order/complete")]
+    public IActionResult ThankYou()
+    {
+        return View("OrderComplete");
+    }
 }
+

@@ -6,9 +6,12 @@
     <nav>
         <a asp-controller="Shop" asp-action="Shop" class="bttn">Back to shop</a>
         <a class="bttn" href="javascript:void(0);" onclick="history.go(-1);">Back</a>
+        @if (Context.Session.GetString("Admin") == "Admin")
+        {
+            <a class="bttn" asp-controller="Product" asp-action="EditProduct" asp-route-ProductId=@Model.ProductId>Edit
+                Product</a>
+        }
     </nav>
-    <a class="bttn" asp-controller="Product" asp-action="EditProduct" asp-route-ProductId=@Model.ProductId>Edit
-        Product</a>
     @if (Model.ProductImageAssocs.Count() > 0)
     {
         <div id="productImageCarousel" class="carousel slide" data-bs-interval="false">
@@ -75,6 +78,7 @@
         </form>
     </div>
     <div>
-        <p style="max-width:450px;margin:0 auto"><i>Please note: Food items must be picked up from the house. Please select the "Pick up" option when you submit your order if your order contains food.</i></p>
+        <p style="max-width:450px;margin:0 auto"><i>Please note: Food items must be picked up from the house. Please
+                select the "Pick up" option when you submit your order if your order contains food.</i></p>
     </div>
 </div>

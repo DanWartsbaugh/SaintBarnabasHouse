@@ -113,8 +113,8 @@
                     if (!imgIDs.Contains(image.ImageId))
                     {
                         <div class="d-flex flex-wrap" style="border:solid gray 1px;border-collapse:collapse;">
-                            <input type="checkbox" name="ImageIds" value="@image.ImageId">
-                            <img src="@image.ImageUrl" alt="" style="width:100px;height:100px">
+                            <input type="checkbox" name="ImageIds" id="@image.ImageId" value="@image.ImageId">
+                            <img src="@image.ImageUrl" alt="@image.ImageId" style="width:100px;height:100px">
                         </div>
                     }
                 }

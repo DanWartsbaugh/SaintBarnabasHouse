@@ -1,16 +1,46 @@
 @model Order
-
+<div id="UUID" style="display:none">@Context.Session.GetInt32("UUID")</div>
 <div class="sheet">
     <form asp-controller="Order" asp-action="Details" method="POST">
-        <div class="order-top" style="border:solid black 1px">
+        <div class="order-top">
             <label asp-for="PickUp"></label>
             <input type="checkbox" asp-for="PickUp">
             <p><i>If your order contains food, please select the pick up option and include your phone number or email
                     address in the comments below. We will contact you shortly to arrange a time for you to pick up your
-                    items.</i></p><br><br>
+                    items.</i></p>
             <label asp-for="OrderComments"></label>
-            <textarea class="form-control" asp-for="OrderComments"></textarea>
+            <textarea class="form-control" asp-for="OrderComments" style="margin-bottom:10px"></textarea>
         </div>
         <input type="submit" value="Submit">
     </form>
 </div>
+
+<div class="modal fade text-center sheet" id="LoginRegModal" tabindex="-1" aria-labelledby="LoginRegLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="LoginRegLabel">Log in to place an order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @await Html.PartialAsync("_Login")
+                <button type="button" class="bttn" data-bs-dismiss="modal" style="margin-top:5px">Continue as guest</button>
+                <div style="border-bottom:solid black 1px;margin:10px 0px"></div>
+                @await Html.PartialAsync("_Registration")
+            </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = () => {
+
+        let UUID = document.querySelector('#UUID').innerHTML;
+        console.log(UUID)
+        if(UUID==''){
+        $('#LoginRegModal').modal('show');
+        }
+    }
+</script>

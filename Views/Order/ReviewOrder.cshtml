@@ -18,14 +18,26 @@
     <div class="orderRvwAddresses d-flex justify-content-evenly">
         <div>
             <h5>Shipping Address</h5>
-            <p>@ViewBag.Shipping.Street, @ViewBag.Shipping.Street2</p>
-            <p>@ViewBag.Shipping.City, @ViewBag.Shipping.State, @ViewBag.Shipping.Zip</p>
+            @if(ViewBag.Shipping != null)
+            {
+            <p>@ViewBag.Shipping.Street, @ViewBag.Shipping.Street2<br>
+            @ViewBag.Shipping.City, @ViewBag.Shipping.State, @ViewBag.Shipping.Zip</p>
+            }
+            else
+            {
+                <p>Pick up from <br>
+                123 Main St <br>
+                West Chicago, IL 12345</p>
+            }
         </div>
         <div>
             <h5>Billing Address</h5>
-            <p>@ViewBag.Billing.Street, @ViewBag.Billing.Street2</p>
-            <p>@ViewBag.Billing.City, @ViewBag.Billing.State, @ViewBag.Billing.Zip</p>
+            <p>@ViewBag.Billing.Street, @ViewBag.Billing.Street2<br>
+            @ViewBag.Billing.City, @ViewBag.Billing.State, @ViewBag.Billing.Zip</p>
         </div>
     </div>
+    <form asp-controller="Order" asp-action="CompleteOrder" asp-route-OrderId="@Model.OrderId" method="post">
+        <input type="submit" value="Complete Order">
+    </form>
 }
     </div>
