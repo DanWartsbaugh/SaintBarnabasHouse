@@ -21,6 +21,12 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        if(HttpContext.Session.GetInt32("CartId")!=null)
+        {
+            int cartId = (int)HttpContext.Session.GetInt32("CartId");
+            int cartCount = _context.CartProductAssocs.Where(c => c.CartId == cartId).Sum(c => c.Qty);
+            HttpContext.Session.SetInt32("CartCount",cartCount);
+        }
         return View("Index");
     }
 

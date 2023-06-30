@@ -18,21 +18,21 @@
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/images/Logo.png"
                         alt="Saint Barnabas House logo" style="width:100px"></a>
                 @*Admin features*@
-                @if(Context.Session.GetString("Admin")=="Admin")
+                @if (Context.Session.GetString("Admin") == "Admin")
                 {
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-controller="Product" asp-action="RenderNewProduct">Add a
-                            product</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-controller="Product" asp-action="RenderNewCategory">Add a
-                            category</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-controller="User" asp-action="Dashboard">Dashboard</a>
-                    </li>
-                </ul>
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-controller="Product" asp-action="RenderNewProduct">Add a
+                                product</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-controller="Product" asp-action="RenderNewCategory">Add a
+                                category</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-controller="User" asp-action="Dashboard">Dashboard</a>
+                        </li>
+                    </ul>
                 }
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,9 +52,23 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-controller="Home" asp-action="Event">Events</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-controller="Order" asp-action="ShowCart">Your Cart</a>
-                        </li>
+                        @if (@Context.Session.GetInt32("CartCount") != null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-controller="Order" asp-action="ShowCart">Your Cart:
+                                    <br>@Context.Session.GetInt32("CartCount") items
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-controller="Order" asp-action="ShowCart">Your Cart:
+                                    <br>0 items
+                                </a>
+                            </li>
+                        }
+
                         @if (Context.Session.GetInt32("UUID") != null)
                         {
                             <li class="nav-item">

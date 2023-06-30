@@ -18,24 +18,28 @@
 
 <div class="sheet">
     <div class="shop-control-bar d-flex justify-content-between">
-        <div>
-        <label for="filter">Filter by category: </label>
-        <select name="filter" id="filter" onchange="filterSelection(value)">
-            <option value="all">Show all</option>
-            @foreach (Category cat in orderedCats)
-            {
-                <option value="@cat.Name">@cat.Name</option>
-            }
-        </select>
-        <label for="orderby">Sort by price: </label>
-        <select name="orderby" id="orderby" onchange="SortByPrice(value)">
-            <option value="hidden">Select a direction</option>
-            <option value="asc">Low to High</option>
-            <option value="desc">High to Low</option>
-        </select>
+        <div class="d-flex">
+            <div>
+                <label for="filter">Filter by category: </label>
+                <select name="filter" id="filter" onchange="filterSelection(value)">
+                    <option value="all">Show all</option>
+                    @foreach (Category cat in orderedCats)
+                    {
+                        <option value="@cat.Name">@cat.Name</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label for="orderby">Sort by price: </label>
+                <select name="orderby" id="orderby" onchange="SortByPrice(value)">
+                    <option value="hidden">Select a direction</option>
+                    <option value="asc">Low to High</option>
+                    <option value="desc">High to Low</option>
+                </select>
+            </div>
         </div>
         <div>
-            @if(Url.RouteUrl(ViewContext.RouteData.Values) != "/shop")
+            @if (Url.RouteUrl(ViewContext.RouteData.Values) != "/shop")
             {
                 <a asp-controller="Shop" asp-action="Shop" class="bttn">Back to shop</a>
             }
@@ -53,16 +57,18 @@
             <a class="prodCard @prod.MainCat @catstring" asp-controller="Shop" asp-action="ShowProduct"
                 asp-route-productId="@prod.ProductId">
                 <div class="text-center prodCard-img-holder">
-                @if(prod.MainImgUrl!=null)
-                {<img class="prodCard-img" src="@prod.MainImgUrl" alt="">}
-                else if(prod.ProductImageAssocs.Count()>0)
-                {
-                    <img class="prodCard-img" src="@prod.ProductImageAssocs[0].Image.ImageUrl" alt="">
-                }
-                else
-                {
-                    <img class="prodCard-img" src="" alt="Not pictured">
-                }
+                    @if (prod.MainImgUrl != null)
+                    {
+                        <img class="prodCard-img" src="@prod.MainImgUrl" alt="">
+                    }
+                    else if (prod.ProductImageAssocs.Count() > 0)
+                    {
+                        <img class="prodCard-img" src="@prod.ProductImageAssocs[0].Image.ImageUrl" alt="">
+                    }
+                    else
+                    {
+                        <img class="prodCard-img" src="" alt="Not pictured">
+                    }
                 </div>
                 <p>@prod.Name</p>
                 <p>$@prod.Price.ToString("0.00")</p>

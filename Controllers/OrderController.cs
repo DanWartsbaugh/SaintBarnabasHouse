@@ -59,6 +59,10 @@ public class OrderController : Controller
         _context.Add(newAssoc);
         _context.SaveChanges();
 
+        int cartId = (int)HttpContext.Session.GetInt32("CartId");
+        int cartCount = _context.CartProductAssocs.Where(c => c.CartId == cartId).Sum(c => c.Qty);
+        HttpContext.Session.SetInt32("CartCount", cartCount);
+
         return Redirect(Request.Headers["Referer"].ToString());
     }
 
@@ -139,7 +143,7 @@ public class OrderController : Controller
         order.PickUp = PickUp;
         order.OrderComments = OrderComments;
         _context.SaveChanges();
-        if(order.PickUp == true)
+        if (order.PickUp == true)
         {
             return RedirectToAction("Billing");
         }
@@ -162,7 +166,7 @@ public class OrderController : Controller
     [HttpPost("shop/order/shipping")]
     public IActionResult SetShipping(int ship, bool UseAsBilling)
     {
-        if(!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             return Shipping();
         }
@@ -196,7 +200,7 @@ public class OrderController : Controller
     [HttpPost("shop/order/Billing")]
     public IActionResult SetBilling(int bill)
     {
-        if(!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             return Billing();
         }
@@ -229,11 +233,11 @@ public class OrderController : Controller
     [HttpPost("addresses/new")]
     public IActionResult CreateAddress(Address newAddress)
     {
-        if(ModelState.IsValid)
+        if (ModelState.IsValid)
         {
-        newAddress.UserId = (int)HttpContext.Session.GetInt32("UUID");
-        _context.Add(newAddress);
-        _context.SaveChanges();
+            newAddress.UserId = (int)HttpContext.Session.GetInt32("UUID");
+            _context.Add(newAddress);
+            _context.SaveChanges();
         }
 
         return Redirect(Request.Headers["Referer"].ToString());
@@ -243,7 +247,7 @@ public class OrderController : Controller
     [HttpPost("addresses/newshipping")]
     public IActionResult NewShipping(formObj newAddress)
     {
-        if(!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             return Shipping();
         }
@@ -271,7 +275,7 @@ public class OrderController : Controller
     [HttpPost("addresses/newbilling")]
     public IActionResult NewBilling(Address newAddress)
     {
-        if(!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             return Billing();
         }
@@ -293,24 +297,28 @@ public class OrderController : Controller
     [HttpPost("cart/{ItemId}/update")]
     public IActionResult UpdateCart(CartProductAssoc newItem, int ItemId)
     {
-        if(!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
-        return Redirect(Request.Headers["Referer"].ToString());
+            return Redirect(Request.Headers["Referer"].ToString());
         }
 
         CartProductAssoc? OldItem = _context.CartProductAssocs.FirstOrDefault(i => i.CartProductAssocId == ItemId);
-        
-        if(OldItem == null)
+
+        if (OldItem == null)
         {
-        return Redirect(Request.Headers["Referer"].ToString());
+            return Redirect(Request.Headers["Referer"].ToString());
         }
-            OldItem.Qty = newItem.Qty;
-            OldItem.UpdatedAt = DateTime.Now;
+        OldItem.Qty = newItem.Qty;
+        OldItem.UpdatedAt = DateTime.Now;
 
-            _context.SaveChanges();
+        _context.SaveChanges();
+
+        int cartId = (int)HttpContext.Session.GetInt32("CartId");
+        int cartCount = _context.CartProductAssocs.Where(c => c.CartId == cartId).Sum(c => c.Qty);
+        HttpContext.Session.SetInt32("CartCount", cartCount);
 
         return Redirect(Request.Headers["Referer"].ToString());
-        
+
     }
 
 
@@ -320,11 +328,16 @@ public class OrderController : Controller
     {
         CartProductAssoc? item = _context.CartProductAssocs.FirstOrDefault(d => d.CartProductAssocId == ItemId);
 
-        if(item != null)
+        if (item != null)
         {
             _context.CartProductAssocs.Remove(item);
             _context.SaveChanges();
         }
+
+        int cartId = (int)HttpContext.Session.GetInt32("CartId");
+        int cartCount = _context.CartProductAssocs.Where(c => c.CartId == cartId).Sum(c => c.Qty);
+        HttpContext.Session.SetInt32("CartCount", cartCount);
+
         return Redirect(Request.Headers["Referer"].ToString());
     }
 
@@ -337,6 +350,7 @@ public class OrderController : Controller
         _context.SaveChanges();
         HttpContext.Session.Remove("OrderId");
         HttpContext.Session.Remove("CartId");
+        HttpContext.Session.Remove("CartCount");
         return RedirectToAction("ThankYou");
     }
 
