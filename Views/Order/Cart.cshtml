@@ -28,7 +28,8 @@
                                 </div>
                                 <div class="col-md-2 col-lg-2 col-xl-2 d-flex">
 
-                                    <form id="Update" asp-controller=Order asp-action="UpdateCart" asp-route-ItemId=@item.CartProductAssocId>
+                                    <form id="Update<@item.CartProductAssocId>" asp-controller=Order asp-action="UpdateCart"
+                                        asp-route-ItemId=@item.CartProductAssocId>
                                         <input min="0" name="Qty" value="@item.Qty" type="number"
                                             class="form-control form-control-sm" />
                                     </form>
@@ -38,11 +39,12 @@
                                     <h5 class="mb-0">$@((item.Product.Price * item.Qty).ToString("0.00"))</h5>
                                 </div>
                                 <div class="col-md-2 col-lg-2 col-xl-2 text-center">
-                                    <input class="bttn" style="margin-bottom:5px;width:100px" form="Update"
-                                        type="submit" value="Update Cart">
-                                        <form asp-controller="Order" asp-action="RemoveFromCart" asp-route-ItemId="@item.CartProductAssocId">
-                                            <input class="bttn" type="submit" value="Remove" style="width:100px">
-                                        </form>
+                                    <input class="bttn" style="margin-bottom:5px;width:100px"
+                                        form="Update<@item.CartProductAssocId>" type="submit" value="Update Cart">
+                                    <form asp-controller="Order" asp-action="RemoveFromCart"
+                                        asp-route-ItemId="@item.CartProductAssocId">
+                                        <input class="bttn" type="submit" value="Remove" style="width:100px">
+                                    </form>
 
                                 </div>
                             </div>
@@ -57,7 +59,8 @@
                     <div class="card">
                         <div class="card-body">
                             <form asp-controller="Order" asp-action="Checkout" method="POST">
-                                <input type="submit" value="Proceed to pay" class="btn btn-block btn-lg" style="background-color:#FFCE5C;border:solid #91818A 1px;box-shadow:2px 2px #462914">
+                                <input type="submit" value="Proceed to pay" class="btn btn-block btn-lg"
+                                    style="background-color:#FFCE5C;border:solid #91818A 1px;box-shadow:2px 2px #462914">
                             </form>
                         </div>
                     </div>
