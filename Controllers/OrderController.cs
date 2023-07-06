@@ -76,7 +76,7 @@ public class OrderController : Controller
         {
             Order newOrder = new Order();
             newOrder.CartId = (int)HttpContext.Session.GetInt32("CartId");
-            if(HttpContext.Session.GetInt32("UUID") != null)
+            if (HttpContext.Session.GetInt32("UUID") != null)
             {
                 newOrder.UserId = (int)HttpContext.Session.GetInt32("UUID");
             }
@@ -130,25 +130,25 @@ public class OrderController : Controller
     public IActionResult RepeatOrder(int orderId)
     {
         Order newOrder = new Order();
-            newOrder.UserId = (int)HttpContext.Session.GetInt32("UUID");
-            _context.Add(newOrder);
-            _context.SaveChanges();
-            HttpContext.Session.SetInt32("OrderId", newOrder.OrderId);
+        newOrder.UserId = (int)HttpContext.Session.GetInt32("UUID");
+        _context.Add(newOrder);
+        _context.SaveChanges();
+        HttpContext.Session.SetInt32("OrderId", newOrder.OrderId);
 
-            List<OrderProductAssoc> items = _context.OrderProductAssocs.Where(opa => opa.OrderId == orderId).ToList();
-            foreach (OrderProductAssoc item in items)
+        List<OrderProductAssoc> items = _context.OrderProductAssocs.Where(opa => opa.OrderId == orderId).ToList();
+        foreach (OrderProductAssoc item in items)
+        {
+            OrderProductAssoc newAssoc = new OrderProductAssoc()
             {
-                OrderProductAssoc newAssoc = new OrderProductAssoc()
-                {
-                    ProductId = item.ProductId,
-                    OrderId = (int)HttpContext.Session.GetInt32("OrderId"),
-                    Qty = item.Qty
-                };
-                _context.Add(newAssoc);
-            }
-            _context.SaveChanges();
+                ProductId = item.ProductId,
+                OrderId = (int)HttpContext.Session.GetInt32("OrderId"),
+                Qty = item.Qty
+            };
+            _context.Add(newAssoc);
+        }
+        _context.SaveChanges();
 
-            return RedirectToAction("Order");
+        return RedirectToAction("Order");
     }
 
     //Render PickUp and Comments form
@@ -171,7 +171,7 @@ public class OrderController : Controller
         Order order = _context.Orders.FirstOrDefault(o => o.OrderId == HttpContext.Session.GetInt32("OrderId"));
         order.PickUp = PickUp;
         order.OrderComments = OrderComments;
-        if(order.UserId == null && HttpContext.Session.GetInt32("UUID")!=null)
+        if (order.UserId == null && HttpContext.Session.GetInt32("UUID") != null)
         {
             order.UserId = (int)HttpContext.Session.GetInt32("UUID");
         }
@@ -257,7 +257,6 @@ public class OrderController : Controller
         return View("ReviewOrder", order);
     }
 
-    //SubmitOrder POST ("shop/checkout/submit") - Dump Cart. For now, maybe send email then Redirect to order completion page
 
 
     //OrderComplete GET ("shop/checkout/complete") - Render Order complete page
@@ -374,14 +373,17 @@ public class OrderController : Controller
         return Redirect(Request.Headers["Referer"].ToString());
     }
 
+    //SubmitOrder POST - Dump Cart. Redirect to order completion page
     [HttpPost("order/complete/{OrderId}")]
     public IActionResult CompleteOrder(int OrderId)
     {
         Order order = _context.Orders.FirstOrDefault(o => o.OrderId == OrderId);
         Cart? cart = _context.Carts.FirstOrDefault(c => c.CartId == order.CartId);
-        if(cart != null){
-        _context.Carts.Remove(cart);
+        if (cart != null)
+        {
+            _context.Carts.Remove(cart);
         }
+        order.OrderStatus = 1;
         _context.SaveChanges();
         HttpContext.Session.Remove("OrderId");
         HttpContext.Session.Remove("CartId");
@@ -393,6 +395,28 @@ public class OrderController : Controller
     public IActionResult ThankYou()
     {
         return View("OrderComplete");
+    }
+
+    [HttpPost("order/cancel/{orderId}")]
+    public IActionResult CancelOrder(int orderId)
+    {
+        Order order = _context.Orders.FirstOrDefault(o => o.OrderId == orderId);
+        order.OrderStatus = -1;
+        _context.SaveChanges();
+        return RedirectToAction("OrderHistory", "Shop");
+
+    }
+
+    [HttpPost("order/continue/{orderId}")]
+    public IActionResult ContinueOrder(int orderId)
+    {
+        Order order = _context.Orders.FirstOrDefault(o => o.OrderId == orderId);
+        HttpContext.Session.SetInt32("OrderId", order.OrderId);
+        HttpContext.Session.SetInt32("CartId", (int)order.CartId);
+        int cartCount = _context.CartProductAssocs.Where(c => c.CartId == order.CartId).Sum(c => c.Qty);
+        HttpContext.Session.SetInt32("CartCount", cartCount);
+
+        return RedirectToAction("Shop", "Shop");
     }
 }
 

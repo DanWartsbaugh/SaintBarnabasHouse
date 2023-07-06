@@ -1,0 +1,89 @@
+@model List<Order>
+
+<div class="sheet">
+    <h3>Past orders</h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="col-2">Order date</th>
+                    <th class="col-1">Number of items</th>
+                    <th class="col-2">Items</th>
+                    <th class="col-1">Total cost</th>
+                    <th class="col-2">Order Status</th>
+                    <th class="col-3">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Order order in Model)
+                {
+                    int count = 0;
+                    int total = 0;
+                    string items = "";
+                    int counter = 1;
+                    foreach (OrderProductAssoc item in order.OrderProductAssocs)
+                    {
+                        count += item.Qty;
+                        total += item.Qty * (int)item.Product.Price;
+                        if (counter < order.OrderProductAssocs.Count)
+                        {
+                            items += @item.Product.Name + ", ";
+                            counter++;
+                        }
+                        else
+                        {
+                            items += @item.Product.Name;
+                        }
+                    }
+                    <tr>
+                        <td>@order.CreatedAt.ToString("MMMM dd, yyyy")</td>
+                        <td>@count</td>
+                        <td style="overflow:hidden;text-overflow:ellipsis">@items</td>
+                        <td>$@total.ToString("0.00")</td>
+                        @if (order.OrderStatus == -1)
+                        {
+                            <td>Cancelled</td>
+                        }
+                        @if (order.OrderStatus == 0)
+                        {
+                            <td>Pending</td>
+                        }
+                        @if (order.OrderStatus == 1)
+                        {
+                            <td>Submitted</td>
+                        }
+                        @if (order.OrderStatus == 2)
+                        {
+                            <td>Fulfilled</td>
+                        }
+                        <td class="d-flex">
+                            <a href="/shop/order/@order.OrderId" class="bttn">View</a>
+                            @if (order.OrderStatus == 0)
+                            {
+                                <form asp-controller="Order" asp-action="ContinueOrder" asp-route-orderId=@order.OrderId
+                                    method="POST">
+                                    <input type="submit" value="Continue" class="bttn">
+                                </form>
+                            }
+                            @if (order.OrderStatus == 1 || order.OrderStatus == 0)
+                            {
+                                <form asp-controller="Order" asp-action="CancelOrder" asp-route-orderId=@order.OrderId
+                                    method="POST">
+                                    <input type="submit" value="Cancel" class="bttn">
+                                </form>
+                            }
+                            @if (order.OrderStatus > 1)
+                            {
+                                <form asp-controller="Order" asp-action="RepeatOrder" asp-route-orderId=@order.OrderId
+                                    method="POST">
+                                    <input type="submit" value="Repeat" class="bttn">
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

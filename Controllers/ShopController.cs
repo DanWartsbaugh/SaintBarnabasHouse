@@ -82,4 +82,11 @@ public class ShopController : Controller
         Order? order = _context.Orders.Include(o => o.OrderProductAssocs).ThenInclude(opa => opa.Product).FirstOrDefault(o => o.OrderId == orderId);
         return View("SingleOrderHistory",order);
     }
+
+    [HttpGet("shop/order/history")]
+    public IActionResult OrderHistory()
+    {
+        List<Order> orders = _context.Orders.Where(o => o.UserId==HttpContext.Session.GetInt32("UUID")).Include(o => o.OrderProductAssocs).ThenInclude(opa => opa.Product).OrderByDescending(o => o.CreatedAt).ToList();
+        return View("OrderHistory",orders);
+    }
 }
