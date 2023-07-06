@@ -18384,6 +18384,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\Views\\Shop\\SingleOrderHistory.cshtml",
+      "TargetPath": "Views\\Shop\\SingleOrderHistory.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\Views\\User\\Dashboard.cshtml",
       "TargetPath": "Views\\User\\Dashboard.cshtml",
       "FileKind": "mvc"

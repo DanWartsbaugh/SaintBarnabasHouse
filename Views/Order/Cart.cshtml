@@ -19,14 +19,14 @@
                     <div class="card rounded-3 mb-4">
                         <div class="card-body p-4">
                             <div class="row d-flex justify-content-between align-items-center">
-                                <div class="col-md-2 col-lg-2 col-xl-2">
+                                <div class="col-md-2 col-lg-2 col-xl-2 d-flex justify-content-center">
                                     <img src="@item.Product.MainImgUrl" class="img-fluid rounded-3"
                                         alt="@item.Product.Name img">
                                 </div>
-                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                <div class="col-md-3 col-lg-3 col-xl-3 text-center">
                                     <p class="lead fw-normal mb-2">@item.Product.Name</p>
                                 </div>
-                                <div class="col-md-2 col-lg-2 col-xl-2 d-flex">
+                                <div class="col-md-2 col-lg-2 col-xl-2 d-flex d-flex justify-content-center">
 
                                     <form id="Update<@item.CartProductAssocId>" asp-controller=Order asp-action="UpdateCart"
                                         asp-route-ItemId=@item.CartProductAssocId>
@@ -35,15 +35,15 @@
                                     </form>
 
                                 </div>
-                                <div class="col-md-3 col-lg-2 col-xl-2 ">
+                                <div class="col-md-3 col-lg-2 col-xl-2 text-center">
                                     <h5 class="mb-0">$@((item.Product.Price * item.Qty).ToString("0.00"))</h5>
                                 </div>
-                                <div class="col-md-2 col-lg-2 col-xl-2 text-center">
-                                    <input class="bttn" style="margin-bottom:5px;width:100px"
-                                        form="Update<@item.CartProductAssocId>" type="submit" value="Update Cart">
+                                <div class="col-md-2 col-lg-2 col-xl-2 text-center" style="padding:5px 0px">
+                                    <input class="bttn" style="margin-bottom:5px;width:70px"
+                                        form="Update<@item.CartProductAssocId>" type="submit" value="Update">
                                     <form asp-controller="Order" asp-action="RemoveFromCart"
                                         asp-route-ItemId="@item.CartProductAssocId">
-                                        <input class="bttn" type="submit" value="Remove" style="width:100px">
+                                        <input class="bttn" type="submit" value="Remove" style="width:70px">
                                     </form>
 
                                 </div>

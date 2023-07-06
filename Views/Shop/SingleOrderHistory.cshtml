@@ -1,0 +1,54 @@
+@model Order
+
+<section class="h-100" style="background-color: rgb(255,255,255,.5);">
+    <div class="container h-100 py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-10">
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="fw-normal mb-0 text-black">Order from @Model.CreatedAt.ToString("MMMM dd")</h3>
+                    @* <div>
+                    <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!" class="text-body">price <i
+                    class="fas fa-angle-down mt-1"></i></a></p>
+                    </div> *@
+                </div>
+
+                @*Foreach item in the Order*@
+                @foreach (OrderProductAssoc item in Model.OrderProductAssocs)
+                {
+                    <div class="card rounded-3 mb-4">
+                        <div class="card-body p-4">
+                            <div class="row d-flex justify-content-between align-items-center">
+                                <div class="col-md-2 col-lg-2 col-xl-2 d-flex justify-content-center">
+                                    <img src="@item.Product.MainImgUrl" class="img-fluid rounded-3"
+                                        alt="@item.Product.Name img">
+                                </div>
+                                <div class="col-md-3 col-lg-3 col-xl-3 text-center">
+                                    <p class="lead fw-normal mb-2">@item.Product.Name</p>
+                                </div>
+                                <div class="col-md-2 col-lg-2 col-xl-2 d-flex d-flex justify-content-center">
+                                    <p>@item.Qty</p>
+                                </div>
+                                <div class="col-md-3 col-lg-2 col-xl-2 text-center">
+                                    <h5 class="mb-0">$@((item.Product.Price * item.Qty).ToString("0.00"))</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @*When the user proceeds to pay, it should convert the cart to an order. This requires the button to be
+                a POST form.*@
+                <div class="card">
+                    <div class="card-body">
+                        <form asp-controller="Order" asp-action="RepeatOrder" asp-route-orderId=@Model.OrderId method="POST">
+                            <input type="submit" value="Order this again" class="btn btn-block btn-lg"
+                                style="background-color:#FFCE5C;border:solid #91818A 1px;box-shadow:2px 2px #462914">
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

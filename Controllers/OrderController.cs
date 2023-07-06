@@ -126,6 +126,31 @@ public class OrderController : Controller
         return RedirectToAction("Order");
     }
 
+    [HttpPost("shop/order/repeat/orderId")]
+    public IActionResult RepeatOrder(int orderId)
+    {
+        Order newOrder = new Order();
+            newOrder.UserId = (int)HttpContext.Session.GetInt32("UUID");
+            _context.Add(newOrder);
+            _context.SaveChanges();
+            HttpContext.Session.SetInt32("OrderId", newOrder.OrderId);
+
+            List<OrderProductAssoc> items = _context.OrderProductAssocs.Where(opa => opa.OrderId == orderId).ToList();
+            foreach (OrderProductAssoc item in items)
+            {
+                OrderProductAssoc newAssoc = new OrderProductAssoc()
+                {
+                    ProductId = item.ProductId,
+                    OrderId = (int)HttpContext.Session.GetInt32("OrderId"),
+                    Qty = item.Qty
+                };
+                _context.Add(newAssoc);
+            }
+            _context.SaveChanges();
+
+            return RedirectToAction("Order");
+    }
+
     //Render PickUp and Comments form
     [HttpGet("shop/checkout")]
     public IActionResult Order()
@@ -353,8 +378,10 @@ public class OrderController : Controller
     public IActionResult CompleteOrder(int OrderId)
     {
         Order order = _context.Orders.FirstOrDefault(o => o.OrderId == OrderId);
-        Cart cart = _context.Carts.FirstOrDefault(c => c.CartId == order.CartId);
+        Cart? cart = _context.Carts.FirstOrDefault(c => c.CartId == order.CartId);
+        if(cart != null){
         _context.Carts.Remove(cart);
+        }
         _context.SaveChanges();
         HttpContext.Session.Remove("OrderId");
         HttpContext.Session.Remove("CartId");

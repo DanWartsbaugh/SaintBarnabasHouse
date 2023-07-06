@@ -26,7 +26,7 @@ public class ShopController : Controller
         List<Product> AllProducts = _context.Products.Include(p => p.ProductCategoryAssocs).ThenInclude(p => p.Category).Include(p => p.ProductImageAssocs).ThenInclude( p => p.Image).ToList();
         if(HttpContext.Session.GetInt32("UUID")!=null)
         {
-        ViewBag.OrderHistory = _context.Orders.Where(o => o.UserId==HttpContext.Session.GetInt32("UUID")).Include(o => o.OrderProductAssocs).ThenInclude(opa => opa.Product).OrderByDescending(o => o.CreatedAt).Take(5).ToList();
+        ViewBag.OrderHistory = _context.Orders.Where(o => o.UserId==HttpContext.Session.GetInt32("UUID")).Include(o => o.OrderProductAssocs).ThenInclude(opa => opa.Product).OrderByDescending(o => o.CreatedAt).Take(8).ToList();
         }
 
         return View("Shop", AllProducts);
@@ -74,5 +74,12 @@ public class ShopController : Controller
         }
 
         return View("ShowItem", OneProduct);
+    }
+
+    [HttpGet("shop/order/{orderId}")]
+    public IActionResult PastOrder(int orderId)
+    {
+        Order? order = _context.Orders.Include(o => o.OrderProductAssocs).ThenInclude(opa => opa.Product).FirstOrDefault(o => o.OrderId == orderId);
+        return View("SingleOrderHistory",order);
     }
 }

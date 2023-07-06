@@ -299,13 +299,20 @@ so that the hovered element takes more of the view*/
 .historycard {
   width:120px;
   margin-right:20px;
-  background-color: rgb(145, 129, 138,.9);
+  background-color: #BB1F1F;
 }
 
 .historycard img {
   width:100px;
   margin:10px 0px 5px 10px;
-  border:solid #BC3908 2px
+  border:solid #91818A 3px;
+  border-radius:2px;
+}
+
+.historytext {
+  background-color:#91818A;
+  margin-top:3px;
+  border-radius:0px 0px 3px 3px;
 }
 
 
