@@ -24,6 +24,11 @@ public class ShopController : Controller
     public IActionResult Shop()
     {
         List<Product> AllProducts = _context.Products.Include(p => p.ProductCategoryAssocs).ThenInclude(p => p.Category).Include(p => p.ProductImageAssocs).ThenInclude( p => p.Image).ToList();
+        if(HttpContext.Session.GetInt32("UUID")!=null)
+        {
+        ViewBag.OrderHistory = _context.Orders.Where(o => o.UserId==HttpContext.Session.GetInt32("UUID")).Include(o => o.OrderProductAssocs).ThenInclude(opa => opa.Product).OrderByDescending(o => o.CreatedAt).Take(5).ToList();
+        }
+
         return View("Shop", AllProducts);
     }
 

@@ -4,4 +4,24 @@
     ViewData["Title"] = "Saint Barnabas House Shop";
 }
 @await Html.PartialAsync("_ShopNavBar")
+
+@if(Context.Session.GetInt32("UUID")!=null)
+{
+    <div class="sheet">
+        <h4>Past Orders</h4>
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex">
+        @foreach(Order order in ViewBag.OrderHistory)
+        {
+            <div class="historycard card text-center" >
+                <img src="@order.OrderProductAssocs[0].Product.MainImgUrl" alt="" >
+                @order.CreatedAt.ToString("MMMM dd, yyyy")
+            </div>
+        }
+        </div>
+        <button class="bttn">View All</button>
+    </div>
+    </div>
+}
+
 @await Html.PartialAsync("_ShopItems")

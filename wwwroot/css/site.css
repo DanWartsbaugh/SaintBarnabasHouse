@@ -276,6 +276,7 @@ so that the hovered element takes more of the view*/
 }
 
 .bttn {
+  height:fit-content;
   border: solid black 1px;
   border-radius: 3px;
   padding: 0px 5px;
@@ -294,6 +295,20 @@ so that the hovered element takes more of the view*/
   border-color: rgb(145, 129, 138, .5);
 }
 
+/* Styling for order history (past orders) */
+.historycard {
+  width:120px;
+  margin-right:20px;
+  background-color: rgb(145, 129, 138,.9);
+}
+
+.historycard img {
+  width:100px;
+  margin:10px 0px 5px 10px;
+  border:solid #BC3908 2px
+}
+
+
 .prodCard {
   width: 200px;
   height: 250px;
@@ -304,7 +319,7 @@ so that the hovered element takes more of the view*/
   box-shadow: 4px 4px 4px #462914;
   display: none;
   text-decoration: none;
-  color: rgb(35, 35, 35);
+  color: rgb(50, 50, 50);
 }
 
 .prodCard:hover {

@@ -76,6 +76,10 @@ public class OrderController : Controller
         {
             Order newOrder = new Order();
             newOrder.CartId = (int)HttpContext.Session.GetInt32("CartId");
+            if(HttpContext.Session.GetInt32("UUID") != null)
+            {
+                newOrder.UserId = (int)HttpContext.Session.GetInt32("UUID");
+            }
             _context.Add(newOrder);
             _context.SaveChanges();
             HttpContext.Session.SetInt32("OrderId", newOrder.OrderId);
@@ -142,6 +146,10 @@ public class OrderController : Controller
         Order order = _context.Orders.FirstOrDefault(o => o.OrderId == HttpContext.Session.GetInt32("OrderId"));
         order.PickUp = PickUp;
         order.OrderComments = OrderComments;
+        if(order.UserId == null && HttpContext.Session.GetInt32("UUID")!=null)
+        {
+            order.UserId = (int)HttpContext.Session.GetInt32("UUID");
+        }
         _context.SaveChanges();
         if (order.PickUp == true)
         {
