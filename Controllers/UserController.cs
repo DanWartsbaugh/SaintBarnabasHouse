@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SaintBarnabasHouse.Models;
 
 namespace SaintBarnabasHouse.Controllers;
@@ -100,6 +101,7 @@ public class UserController : Controller
     {
         if(HttpContext.Session.GetString("Admin")=="Admin")
         {
+            ViewBag.AllOrders = _context.Orders.Include(o => o.OrderProductAssocs).ThenInclude(opa => opa.Product).ToList();
         return View("Dashboard");
         }
         

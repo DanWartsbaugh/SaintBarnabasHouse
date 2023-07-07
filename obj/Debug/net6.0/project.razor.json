@@ -18464,6 +18464,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\Views\\User\\_AllOrders.cshtml",
+      "TargetPath": "Views\\User\\_AllOrders.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\Views\\Shared\\_Registration.cshtml",
       "TargetPath": "Views\\Shared\\_Registration.cshtml",
       "FileKind": "mvc"

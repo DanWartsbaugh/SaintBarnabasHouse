@@ -15,3 +15,6 @@
     
 <h4>User Management</h4>
     Allow admin to set other users as admin
+
+@{List<Order> orders = ViewBag.AllOrders;}
+@await Html.PartialAsync("_AllOrders",orders)

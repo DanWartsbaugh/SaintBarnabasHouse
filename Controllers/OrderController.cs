@@ -403,8 +403,16 @@ public class OrderController : Controller
         Order order = _context.Orders.FirstOrDefault(o => o.OrderId == orderId);
         order.OrderStatus = -1;
         _context.SaveChanges();
-        return RedirectToAction("OrderHistory", "Shop");
+        return Redirect(Request.Headers["Referer"].ToString());
+    }
 
+    [HttpPost("order/fulfilled/{orderId}")]
+    public IActionResult MarkFulfilled(int orderId)
+    {
+        Order order = _context.Orders.FirstOrDefault(o => o.OrderId == orderId);
+        order.OrderStatus = 2;
+        _context.SaveChanges();
+        return Redirect(Request.Headers["Referer"].ToString());
     }
 
     [HttpPost("order/continue/{orderId}")]

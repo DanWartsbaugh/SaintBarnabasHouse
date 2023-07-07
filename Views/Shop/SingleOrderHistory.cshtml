@@ -6,24 +6,27 @@
             <div class="col-10">
 
                 <div class="d-flex justify-content-between align-items-center mb-4">
-@{string status = "";}
-@if(Model.OrderStatus == -1)
-{
-    status = "Cancelled";
-}
-else if(Model.OrderStatus == 0)
-{
-    status = "Pending";
-}
-else if(Model.OrderStatus == 1)
-{
-    status = "Submitted";
-}
-else if(Model.OrderStatus == 2)
-{
-    status = "Fulfilled";
-}
-                    <h3 class="fw-normal mb-0 text-black">Order from @Model.CreatedAt.ToString("MMMM dd") - <i>@status</i></h3>
+                    @{
+                        string status = "";
+                    }
+                    @if (Model.OrderStatus == -1)
+                    {
+                        status = "Cancelled";
+                    }
+                    else if (Model.OrderStatus == 0)
+                    {
+                        status = "Pending";
+                    }
+                    else if (Model.OrderStatus == 1)
+                    {
+                        status = "Submitted";
+                    }
+                    else if (Model.OrderStatus == 2)
+                    {
+                        status = "Fulfilled";
+                    }
+                    <h3 class="fw-normal mb-0 text-black">Order from @Model.CreatedAt.ToString("MMMM dd") -
+                        <i>@status</i></h3>
                     @* <div>
                     <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!" class="text-body">price <i
                     class="fas fa-angle-down mt-1"></i></a></p>
@@ -69,15 +72,26 @@ else if(Model.OrderStatus == 2)
                         else if (Model.OrderStatus >= 0)
                         {
                             <div class="d-flex">
-                            <form asp-controller="Order" asp-action="CancelOrder" asp-route-orderId=@Model.OrderId
-                                method="POST">
-                                <input type="submit" value="Cancel" class="btn btn-block btn-lg"
-                                    style="background-color:#FFCE5C;border:solid #91818A 1px;box-shadow:2px 2px #462914">
-                            </form>
-                            <form asp-controller="Order" asp-action="Checkout" method="POST">
-                                <input type="submit" value="Proceed to checkout" class="btn btn-block btn-lg"
-                                    style="margin-left:10px;background-color:#FFCE5C;border:solid #91818A 1px;box-shadow:2px 2px #462914">
-                            </form>
+                                <form asp-controller="Order" asp-action="CancelOrder" asp-route-orderId=@Model.OrderId
+                                    method="POST">
+                                    <input type="submit" value="Cancel" class="btn btn-block btn-lg"
+                                        style="background-color:#FFCE5C;border:solid #91818A 1px;box-shadow:2px 2px #462914">
+                                </form>
+                                @if (Context.Session.GetString("Admin") != "Admin")
+                                {
+                                    <form asp-controller="Order" asp-action="Checkout" method="POST">
+                                        <input type="submit" value="Proceed to checkout" class="btn btn-block btn-lg"
+                                            style="margin-left:10px;background-color:#FFCE5C;border:solid #91818A 1px;box-shadow:2px 2px #462914">
+                                    </form>
+                                }
+                                else if (Model.OrderStatus == 1)
+                                {
+                                    <form asp-controller="Order" asp-action="MarkFulfilled" asp-route-orderId=@Model.OrderId
+                                        method="POST">
+                                        <input type="submit" value="Fulfilled" class="btn btn-block btn-lg"
+                                            style="margin-left:10px;background-color:#FFCE5C;border:solid #91818A 1px;box-shadow:2px 2px #462914">
+                                    </form>
+                                }
                             </div>
                         }
                     </div>

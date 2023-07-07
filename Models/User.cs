@@ -49,7 +49,7 @@ public class UniqueEmailAttribute : ValidationAttribute
     {
         if (value == null)
         {
-            return new ValidationResult("Email is required!");
+            return new ValidationResult("Email is required");
         }
 
         MyContext _context = (MyContext)validationContext.GetService(typeof(MyContext));
@@ -57,7 +57,7 @@ public class UniqueEmailAttribute : ValidationAttribute
         if (_context.Users.Any(e => e.Email == value.ToString()))
         {
             // If yes, throw an error
-            return new ValidationResult("Email must be unique!");
+            return new ValidationResult("Email must be unique");
         }
         else
         {
