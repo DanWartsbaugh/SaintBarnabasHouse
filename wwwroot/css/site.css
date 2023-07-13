@@ -52,10 +52,9 @@ body {
     display: none;
   }
 
-  /*shop front*/
-  /* .shop-main-l {
-    display:none;
-  } */
+  .items-view .prodCard {
+    color:black;
+  }
 
 
 }
@@ -71,20 +70,6 @@ body {
 }
 
 /*--FRONT PAGE--*/
-
-/* #askButton {
-  background-color: red;
-  color: white;
-  padding: 4px;
-  border: none;
-  box-shadow: 6px 6px 6px pink;
-  cursor: pointer;
-}
-
-#askButton:active {
-  box-shadow: 3px 3px 3px pink;
-  transform: translate(2px, 2px);
-} */
 
 .nav-card {
   max-width: 170px;
@@ -533,3 +518,21 @@ Taken from https://codepen.io/martinwolf/pen/GRaWPy*/
   color: white;
 }
 
+.order-row{
+  display:none;
+}
+.order-row.showrow{
+  display:table-row;
+  height:40px;
+
+}
+
+.order-row.showrow td{
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+}
+
+td.admin-order-items{
+  max-width:30%
+}
