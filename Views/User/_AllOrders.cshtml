@@ -14,6 +14,13 @@
             <option value="fulfilled">Fulfilled</option>
         </select>
     </div>
+                <div>
+                <label for="orderby">Sort by order date: </label>
+                <select name="orderby" id="orderby" onchange="SortByDate(value)">
+                    <option value="asc">Newest first</option>
+                    <option value="desc">Oldest first</option>
+                </select>
+            </div>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -26,7 +33,7 @@
                     <th class="col-3">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="all-orders">
                 @foreach (Order order in Model)
                 {
                     string status = "";
@@ -88,6 +95,7 @@
                                 }
                             
                         </td>
+                        <td style="display:none">@order.CreatedAt.Date.Ticks</td>
                     </tr>
                 }
 
@@ -146,13 +154,33 @@
         this.className += " active";
     });
 
-    // Add active class to the current control button (highlight it)
-    @* var filteredorders = document.getElementById("filteredorders");
-        for (var i = 0; i < script filteredorders.length; i++) {
-        filteredorders.addEventListener("change", function () {
-        var current = document.getElementsByClassName("active");
-        current[0].className = current[0].className.replace(" active", "");
-        this.className += " active";
-        });
-        } *@
+    //sort functionality
+    //special thanks to nickf on StackOverflow and Spencer Rauch
+    function SortByDate(direction) {
+
+        let list = document.querySelector('.all-orders');
+        let items = document.querySelectorAll('.showrow')
+        //list all the items that are currently in the DOM
+        let itemsArr = [];
+        for (let i in items) {
+            if (items[i].nodeType == 1) { // get rid of the whitespace text nodes
+                itemsArr.push(items[i]);
+            }
+        }
+        //particular sort functions for ascending and descending
+        if (direction == "asc") {
+            itemsArr.sort(function (a, b) {
+                return a.lastElementChild.innerText - b.lastElementChild.innerText;
+            });
+        }
+        if (direction == "desc") {
+            itemsArr.sort(function (a, b) {
+                return b.lastElementChild.innerText - a.lastElementChild.innerText;
+            });
+        }
+        //repopulates the DOM with the newly ordered list
+        for (i = 0; i < itemsArr.length; ++i) {
+            list.appendChild(itemsArr[i]);
+        }
+    }
 </script>
