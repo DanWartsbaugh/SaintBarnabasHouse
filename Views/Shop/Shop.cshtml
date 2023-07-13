@@ -10,28 +10,35 @@
     <div class="sheet">
         <h4>Past Orders</h4>
         <div class="d-flex justify-content-evenly align-items-center">
-            <div class="d-flex" style='overflow:auto'>
-                @foreach (Order order in ViewBag.OrderHistory)
-                {
-                    <a href="/shop/order/@order.OrderId" style="text-decoration:none;color:black">
-                        <div class="historycard card text-center">
-                            <img src="@order.OrderProductAssocs[0].Product.MainImgUrl" alt="">
-                            <div class="historytext">
-                                @if (order.OrderProductAssocs.Count == 1)
-                                {
-                                    <p class="mb-0">1 item</p>
-                                }
-                                else
-                                {
-                                    <p class="mb-0">@order.OrderProductAssocs.Count items</p>
-                                }
-                                <span>@order.CreatedAt.ToString("MMMM dd, yyyy")</span>
+            @if (ViewBag.OrderHistory.Count > 0)
+            {
+                <div class="d-flex" style='overflow:auto'>
+                    @foreach (Order order in ViewBag.OrderHistory)
+                    {
+                        <a href="/shop/order/@order.OrderId" style="text-decoration:none;color:black">
+                            <div class="historycard card text-center">
+                                <img src="@order.OrderProductAssocs[0].Product.MainImgUrl" alt="">
+                                <div class="historytext">
+                                    @if (order.OrderProductAssocs.Count == 1)
+                                    {
+                                        <p class="mb-0">1 item</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="mb-0">@order.OrderProductAssocs.Count items</p>
+                                    }
+                                    <span>@order.CreatedAt.ToString("MMMM dd, yyyy")</span>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                }
-            </div>
-            <a class="bttn" href="shop/order/history"style="margin-left:10px">View All</a>
+                        </a>
+                    }
+                </div>
+                <a class="bttn" href="shop/order/history" style="margin-left:10px">View All</a>
+            }
+            else
+            {
+                <p>No orders have been placed</p>
+            }
         </div>
     </div>
 }

@@ -1,7 +1,19 @@
 @model List<Order>
 
+
+
 <div class="sheet">
     <h3>Order Management</h3>
+    <div>
+        <label for="filteredorders">Filter by order staus: </label>
+        <select name="filteredorders" id="filteredorders" onchange="filterOrders(value)">
+            <option value="all">Show all</option>
+            <option value="cancelled">Cancelled</option>
+            <option value="pending">Pending</option>
+            <option value="submitted">Submitted</option>
+            <option value="fulfilled">Fulfilled</option>
+        </select>
+    </div>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -17,6 +29,23 @@
             <tbody>
                 @foreach (Order order in Model)
                 {
+                    string status = "";
+                    if (order.OrderStatus == -1)
+                    {
+                        status = "cancelled";
+                    }
+                    else if (order.OrderStatus == 0)
+                    {
+                        status = "pending";
+                    }
+                    else if (order.OrderStatus == 1)
+                    {
+                        status = "submitted";
+                    }
+                    else if (order.OrderStatus == 2)
+                    {
+                        status = "fulfilled";
+                    }
                     int count = 0;
                     int total = 0;
                     string items = "";
@@ -35,44 +64,29 @@
                             items += @item.Product.Name;
                         }
                     }
-                    <tr>
+                    <tr class="order-row @status">
                         <td>@order.CreatedAt.ToString("MMMM dd, yyyy")</td>
                         <td>@count</td>
-                        <td style="overflow:hidden;text-overflow:ellipsis">@items</td>
+                        <td class="admin-order-items" style="max-width:100px">@items</td>
                         <td>$@total.ToString("0.00")</td>
-                        @if (order.OrderStatus == -1)
-                        {
-                            <td>Cancelled</td>
-                        }
-                        @if (order.OrderStatus == 0)
-                        {
-                            <td>Pending</td>
-                        }
-                        @if (order.OrderStatus == 1)
-                        {
-                            <td>Submitted</td>
-                        }
-                        @if (order.OrderStatus == 2)
-                        {
-                            <td>Fulfilled</td>
-                        }
-                        <td class="d-flex">
-                            <a href="/shop/order/@order.OrderId" class="bttn" style="margin-right:5px">View</a>
-                            @if (order.OrderStatus == 1 || order.OrderStatus == 0)
-                            {
-                                <form asp-controller="Order" asp-action="CancelOrder" asp-route-orderId=@order.OrderId
-                                    method="POST">
-                                    <input type="submit" value="Cancel" class="bttn" style="margin-right:5px">
-                                </form>
-                            }
-                            @if (order.OrderStatus == 1)
-                            {
-                                <form asp-controller="Order" asp-action="MarkFulfilled" asp-route-orderId=@order.OrderId
-                                    method="POST">
-                                    <input type="submit" value="Fulfilled" class="bttn" style="margin-right:5px">
-                                </form>
-                            }
-
+                        <td style="text-transform:capitalize">@status</td>
+                        <td class="d-flex admin-actions">                          
+                                <a href="/shop/order/@order.OrderId" class="bttn" style="margin-right:5px">View</a>
+                                @if (order.OrderStatus == 1 || order.OrderStatus == 0)
+                                {
+                                    <form asp-controller="Order" asp-action="CancelOrder" asp-route-orderId=@order.OrderId
+                                        method="POST">
+                                        <input type="submit" value="Cancel" class="bttn" style="margin-right:5px">
+                                    </form>
+                                }
+                                @if (order.OrderStatus == 1)
+                                {
+                                    <form asp-controller="Order" asp-action="MarkFulfilled" asp-route-orderId=@order.OrderId
+                                        method="POST">
+                                        <input type="submit" value="Fulfilled" class="bttn" style="margin-right:5px">
+                                    </form>
+                                }
+                            
                         </td>
                     </tr>
                 }
@@ -81,3 +95,64 @@
         </table>
     </div>
 </div>
+
+
+<script>
+    //filter functionality from w3schools
+    filterOrders("all")
+    function filterOrders(c) {
+        var x, i;
+        x = document.getElementsByClassName("order-row");
+        if (c == "all") c = "";
+        // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+        for (i = 0; i < x.length; i++) {
+            w3RemoveClass(x[i], "showrow");
+            if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "showrow");
+        }
+    }
+
+    // Show filtered elements
+    function w3AddClass(element, name) {
+        var i, arr1, arr2;
+        arr1 = element.className.split(" ");
+        arr2 = name.split(" ");
+        for (i = 0; i < arr2.length; i++) {
+            if (arr1.indexOf(arr2[i]) == -1) {
+                element.className += " " + arr2[i];
+            }
+        }
+    }
+
+    // Hide elements that are not selected
+    function w3RemoveClass(element, name) {
+        var i, arr1, arr2;
+        arr1 = element.className.split(" ");
+        arr2 = name.split(" ");
+        for (i = 0; i < arr2.length; i++) {
+            while (arr1.indexOf(arr2[i]) > -1) {
+                arr1.splice(arr1.indexOf(arr2[i]), 1);
+            }
+        }
+        element.className = arr1.join(" ");
+    }
+
+    var filteredorders = document.getElementById("filteredorders");
+    filteredorders.addEventListener("change", function () {
+        filterOrders(this.value);
+        var current = document.getElementsByClassName("active");
+        if (current.length > 0) {
+            current[0].className = current[0].className.replace(" active", "");
+        }
+        this.className += " active";
+    });
+
+    // Add active class to the current control button (highlight it)
+    @* var filteredorders = document.getElementById("filteredorders");
+        for (var i = 0; i < script filteredorders.length; i++) {
+        filteredorders.addEventListener("change", function () {
+        var current = document.getElementsByClassName("active");
+        current[0].className = current[0].className.replace(" active", "");
+        this.className += " active";
+        });
+        } *@
+</script>

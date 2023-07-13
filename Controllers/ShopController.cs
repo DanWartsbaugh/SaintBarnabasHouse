@@ -80,6 +80,8 @@ public class ShopController : Controller
     public IActionResult PastOrder(int orderId)
     {
         Order? order = _context.Orders.Include(o => o.OrderProductAssocs).ThenInclude(opa => opa.Product).FirstOrDefault(o => o.OrderId == orderId);
+        ViewBag.Shipping = _context.Addresses.FirstOrDefault(a => a.AddressId==order.ShippingAddressId);
+        
         return View("SingleOrderHistory",order);
     }
 

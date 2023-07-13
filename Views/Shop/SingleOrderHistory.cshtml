@@ -26,7 +26,8 @@
                         status = "Fulfilled";
                     }
                     <h3 class="fw-normal mb-0 text-black">Order from @Model.CreatedAt.ToString("MMMM dd") -
-                        <i>@status</i></h3>
+                        <i>@status</i>
+                    </h3>
                     @* <div>
                     <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!" class="text-body">price <i
                     class="fas fa-angle-down mt-1"></i></a></p>
@@ -57,34 +58,95 @@
                     </div>
                 }
 
-                @*When the user proceeds to pay, it should convert the cart to an order. This requires the button to be
-                a POST form.*@
+                @*Order specifics: Pick up status, comments, Shipping address*@
                 <div class="card">
                     <div class="card-body">
-                        @if (Model.OrderStatus > 1)
+                        @if (Model.OrderStatus > 0)
                         {
-                            <form asp-controller="Order" asp-action="RepeatOrder" asp-route-orderId=@Model.OrderId
-                                method="POST">
-                                <input type="submit" value="Order this again" class="btn btn-block btn-lg"
-                                    style="background-color:#FFCE5C;border:solid #91818A 1px;box-shadow:2px 2px #462914">
-                            </form>
+                            @*Pick up*@
+                            string PU = "";
+                            if (Model.PickUp == true)
+                            {
+                                PU = "Yes";
+                            }
+                            else
+                            {
+                                PU = "No";
+                            }
+
+                            <h5>Pick up: @PU</h5>
+
+                            @*Comments*@
+                            <h5>Customer Comments</h5>
+                            @if (Model.OrderComments != null)
+                            {
+                                <p>@Model.OrderComments</p>
+                            }
+                            else
+                            {
+                                <p>None</p>
+                            }
+
+                            @*Shipping Address*@
+                            <h5>Shipping Address</h5>
+                            @if (Model.PickUp == false)
+                            {
+                                if (ViewBag.Shipping.Street2 != null)
+                                {
+                                    <p>@ViewBag.Shipping.Street <br>
+                                        @ViewBag.Shipping.Street2 <br>
+                                        @ViewBag.Shipping.City, @ViewBag.Shipping.State @ViewBag.Shipping.Zip
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p>@ViewBag.Shipping.Street <br>
+                                        @ViewBag.Shipping.City, @ViewBag.Shipping.State @ViewBag.Shipping.Zip
+                                    </p>
+                                }
+                            }
+                            else
+                            {
+                                <p>Customer is picking up</p>
+                            }
+                        }
+                    </div>
+                </div>
+
+                @*When the user proceeds to pay, it should convert the cart to an order. This requires the button to be
+                a POST form.*@
+                @* Buttons: Repeat order if it has been submitted, fulfilled, or cancelled; Cancel order if it is
+                pending or submitted;
+                Proceed to checkout for users if order is pending; Mark Fulfilled for admins if order is submitted *@
+                <div class="card">
+                    <div class="card-body">
+                        @if (Model.OrderStatus > 1 || Model.OrderStatus == -1)
+                        {
+                            if (Context.Session.GetString("Admin") != "Admin")
+                            {
+                                <form asp-controller="Order" asp-action="RepeatOrder" asp-route-orderId=@Model.OrderId
+                                    method="POST">
+                                    <input type="submit" value="Order this again" class="btn btn-block btn-lg"
+                                        style="background-color:#FFCE5C;border:solid #91818A 1px;box-shadow:2px 2px #462914">
+                                </form>
+                            }
                         }
                         else if (Model.OrderStatus >= 0)
                         {
                             <div class="d-flex">
                                 <form asp-controller="Order" asp-action="CancelOrder" asp-route-orderId=@Model.OrderId
                                     method="POST">
-                                    <input type="submit" value="Cancel" class="btn btn-block btn-lg"
+                                    <input type="submit" value="Cancel order" class="btn btn-block btn-lg"
                                         style="background-color:#FFCE5C;border:solid #91818A 1px;box-shadow:2px 2px #462914">
                                 </form>
-                                @if (Context.Session.GetString("Admin") != "Admin")
+                                @if (Context.Session.GetString("Admin") != "Admin" && Model.OrderStatus == 0)
                                 {
                                     <form asp-controller="Order" asp-action="Checkout" method="POST">
                                         <input type="submit" value="Proceed to checkout" class="btn btn-block btn-lg"
                                             style="margin-left:10px;background-color:#FFCE5C;border:solid #91818A 1px;box-shadow:2px 2px #462914">
                                     </form>
                                 }
-                                else if (Model.OrderStatus == 1)
+                                else if (Model.OrderStatus == 1 && Context.Session.GetString("Admin") == "Admin")
                                 {
                                     <form asp-controller="Order" asp-action="MarkFulfilled" asp-route-orderId=@Model.OrderId
                                         method="POST">
