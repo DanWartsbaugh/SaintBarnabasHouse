@@ -1,0 +1,21 @@
+@model List<Category>
+
+<div class="sheet">
+    <button class="collapse-title" type="button" data-bs-toggle="collapse" data-bs-target="#catList" aria-expanded="false"
+        aria-controls="catList">
+        <h5>Categories</h5>
+    </button>
+    <div class="collapse" id="catList">
+        <form action="">
+        <ul style="list-style:none;display:flex;flex-wrap:wrap">
+            @foreach (Category cat in Model)
+            {
+                <li style="margin-right:10px">
+                    <input type="checkbox" name="CatIds" id="@cat.Name" value="@cat.CategoryId">
+                    <label style="font-weight:normal" for="@cat.Name">@cat.Name</label>
+                </li>
+            }
+        </ul>
+        </form>
+    </div>
+</div>
