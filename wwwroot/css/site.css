@@ -523,7 +523,7 @@ Taken from https://codepen.io/martinwolf/pen/GRaWPy*/
 }
 .order-row.showrow{
   display:table-row;
-  height:40px;
+  /* height:35px; */
 
 }
 
@@ -535,4 +535,14 @@ Taken from https://codepen.io/martinwolf/pen/GRaWPy*/
 
 td.admin-order-items{
   max-width:30%
+}
+
+.collapse-title{
+  width:100%;
+  border:none;
+  padding: 0px 5px;
+  background-color: transparent;
+  color: black;
+  text-decoration: none;
+  text-align:left
 }

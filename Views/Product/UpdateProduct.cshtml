@@ -19,5 +19,12 @@
     </form><br>
     <a class="bttn" asp-controller="Product" asp-action="AddCategory" asp-route-productId="@Model.ProductId">Edit Categories</a>
     <a class="bttn" asp-controller="Product" asp-action="AddImage" asp-route-productId="@Model.ProductId">Edit Images</a>
+    @if(Context.Session.GetString("Admin")=="Admin")
+    {
+    <a class="bttn" asp-controller="User" asp-action="Dashboard">Finish</a>
+    }
+    else
+    {
     <a class="bttn" asp-controller="Shop" asp-action="Shop">Finish</a>
+    }
 </div>

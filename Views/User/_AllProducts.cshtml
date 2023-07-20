@@ -1,0 +1,65 @@
+@model List<Product>
+
+<div class="sheet">
+
+    <button class="collapse-title" type="button" data-bs-toggle="collapse" data-bs-target="#productList" aria-expanded="false"
+        aria-controls="productList" style="border:none">
+        <h5>Products</h5>
+    </button>
+    <div class="collapse" id="productList" style="margin-top:10px">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th class="col-2">Name</th>
+                    <th class="col-3">Description</th>
+                    <th class="col-1">Price</th>
+                    <th class="col-1">Main Category</th>
+                    <th class="col-1">Display image</th>
+                    <th class="col-1">Actions</th>
+                </tr>
+                @foreach (Product prod in Model)
+                {
+                    <tr>
+                        <td><b>@prod.Name</b></td>
+                        <td>@prod.Description</td>
+                        <td>$@prod.Price.ToString("0.00")</td>
+                        <td>@prod.MainCat</td>
+                        <td><img src="@prod.MainImgUrl" alt="Display image for @prod.Name" style=width:50px></td>
+                        <td>
+                            <a type="submit" class="bttn text-center" style="margin-bottom:5px;width:100%;color:black" asp-controller="Product" asp-action="EditProduct" asp-route-ProductId=@prod.ProductId>Edit</a>
+                            <form asp-controller="User" asp-action="RemoveProduct" asp-route-productId="@prod.ProductId" method="POST">
+                                <button type="submit" class="bttn" style="width:100%">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+
+
+
+            </table>
+        </div>
+    </div>
+
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim
+            keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+        </div>
+    </div>
+</div>
+
+@* @section Scripts {
+<script>
+$(document).ready(function () {
+$('#productList').on('shown.bs.collapse', function () {
+// Code to be executed when the element is shown
+console.log('The element is now shown.');
+});
+
+$('#productList').on('hidden.bs.collapse', function () {
+// Code to be executed when the element is hidden
+console.log('The element is now hidden.');
+});
+});
+</script>
+} *@

@@ -8,141 +8,153 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SaintBarnabasHouse
 build_property.RootNamespace = SaintBarnabasHouse
-build_property.ProjectDir = c:\Users\dwart\OneDrive\Desktop\Dojo\csharp\project\SaintBarnabasHouse\
+build_property.ProjectDir = C:\Users\dwart\OneDrive\Desktop\Dojo\csharp\project\SaintBarnabasHouse\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = c:\Users\dwart\OneDrive\Desktop\Dojo\csharp\project\SaintBarnabasHouse
+build_property.MSBuildProjectDirectory = C:\Users\dwart\OneDrive\Desktop\Dojo\csharp\project\SaintBarnabasHouse
 build_property._RazorSourceGeneratorDebug = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Home/Blog.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Home/Blog.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxCbG9nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Home/BlogPost.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Home/BlogPost.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxCbG9nUG9zdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Home/Event.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Home/Event.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFdmVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Home/Index.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Home/Privacy.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Order/BillingAddress.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Order/BillingAddress.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcQmlsbGluZ0FkZHJlc3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Order/Cart.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Order/Cart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcQ2FydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Order/OrderComplete.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Order/OrderComplete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT3JkZXJDb21wbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Order/OrderDetails.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Order/OrderDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT3JkZXJEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Order/ReviewOrder.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Order/ReviewOrder.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcUmV2aWV3T3JkZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Order/ShippingAddress.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Order/ShippingAddress.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcU2hpcHBpbmdBZGRyZXNzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Product/AddCategory.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Product/AddCategory.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxBZGRDYXRlZ29yeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Product/AddImage.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Product/AddImage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxBZGRJbWFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Product/NewCategory.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Product/NewCategory.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxOZXdDYXRlZ29yeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Product/NewProduct.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Product/NewProduct.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxOZXdQcm9kdWN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Product/UpdateProduct.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Product/UpdateProduct.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxVcGRhdGVQcm9kdWN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shared/Error.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shared/LoginReg.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shared/LoginReg.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXExvZ2luUmVnLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shared/_Login.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shared/_Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shared/_Registration.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shared/_Registration.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9SZWdpc3RyYXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shop/FilteredShop.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shop/FilteredShop.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcFxGaWx0ZXJlZFNob3AuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shop/OrderHistory.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shop/OrderHistory.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcFxPcmRlckhpc3RvcnkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shop/Shop.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shop/Shop.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcFxTaG9wLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shop/ShowItem.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shop/ShowItem.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcFxTaG93SXRlbS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shop/SingleOrderHistory.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shop/SingleOrderHistory.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcFxTaW5nbGVPcmRlckhpc3RvcnkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shop/_ShopItems.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shop/_ShopItems.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcFxfU2hvcEl0ZW1zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shop/_ShopNavBar.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shop/_ShopNavBar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcFxfU2hvcE5hdkJhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/User/Dashboard.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/User/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEYXNoYm9hcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/User/_AllOrders.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/User/_AllCategories.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxfQWxsQ2F0ZWdvcmllcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/User/_AllImages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxfQWxsSW1hZ2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/User/_AllOrders.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxfQWxsT3JkZXJzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/_ViewImports.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/User/_AllProducts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxfQWxsUHJvZHVjdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/_ViewStart.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shared/_Layout.cshtml]
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-baf32ojsdm

@@ -3,81 +3,85 @@
 
 
 <div class="sheet">
-    <h3>Order Management</h3>
-    <div>
-        <label for="filteredorders">Filter by order staus: </label>
-        <select name="filteredorders" id="filteredorders" onchange="filterOrders(value)">
-            <option value="all">Show all</option>
-            <option value="cancelled">Cancelled</option>
-            <option value="pending">Pending</option>
-            <option value="submitted">Submitted</option>
-            <option value="fulfilled">Fulfilled</option>
-        </select>
-    </div>
-                <div>
-                <label for="orderby">Sort by order date: </label>
-                <select name="orderby" id="orderby" onchange="SortByDate(value)">
-                    <option value="asc">Newest first</option>
-                    <option value="desc">Oldest first</option>
-                </select>
-            </div>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th class="col-2">Order date</th>
-                    <th class="col-1">Number of items</th>
-                    <th class="col-2">Items</th>
-                    <th class="col-1">Total cost</th>
-                    <th class="col-2">Order Status</th>
-                    <th class="col-3">Actions</th>
-                </tr>
-            </thead>
-            <tbody class="all-orders">
-                @foreach (Order order in Model)
-                {
-                    string status = "";
-                    if (order.OrderStatus == -1)
+    <button class="bttn" type="button" data-bs-toggle="collapse" data-bs-target="#orderList" aria-expanded="false"
+        aria-controls="orderList">
+        <h3>Order Management</h3>
+    </button>
+    <div class="collapse" id="orderList" style="margin-top:10px">
+        <div>
+            <label for="filteredorders">Filter by order staus: </label>
+            <select name="filteredorders" id="filteredorders" onchange="filterOrders(value)">
+                <option value="all">Show all</option>
+                <option value="cancelled">Cancelled</option>
+                <option value="pending">Pending</option>
+                <option value="submitted">Submitted</option>
+                <option value="fulfilled">Fulfilled</option>
+            </select>
+        </div>
+        <div>
+            <label for="orderby">Sort by order date: </label>
+            <select name="orderby" id="orderby" onchange="SortByDate(value)">
+                <option value="asc">Newest first</option>
+                <option value="desc">Oldest first</option>
+            </select>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-2">Order date</th>
+                        <th class="col-1">Number of items</th>
+                        <th class="col-2">Items</th>
+                        <th class="col-1">Total cost</th>
+                        <th class="col-2">Order Status</th>
+                        <th class="col-3">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="all-orders">
+                    @foreach (Order order in Model)
                     {
-                        status = "cancelled";
-                    }
-                    else if (order.OrderStatus == 0)
-                    {
-                        status = "pending";
-                    }
-                    else if (order.OrderStatus == 1)
-                    {
-                        status = "submitted";
-                    }
-                    else if (order.OrderStatus == 2)
-                    {
-                        status = "fulfilled";
-                    }
-                    int count = 0;
-                    int total = 0;
-                    string items = "";
-                    int counter = 1;
-                    foreach (OrderProductAssoc item in order.OrderProductAssocs)
-                    {
-                        count += item.Qty;
-                        total += item.Qty * (int)item.Product.Price;
-                        if (counter < order.OrderProductAssocs.Count)
+                        string status = "";
+                        if (order.OrderStatus == -1)
                         {
-                            items += @item.Product.Name + ", ";
-                            counter++;
+                            status = "cancelled";
                         }
-                        else
+                        else if (order.OrderStatus == 0)
                         {
-                            items += @item.Product.Name;
+                            status = "pending";
                         }
-                    }
-                    <tr class="order-row @status">
-                        <td>@order.CreatedAt.ToString("MMMM dd, yyyy")</td>
-                        <td>@count</td>
-                        <td class="admin-order-items" style="max-width:100px">@items</td>
-                        <td>$@total.ToString("0.00")</td>
-                        <td style="text-transform:capitalize">@status</td>
-                        <td class="d-flex admin-actions">                          
+                        else if (order.OrderStatus == 1)
+                        {
+                            status = "submitted";
+                        }
+                        else if (order.OrderStatus == 2)
+                        {
+                            status = "fulfilled";
+                        }
+                        int count = 0;
+                        int total = 0;
+                        string items = "";
+                        int counter = 1;
+                        foreach (OrderProductAssoc item in order.OrderProductAssocs)
+                        {
+                            count += item.Qty;
+                            total += item.Qty * (int)item.Product.Price;
+                            if (counter < order.OrderProductAssocs.Count)
+                            {
+                                items += @item.Product.Name + ", ";
+                                counter++;
+                            }
+                            else
+                            {
+                                items += @item.Product.Name;
+                            }
+                        }
+                        <tr class="order-row @status">
+                            <td>@order.CreatedAt.ToString("MMMM dd, yyyy")</td>
+                            <td>@count</td>
+                            <td class="admin-order-items" style="max-width:100px">@items</td>
+                            <td>$@total.ToString("0.00")</td>
+                            <td style="text-transform:capitalize">@status</td>
+                            <td class="d-flex admin-actions">
                                 <a href="/shop/order/@order.OrderId" class="bttn" style="margin-right:5px">View</a>
                                 @if (order.OrderStatus == 1 || order.OrderStatus == 0)
                                 {
@@ -93,14 +97,15 @@
                                         <input type="submit" value="Fulfilled" class="bttn" style="margin-right:5px">
                                     </form>
                                 }
-                            
-                        </td>
-                        <td style="display:none">@order.CreatedAt.Date.Ticks</td>
-                    </tr>
-                }
 
-            </tbody>
-        </table>
+                            </td>
+                            <td style="display:none">@order.CreatedAt.Date.Ticks</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

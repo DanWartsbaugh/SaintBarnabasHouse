@@ -51,7 +51,7 @@ public class UserController : Controller
 
         //log in (add to session)
         HttpContext.Session.SetInt32("UUID", newUser.UserId);
-        return RedirectToAction("Index","Home");
+        return RedirectToAction("Index", "Home");
     }
 
     //Post route for LogIn (redirect to success page)
@@ -59,7 +59,7 @@ public class UserController : Controller
     public IActionResult Login(LoginUser loginUser)
     {
         User user = _context.Users.FirstOrDefault(u => u.Email == loginUser.LoginEmail);
-        if(user.IsAdmin)
+        if (user.IsAdmin)
         {
             HttpContext.Session.SetString("Admin", "Admin");
         }
@@ -86,25 +86,41 @@ public class UserController : Controller
         }
 
         HttpContext.Session.SetInt32("UUID", dbUser.UserId);
-        return RedirectToAction("Index","Home");
+        return RedirectToAction("Index", "Home");
     }
 
     [HttpPost("logout")]
     public IActionResult Logout()
     {
         HttpContext.Session.Clear();
-        return RedirectToAction("Index","Home");
+        return RedirectToAction("Index", "Home");
     }
 
     [HttpGet("admin/dashboard")]
     public IActionResult Dashboard()
     {
-        if(HttpContext.Session.GetString("Admin")=="Admin")
+        if (HttpContext.Session.GetString("Admin") == "Admin")
         {
+            ViewBag.AllImages = _context.Images.ToList();
+            ViewBag.AllCats = _context.Categories.OrderBy(c => c.Name).ToList();
+            ViewBag.AllProducts = _context.Products.Include(p => p.ProductCategoryAssocs).ThenInclude(p => p.Category).Include(p => p.ProductImageAssocs).ThenInclude(p => p.Image).ToList();
             ViewBag.AllOrders = _context.Orders.Include(o => o.OrderProductAssocs).ThenInclude(opa => opa.Product).ToList();
-        return View("Dashboard");
+            return View("Dashboard");
         }
+
+        return RedirectToAction("Index", "Home");
+    }
+
+    [HttpPost("products/{productId}/delete")]
+    public IActionResult RemoveProduct(int productId)
+    {
+            Product prod = _context.Products.FirstOrDefault(p => p.ProductId == productId);
+            if (prod != null)
+            {
+                _context.Products.Remove(prod);
+            }
+            _context.SaveChanges();
         
-        return RedirectToAction("Index","Home");
+            return Redirect(Request.Headers["Referer"].ToString());
     }
 }

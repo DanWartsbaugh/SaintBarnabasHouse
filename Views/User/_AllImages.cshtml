@@ -1,0 +1,28 @@
+@model List<Image>
+
+<div class="sheet">
+    <button class="collapse-title" type="button" data-bs-toggle="collapse" data-bs-target="#imageList" aria-expanded="false"
+        aria-controls="imageList">
+        <h5>Images</h5>
+    </button>
+    <div class="collapse" id="imageList">
+        <form asp-controller="Product" asp-action="CreateImage">
+            <div class="form-control" style="width:100%;margin-bottom:10px">
+            <label for="ImageUrl">Upload a new image</label>
+            <input type="text" name="ImageUrl" id="" style="width:100%;margin-bottom:5px">
+            <button class="bttn" type="submit">Submit</button>
+            </div>
+        </form>
+        <form action="">
+        <ul style="list-style:none;display:flex;flex-wrap:wrap;justify-content:space-evenly">
+            @foreach (Image img in Model)
+            {
+                <li>
+                    <input type="checkbox" name="imgIds" id="@img.ImageId" value="@img.ImageId">
+                    <img src="@img.ImageUrl" alt="@img.ImageUrl" style="width:150px;margin-bottom:5px">
+                </li>
+            }
+        </ul>
+        </form>
+    </div>
+</div>

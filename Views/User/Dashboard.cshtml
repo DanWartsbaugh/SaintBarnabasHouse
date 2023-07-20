@@ -4,19 +4,40 @@
 <p>When completed, it will include the following features</p>
 
 <h4>Product Management</h4>
-    Add/Remove Product
-    Add/Remove category
-    Add/Remove image
+Add/Remove Product - <i>Complete</i><br>
+Add/Remove category<br>
+Add/Remove image
 
 <h4>Order Management - <i>Complete</i></h4>
-    View all orders (clicking item goes to single order page)
-    Filter by status
-    Sort by creation date
-    
-<h4>User Management</h4>
-    Allow admin to set other users as admin
+View all orders (clicking item goes to single order page)<br>
+Filter by status<br>
+Sort by creation date
 
-@{List<Order> orders = ViewBag.AllOrders;}
+<h4>User Management</h4>
+Allow admin to set other users as admin
+<div class="sheet">
+<button class="bttn" type="button" data-bs-toggle="collapse" data-bs-target="#manageProducts" aria-expanded="false"
+    aria-controls="manageProducts">
+    <h3>Product Management</h3>
+</button>
+<div class="collapse" id="manageProducts">
+    @{
+        List<Product> products = ViewBag.AllProducts;
+    }
+    @await Html.PartialAsync("_AllProducts",products)
+    @{
+        List<Category> cats = ViewBag.AllCats;
+    }
+    @await Html.PartialAsync("_AllCategories",cats)
+    @{
+        List<Image> images = ViewBag.AllImages;
+    }
+    @await Html.PartialAsync("_AllImages",images)
+</div>
+</div>
+@{
+    List<Order> orders = ViewBag.AllOrders;
+}
 @await Html.PartialAsync("_AllOrders",orders)
 
 
