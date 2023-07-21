@@ -1,0 +1,39 @@
+@model User
+
+<div class="sheet">
+
+    <button class="collapse-title" type="button" data-bs-toggle="collapse" data-bs-target="#manageUser" aria-expanded="false"
+        aria-controls="manageUser">
+        <h3>User Management</h3>
+    </button>
+    <div class="collapse" id="manageUser" style="margin-top:10px">
+        <form asp-controller="User" asp-action="FindUser" method="POST">
+            <input class="form-control" type="search" name="userquery">
+            <input class="bttn" type="submit" value="Find user" style="margin-top:5px">
+        </form>
+    </div>
+    @if (Model != null)
+    {
+        <div style="margin-top:10px">
+            <h5>Name:</h5>
+            <p>@Model.FirstName @Model.LastName</p>
+            <h5>Email:</h5>
+            <p>@Model.Email</p>
+            <h5>Admin:</h5>
+            @if (Model.IsAdmin == true)
+            {
+                <p>Yes</p>
+                <form asp-controller="User" asp-action="ChangeAdmin" asp-route-userid="@Model.UserId">
+                    <input class="bttn" type="submit" value="Revoke Admin Status">
+                </form>
+            }
+            else
+            {
+                <p>No</p>
+                <form asp-controller="User" asp-action="ChangeAdmin" asp-route-userid="@Model.UserId">
+                    <input class="bttn" type="submit" value="Make Admin">
+                </form>
+            }
+        </div>
+    }
+</div>

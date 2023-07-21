@@ -13,7 +13,7 @@
             <button class="bttn" type="submit">Submit</button>
             </div>
         </form>
-        <form action="">
+        <form asp-controller="User" asp-action="RemoveImgFromDB" method="POST">
         <ul style="list-style:none;display:flex;flex-wrap:wrap;justify-content:space-evenly">
             @foreach (Image img in Model)
             {
@@ -23,6 +23,7 @@
                 </li>
             }
         </ul>
+        <button class="bttn" type="submit">Remove selected images from database</button>
         </form>
     </div>
 </div>

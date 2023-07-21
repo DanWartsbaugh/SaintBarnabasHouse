@@ -1,22 +1,6 @@
-<h2>The dashboard is still under construction</h2>
-
-
-<p>When completed, it will include the following features</p>
-
-<h4>Product Management</h4>
-Add/Remove Product - <i>Complete</i><br>
-Add/Remove category<br>
-Add/Remove image
-
-<h4>Order Management - <i>Complete</i></h4>
-View all orders (clicking item goes to single order page)<br>
-Filter by status<br>
-Sort by creation date
-
-<h4>User Management</h4>
-Allow admin to set other users as admin
+<h2>Admin Dashboard</h2>
 <div class="sheet">
-<button class="bttn" type="button" data-bs-toggle="collapse" data-bs-target="#manageProducts" aria-expanded="false"
+<button class="collapse-title" type="button" data-bs-toggle="collapse" data-bs-target="#manageProducts" aria-expanded="false"
     aria-controls="manageProducts">
     <h3>Product Management</h3>
 </button>
@@ -39,5 +23,6 @@ Allow admin to set other users as admin
     List<Order> orders = ViewBag.AllOrders;
 }
 @await Html.PartialAsync("_AllOrders",orders)
+@await Html.PartialAsync("_ManageUser")
 
 

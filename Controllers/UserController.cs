@@ -111,16 +111,94 @@ public class UserController : Controller
         return RedirectToAction("Index", "Home");
     }
 
-    [HttpPost("products/{productId}/delete")]
+    [HttpPost("admin/{productId}/delete")]
     public IActionResult RemoveProduct(int productId)
     {
-            Product prod = _context.Products.FirstOrDefault(p => p.ProductId == productId);
-            if (prod != null)
+        Product prod = _context.Products.FirstOrDefault(p => p.ProductId == productId);
+        if (prod != null)
+        {
+            _context.Products.Remove(prod);
+        }
+        _context.SaveChanges();
+
+        return Redirect(Request.Headers["Referer"].ToString());
+    }
+
+    [HttpPost("admin/removeimg")]
+    public IActionResult RemoveImgFromDB(int[] ImgIds)
+    {
+        foreach (int img in ImgIds)
+        {
+            Image image = _context.Images.FirstOrDefault(i => i.ImageId == img);
+            if (image != null)
             {
-                _context.Products.Remove(prod);
+                _context.Images.Remove(image);
             }
             _context.SaveChanges();
-        
-            return Redirect(Request.Headers["Referer"].ToString());
+        }
+        return Redirect(Request.Headers["Referer"].ToString());
     }
+
+    [HttpPost("admin/removecat")]
+    public IActionResult RemoveCatFromDB(int[] CatIds)
+    {
+        foreach (int cat in CatIds)
+        {
+            Category category = _context.Categories.FirstOrDefault(c => c.CategoryId == cat);
+            if (category != null)
+            {
+                _context.Categories.Remove(category);
+            }
+            _context.SaveChanges();
+        }
+        return Redirect(Request.Headers["Referer"].ToString());
+    }
+
+    [HttpGet("admin/manageuser/{userid}")]
+    public IActionResult ShowUser(int userid)
+    {
+        if (HttpContext.Session.GetString("Admin") == "Admin")
+        {
+            User? user = _context.Users.FirstOrDefault(u => u.UserId == userid);
+
+            return View("_ManageUser", user);
+        }
+        else
+        {
+            return RedirectToAction("Index", "Home");
+        }
+    }
+
+    [HttpPost("admin/manageuser")]
+    public IActionResult FindUser(string userquery)
+    {
+        User? user = _context.Users.FirstOrDefault(u => u.Email.Contains(userquery));
+        if (user != null)
+        {
+            int userid = user.UserId;
+            return Redirect($"/admin/manageuser/{userid}");
+        }
+
+        return RedirectToAction("Dashboard");
+    }
+
+    [HttpPost("admin/changeadmin/{userid}")]
+    public IActionResult ChangeAdmin(int userid)
+    {
+        User? user = _context.Users.FirstOrDefault(u => u.UserId == userid);
+        if (user.IsAdmin == true)
+        {
+            user.IsAdmin = false;
+        }
+        else
+        {
+            user.IsAdmin = true;
+        }
+        user.UpdatedAt = DateTime.Now;
+        _context.SaveChanges();
+
+        return Redirect($"/admin/manageuser/{user.UserId}");
+    }
+
+
 }
