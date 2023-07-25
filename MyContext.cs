@@ -19,6 +19,8 @@ public class MyContext : DbContext
     public DbSet<Order> Orders { get; set; }
     public DbSet<CartProductAssoc> CartProductAssocs { get; set; }
     public DbSet<OrderProductAssoc> OrderProductAssocs { get; set; }
+    public DbSet<BlogPost> BlogPosts { get; set; }
+    public DbSet<Comment> Comments { get; set; }
 
     
 }

@@ -1,0 +1,17 @@
+@model BlogPost
+
+@{
+    int UUID = (int)Context.Session.GetInt32("UUID");
+}
+<div class="sheet">
+    <form asp-controller="Blog" asp-action="CreateNewPost">
+        <input type="hidden" name="Creator" value="@UUID">
+        <label asp-for="Title"></label><br>
+        <input class="form-control" asp-for="Title"><br>
+        <label asp-for="MainImgUrl"></label><br>
+        <input class="form-control" asp-for="MainImgUrl"><br>
+        <label asp-for="Content"></label><br>
+        <textarea class="form-control" asp-for="Content"></textarea><br>
+        <input class="bttn" type="submit" value="Post">
+    </form>
+</div>

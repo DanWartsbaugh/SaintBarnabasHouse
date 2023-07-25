@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SaintBarnabasHouse.Models;
 
@@ -10,9 +11,10 @@ using SaintBarnabasHouse.Models;
 namespace SaintBarnabasHouse.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20230725163447_blogmigration1")]
+    partial class blogmigration1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,37 +60,6 @@ namespace SaintBarnabasHouse.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Addresses");
-                });
-
-            modelBuilder.Entity("SaintBarnabasHouse.Models.BlogPost", b =>
-                {
-                    b.Property<int>("BlogPostId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("Creator")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MainImgUrl")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("BlogPostId");
-
-                    b.ToTable("BlogPosts");
                 });
 
             modelBuilder.Entity("SaintBarnabasHouse.Models.Cart", b =>
@@ -160,41 +131,6 @@ namespace SaintBarnabasHouse.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("SaintBarnabasHouse.Models.Comment", b =>
-                {
-                    b.Property<int>("CommentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("BlogPostId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int?>("ParentComment")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CommentId");
-
-                    b.HasIndex("BlogPostId");
-
-                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("SaintBarnabasHouse.Models.Image", b =>
@@ -429,13 +365,6 @@ namespace SaintBarnabasHouse.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("SaintBarnabasHouse.Models.Comment", b =>
-                {
-                    b.HasOne("SaintBarnabasHouse.Models.BlogPost", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("BlogPostId");
-                });
-
             modelBuilder.Entity("SaintBarnabasHouse.Models.Order", b =>
                 {
                     b.HasOne("SaintBarnabasHouse.Models.User", "User")
@@ -500,11 +429,6 @@ namespace SaintBarnabasHouse.Migrations
                     b.Navigation("Image");
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("SaintBarnabasHouse.Models.BlogPost", b =>
-                {
-                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("SaintBarnabasHouse.Models.Cart", b =>

@@ -1,0 +1,41 @@
+@model BlogPost
+
+<main class="blog-main">
+<button class="dk-button bttn" style="float:right" onclick="toggleDark()">Toggle dark mode</button>
+<div class="blogpost">
+    <img src="@Model.MainImgUrl" alt="@Model.Title" style="width:100%">
+<h2 class="display-5">@Model.Title</h2>
+<p><i>Posted by @ViewBag.Creator.FirstName on @Model.CreatedAt.ToString("MMMM dd, yyyy")</i></p>
+<p class="blog-content">@Model.Content</p>
+</div>
+<div class="blog-comments sheet">
+    <h4 class="display-6">Comments</h4>
+    @foreach(Comment comment in Model.Comments){
+        <p class="blog-content"><i>Posted by @comment.User.FirstName, @comment.CreatedAt.ToString("MMMM dd, yyyy H:mm")</i>
+        @comment.Text</p>
+    }
+    @if(Context.Session.GetInt32("UUID")!=null)
+    {
+    <form asp-controller="Blog" asp-action="NewComment">
+        <input type="hidden" name="UserId" value='@Context.Session.GetInt32("UUID")'>
+        <input type="hidden" name="BlogPostId" value="@Model.BlogPostId">
+        <label for="Text" style="font-style:italic">Leave a comment:</label>
+        <textarea class="form-control" name="Text"></textarea>
+        <input class="bttn" type="submit" value="Submit" style="margin-top:5px">
+    </form>
+    }
+</div>
+</main>
+
+<script>
+function toggleDark() {
+    let element = document.querySelector("main.blog-main");
+    element.classList.toggle("dark-mode");
+    let button = document.querySelector(".dk-button");
+    button.classList.toggle("dark-mode");
+    let html = document.querySelector("html");
+    html.classList.toggle("dark-mode");
+    let body = document.querySelector("body");
+    body.classList.toggle("dark-mode");
+}
+</script>

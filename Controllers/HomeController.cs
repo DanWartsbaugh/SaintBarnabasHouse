@@ -41,17 +41,7 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
-    [HttpGet("blog")]
-    public IActionResult Blog()
-    {
-        return View("Blog");
-    }
 
-    [HttpGet("blogpost")]
-    public IActionResult BlogPost()
-    {
-        return View("BlogPost");
-    }
 
     [HttpGet("event")]
     public IActionResult Event()

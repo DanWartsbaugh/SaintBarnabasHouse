@@ -1,0 +1,23 @@
+@model List<BlogPost>
+
+@{
+    ViewData["Title"] = "Saint Barnabas House Blog";
+}
+
+@if (Context.Session.GetString("Admin") == "Admin")
+{
+    <a href="/blog/new" class="bttn">New Post</a>
+}
+<div class="sheet">
+    <div class="allposts">
+        @foreach (BlogPost post in Model)
+        {
+            <a href="/blog/@post.BlogPostId"><div class="blog-tile">
+                <img src="@post.MainImgUrl" alt="image for post #@post.BlogPostId">
+                <h4>@post.Title</h4>
+                <i>@post.CreatedAt.ToString("MMMM dd, yyyy")</i>
+                <p class="blog-lead-text">@post.Content</p>
+            </div></a>
+        }
+    </div>
+</div>

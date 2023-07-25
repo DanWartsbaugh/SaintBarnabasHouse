@@ -53,7 +53,7 @@ body {
   }
 
   .items-view .prodCard {
-    color:black;
+    color: black;
   }
 
 
@@ -179,7 +179,7 @@ so that the hovered element takes more of the view*/
 .shop-cats-left h4 {
   padding-top: 75px;
   margin-left: 20px;
-  color:white;
+  color: white;
 }
 
 .shop-cats-mid {
@@ -208,7 +208,7 @@ so that the hovered element takes more of the view*/
   text-align: center;
   padding-top: 100px;
   padding-right: 50px;
-  color:white
+  color: white
 }
 
 
@@ -225,7 +225,7 @@ so that the hovered element takes more of the view*/
 .shop-cats-right h4 {
   padding-top: 150px;
   margin-right: 20px;
-  color:white
+  color: white
 }
 
 @media (max-width:770px) {
@@ -261,7 +261,7 @@ so that the hovered element takes more of the view*/
 }
 
 .bttn {
-  height:fit-content;
+  height: fit-content;
   border: solid black 1px;
   border-radius: 3px;
   padding: 0px 5px;
@@ -282,22 +282,22 @@ so that the hovered element takes more of the view*/
 
 /* Styling for order history (past orders) */
 .historycard {
-  width:120px;
-  margin-right:20px;
+  width: 120px;
+  margin-right: 20px;
   background-color: #BB1F1F;
 }
 
 .historycard img {
-  width:100px;
-  margin:10px 0px 5px 10px;
-  border:solid #91818A 3px;
-  border-radius:2px;
+  width: 100px;
+  margin: 10px 0px 5px 10px;
+  border: solid #91818A 3px;
+  border-radius: 2px;
 }
 
 .historytext {
-  background-color:#91818A;
-  margin-top:3px;
-  border-radius:0px 0px 3px 3px;
+  background-color: #91818A;
+  margin-top: 3px;
+  border-radius: 0px 0px 3px 3px;
 }
 
 
@@ -325,15 +325,15 @@ so that the hovered element takes more of the view*/
   margin: 0px 15px;
   background-color: #91818A;
   border-radius: 3px;
-  border:solid #462914 1px;
+  border: solid #462914 1px;
 }
 
 .prodCard-img {
   width: 140px;
   height: 140px;
   margin-top: 5px;
-  border:solid #462914 1px;
-  border-radius:3px;
+  border: solid #462914 1px;
+  border-radius: 3px;
 
   /* padding:5px;
   background-color:#91818A */
@@ -351,7 +351,7 @@ so that the hovered element takes more of the view*/
 
 .Books {
   background-color: #462914;
-  color: rgb(95,95,95)
+  color: rgb(95, 95, 95)
 }
 
 .Food {
@@ -365,7 +365,7 @@ so that the hovered element takes more of the view*/
 
 .shop-control-bar {
   padding: 10px 5px;
-  border-bottom:solid #91818A 1px;
+  border-bottom: solid #91818A 1px;
 }
 
 .shop-control-bar select {
@@ -374,7 +374,7 @@ so that the hovered element takes more of the view*/
 }
 
 .items-view {
-  padding-top:5px;
+  padding-top: 5px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -434,33 +434,96 @@ so that the hovered element takes more of the view*/
   width: fit-content
 }
 
-.prod-desc {
+.prod-desc,
+.blog-content {
   white-space: pre-wrap;
 }
 
 .reviewItem {
-  display:flex;
-  justify-content:space-between;
+  display: flex;
+  justify-content: space-between;
   padding: 10px 10%;
   border-bottom: solid #91818A 1px;
 }
 
 .modal {
-  background-color:#FFCE5C
+  background-color: #FFCE5C
 }
 
+/*Blog main page*/
+.allposts{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-evenly;
+  
+}
+
+.allposts a{
+  text-decoration:none;
+  color:black;
+}
+
+.blog-tile{
+  max-width:300px;
+  padding:8px;
+  margin:5px;
+  border:solid 1px #91818A;
+  border-radius:3px;
+  background-color:rgb(145, 129, 138,.8);
+  font-size:small
+}
+
+.blog-tile img{
+  margin:auto;
+  width:100%;
+}
+
+
+.blog-lead-text{
+  max-height:75px;
+  overflow-wrap:break-word;
+  /* white-space: break-spaces; */
+  /* text-overflow: ellipsis; */
+  overflow: hidden;
+}
 
 
 /*Blog post*/
 
+.blog-main {
+  padding: 20px;
+  color: black;
+}
+
+.dark-mode {
+  background: black;
+  color: white;
+}
+
+.bttn.dark-mode {
+  border-color:#91818A
+}
+
+.blogpost {
+  margin-top:40px;
+  padding:20px;
+  background: rgb(145, 129, 138, .3);
+  box-shadow: 3px 3px 6px 2px rgb(145, 129, 138, .5);
+  border-radius: 10px;
+}
+
+.blog-comments {
+  padding:10px
+}
+
 /*Credit to Martin Wolf (@martinwolf) for the paper hover effect below
 Taken from https://codepen.io/martinwolf/pen/GRaWPy*/
-.blog-main {
+/* .blog-main {
   position: relative;
   margin: 40px auto;
   width: 90%;
   height: 100%;
-  /* background: white; */
+  background: white;
   border-radius: 2px;
   padding: 10px;
 }
@@ -498,51 +561,40 @@ Taken from https://codepen.io/martinwolf/pen/GRaWPy*/
 
 .blog-main:hover::after {
   right: 5px;
-}
+} */
 
 /*end hover effect*/
 
 /*dark mode for blog post*/
-.dark-mode {
-  background: black;
-  color: white;
+
+
+
+.order-row {
+  display: none;
 }
 
-.blog-main.light-mode {
-  background: white;
-  color: black;
-}
-
-.blog-main.dark-mode {
-  background: black;
-  color: white;
-}
-
-.order-row{
-  display:none;
-}
-.order-row.showrow{
-  display:table-row;
+.order-row.showrow {
+  display: table-row;
   /* height:35px; */
 
 }
 
-.order-row.showrow td{
-  white-space:nowrap;
-  text-overflow:ellipsis;
-  overflow:hidden;
+.order-row.showrow td {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
-td.admin-order-items{
-  max-width:30%
+td.admin-order-items {
+  max-width: 30%
 }
 
-.collapse-title{
-  width:100%;
-  border:none;
+.collapse-title {
+  width: 100%;
+  border: none;
   padding: 0px 5px;
   background-color: transparent;
   color: black;
   text-decoration: none;
-  text-align:left
+  text-align: left
 }

@@ -15,12 +15,16 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\dwart\OneDrive\Desktop\Dojo\csharp\project\SaintBarnabasHouse
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Home/Blog.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxCbG9nLmNzaHRtbA==
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Blog/Blog.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmxvZ1xCbG9nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Home/BlogPost.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxCbG9nUG9zdC5jc2h0bWw=
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Blog/BlogPost.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmxvZ1xCbG9nUG9zdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Blog/NewPost.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmxvZ1xOZXdQb3N0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Home/Event.cshtml]
