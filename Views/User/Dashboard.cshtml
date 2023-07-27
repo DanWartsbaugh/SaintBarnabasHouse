@@ -23,6 +23,12 @@
     List<Order> orders = ViewBag.AllOrders;
 }
 @await Html.PartialAsync("_AllOrders",orders)
+
+@{
+    List<BlogPost> posts = ViewBag.AllPosts;
+}
+@await Html.PartialAsync("_AllPosts",posts)
+
 @await Html.PartialAsync("_ManageUser")
 
 

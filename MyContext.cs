@@ -21,6 +21,7 @@ public class MyContext : DbContext
     public DbSet<OrderProductAssoc> OrderProductAssocs { get; set; }
     public DbSet<BlogPost> BlogPosts { get; set; }
     public DbSet<Comment> Comments { get; set; }
+    public DbSet<Event> Events { get; set; }
 
     
 }

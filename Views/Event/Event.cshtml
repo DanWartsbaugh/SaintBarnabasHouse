@@ -1,0 +1,40 @@
+@model List<Event>
+
+<div class="sheet">
+    <p style="font-size:large">One of our favorite things at Saint Barnabas House is hosting events. From bonfires, to classes, to small retreats, we would love to have you over. We also love coming to you if you would like us to speak or teach in your parish. You can see all of our upcoming public events on the schedule below. We would love to have you join us!<br><br>
+    If you would like to schedule an event, simply click the link below. Once your request has been submitted, we will contact you to confirm the details.
+    </p>
+    <a href="/event/request" style="text-decoration:none;font-size:large">Schedule an event</a>
+    <h4 class="display-6" style="margin-top:10px;">Upcoming Events</h4>
+    @if(Model.Count>0){
+    <ul style="list-style:none">
+    @foreach (Event item in Model)
+    {
+        <li>
+        @if(item.Status==2)
+        {
+            <b style="text-decoration:line-through;font-size:large">@item.Date.ToString("MMMM dd, yyyy h:mm tt")</b>
+            <span style="color:darkred;font-weight:bold">This event has been cancelled</span>
+        }
+        else
+        {
+            <b style="font-size:large">@item.Date.ToString("MMMM dd, yyyy h:mm tt")</b>
+        }
+        @if(item.OnSite==true)
+        {
+            <p>Location: Saint Barnabas House</p>
+        }
+        else
+        {
+            <p>Location: @item.Address</p>
+        }
+        <p>@item.Details</p>
+        </li>
+    }
+    </ul>
+    }
+    else
+    {
+    <h4>No events have been scheduled</h4>
+    }
+</div>

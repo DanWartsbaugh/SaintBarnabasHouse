@@ -13,6 +13,11 @@
     @foreach(Comment comment in Model.Comments){
         <p class="blog-content"><i>Posted by @comment.User.FirstName, @comment.CreatedAt.ToString("MMMM dd, yyyy H:mm")</i>
         @comment.Text</p>
+        @if(Context.Session.GetString("Admin")=="Admin"){
+            <form asp-controller="Blog" asp-action="RemoveComment" asp-route-CommentId="@comment.CommentId">
+                <input class="bttn" type="submit" value="Delete comment">
+            </form>
+        }
     }
     @if(Context.Session.GetInt32("UUID")!=null)
     {

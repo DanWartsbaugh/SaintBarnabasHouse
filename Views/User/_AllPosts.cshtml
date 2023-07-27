@@ -1,0 +1,52 @@
+@model List<BlogPost>
+
+<div class="sheet">
+    <button class="collapse-title" type="button" data-bs-toggle="collapse" data-bs-target="#postList"
+        aria-expanded="false" aria-controls="postList">
+        <h3>Blog</h3>
+    </button>
+    <div class="collapse" id="postList" style="margin-top:10px">
+        <a class="bttn" href="/blog/new" style="color:black">Add a new post</a>
+
+        @* View and Edit buttons, show a thumbnail of the image and the title *@
+        @* Viewing the post should also display comments with an option to delete the comment, which can be handled on
+        the blogpost page itself*@
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th class="col-2">Title</th>
+                    <th class="col-4">Content</th>
+                    <th class="col-2">Display image</th>
+                    <th class="col-1">Created</th>
+                    <th class="col-1">Last Updated</th>
+                    <th class="col-2">Actions</th>
+                </tr>
+                @foreach (BlogPost post in Model)
+                {
+                    <tr style="height:75px">
+                        <td><b>@post.Title</b></td>
+                        <td>
+                            <p style="height:75px;overflow:hidden;overflow-wrap:break-word;font-size:small">@post.Content
+                            </p>
+                        </td>
+                        <td class="col-2"><img class="col-12" src="@post.MainImgUrl" alt="@post.Title image"></td>
+                        <td>@post.CreatedAt.ToString("MMMM dd, yyyy")</td>
+                        <td>@post.UpdatedAt.ToString("MMMM dd, yyyy")</td>
+                        <td>
+                            <a class="bttn" href="/blog/@post.BlogPostId" style="color:black">View</a>
+                            <form asp-controller="blog" asp-action="RenderUpdatePost"
+                                asp-route-BlogPostId="@post.BlogPostId">
+                                <button type="submit" class="bttn">Edit</button>
+                            </form>
+                            <form asp-controller="Blog" asp-action="RemovePost" asp-route-BlogPostId="@post.BlogPostId">
+                                <button type="submit" class="bttn">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+
+
+            </table>
+        </div>
+    </div>
+</div>
