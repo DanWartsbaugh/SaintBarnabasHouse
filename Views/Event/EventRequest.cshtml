@@ -1,0 +1,36 @@
+@model Event
+
+<div class="sheet">
+    <form asp-controller="Event" asp-action="SubmitEventRequest" method="POST">
+        <input asp-for="OnSite">
+        <label for="OnSite">This event will be hosted at Saint Barnabas House</label><br>
+        <span asp-validation-for="OnSite"></span>
+        <input asp-for="Private">
+        <label for="Private">This will be a private event. (If it is not private, it will be listed on our
+            website.)</label><br>
+        <span asp-validation-for="Private"></span>
+
+        <label for="Address">If this event is not hosted at Saint Barnabas House, please list the address</label><br>
+        <input class="form-control" asp-for="Address">
+        <label asp-for="Date"></label> <span asp-validation-for="Date"></span><br>
+
+        <input asp-for="Date"><br>
+        <label for="EventType">Type of event</label> <span asp-validation-for="EventType"></span>
+        <br>
+        <select asp-for="EventType">
+            <option value="hidden">Select one</option>
+            <option value="Class">Class</option>
+            <option value="Party">Party</option>
+        </select><br>
+        <label for="RequesterName">Your name</label> <span asp-validation-for="RequesterName"></span><br>
+        <input class="form-control" asp-for="RequesterName"><br>
+        <label for="RequesterEmail">Your email</label> <span asp-validation-for="RequesterEmail"></span><br>
+
+        <input class="form-control" asp-for="RequesterEmail"><br>
+        <label for="Details">Event details</label> <span asp-validation-for="Details"></span>
+        <br>
+        <textarea class="form-control" asp-for="Details"></textarea><br>
+
+        <input class="bttn" type="submit" value="Submit request">
+    </form>
+</div>
