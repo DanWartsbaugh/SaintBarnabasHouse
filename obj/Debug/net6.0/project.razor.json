@@ -18449,6 +18449,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\Views\\Event\\UpdateEvent.cshtml",
+      "TargetPath": "Views\\Event\\UpdateEvent.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\Views\\Event\\EventRequest.cshtml",
       "TargetPath": "Views\\Event\\EventRequest.cshtml",
       "FileKind": "mvc"
@@ -18481,6 +18486,11 @@
     {
       "FilePath": "c:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\Views\\User\\_ManageUser.cshtml",
       "TargetPath": "Views\\User\\_ManageUser.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\Views\\User\\_AllEvents.cshtml",
+      "TargetPath": "Views\\User\\_AllEvents.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -18571,6 +18581,11 @@
     {
       "FilePath": "c:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\Views\\User\\_AllProducts.cshtml",
       "TargetPath": "Views\\User\\_AllProducts.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\dwart\\OneDrive\\Desktop\\Dojo\\csharp\\project\\SaintBarnabasHouse\\Views\\Event\\SingleEvent.cshtml",
+      "TargetPath": "Views\\Event\\SingleEvent.cshtml",
       "FileKind": "mvc"
     },
     {

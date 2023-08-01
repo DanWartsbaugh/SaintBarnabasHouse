@@ -1,7 +1,7 @@
 @model Event
 
 <div class="sheet">
-    <form asp-controller="Event" asp-action="SubmitEventRequest" method="POST">
+    <form asp-controller="Event" asp-action="UpdateEvent" asp-route-EventId="@Model.EventId" method="POST">
         <input asp-for="OnSite">
         <label for="OnSite">This event will be hosted at Saint Barnabas House</label><br>
         <span asp-validation-for="OnSite"></span>
@@ -31,11 +31,18 @@
         <br>
         <textarea class="form-control" asp-for="Details"></textarea><br>
 
-        <label for="Description">Description (This is what will be posted on our website if your event is public.)</label>
+        <label for="Description">Description (This is what will be posted on our website if your event is
+            public.)</label>
         <br>
         <textarea class="form-control" asp-for="Description"></textarea><br>
+        <select asp-for="Status">
+            <option value="hidden"></option>
+            <option value="-1">Past</option>
+            <option value="0">Requested</option>
+            <option value="1">Confirmed</option>
+            <option value="2">Cancelled</option>
+        </select><br>
 
-
-        <input class="bttn" type="submit" value="Submit request">
+        <input class="bttn" type="submit" value="Update event">
     </form>
 </div>

@@ -106,6 +106,7 @@ public class UserController : Controller
             ViewBag.AllProducts = _context.Products.Include(p => p.ProductCategoryAssocs).ThenInclude(p => p.Category).Include(p => p.ProductImageAssocs).ThenInclude(p => p.Image).ToList();
             ViewBag.AllOrders = _context.Orders.Include(o => o.OrderProductAssocs).ThenInclude(opa => opa.Product).ToList();
             ViewBag.AllPosts = _context.BlogPosts.ToList();
+            ViewBag.AllEvents = _context.Events.ToList();
             return View("Dashboard");
         }
 

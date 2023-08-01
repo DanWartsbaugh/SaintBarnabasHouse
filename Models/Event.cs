@@ -34,6 +34,8 @@ public class Event
 // Statuses will be -1: Past, 0: Requested, 1: Confirmed, 2: Cancelled
     public int Status { get; set; }
 
+    public string? Description { get; set; }
+
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
 

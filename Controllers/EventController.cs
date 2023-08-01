@@ -24,7 +24,7 @@ public class EventController : Controller
     public IActionResult Event()
     {
         List<Event> UpcomingEvents = _context.Events.Where(e => e.Status > 0).OrderBy(e => e.Date).ToList();
-        return View("Event",UpcomingEvents);
+        return View("Event", UpcomingEvents);
     }
 
     [HttpGet("event/request")]
@@ -36,7 +36,7 @@ public class EventController : Controller
     [HttpPost("event/request")]
     public IActionResult SubmitEventRequest(Event request)
     {
-                if (ModelState.IsValid)
+        if (ModelState.IsValid)
         {
             request.Status = 0;
             _context.Add(request);
@@ -47,6 +47,82 @@ public class EventController : Controller
         {
             return View("EventRequest");
         }
+    }
+
+    [HttpGet("event/{EventId}")]
+    public IActionResult ShowEvent(int EventId)
+    {
+        Event item = _context.Events.FirstOrDefault(e => e.EventId == EventId);
+        if (item == null)
+        {
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+        return View("SingleEvent", item);
+    }
+
+    [HttpGet("event/{EventId}/update")]
+    public IActionResult RenderUpdateEvent(int EventId)
+    {
+        Event? item = _context.Events.FirstOrDefault(e => e.EventId == EventId);
+        if (item == null)
+        {
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+        return View("UpdateEvent", item);
+    }
+
+    [HttpPost("event/{EventId}/update")]
+    public IActionResult UpdateEvent(Event updatedEvent, int EventId)
+    {
+        if (HttpContext.Session.GetString("Admin") == "Admin")
+        {
+            if (!ModelState.IsValid)
+            {
+                return RenderUpdateEvent(EventId);
+            }
+
+            Event? OldEvent = _context.Events.FirstOrDefault(e => e.EventId == EventId);
+
+            if (OldEvent == null)
+            {
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+            OldEvent.EventType = updatedEvent.EventType;
+            OldEvent.Private = updatedEvent.Private;
+            OldEvent.OnSite = updatedEvent.OnSite;
+            OldEvent.Address = updatedEvent.Address;
+            OldEvent.RequesterName = updatedEvent.RequesterName;
+            OldEvent.RequesterEmail = updatedEvent.RequesterEmail;
+            OldEvent.Details = updatedEvent.Details;
+            OldEvent.Date = updatedEvent.Date;
+            OldEvent.Description = updatedEvent.Description;
+            OldEvent.Status = updatedEvent.Status;
+            OldEvent.UpdatedAt = DateTime.Now;
+
+            _context.SaveChanges();
+            return RedirectToAction("Dashboard", "User");
+        }
+
+        return Redirect(Request.Headers["Referer"].ToString());
+    }
+
+    [HttpPost("event/{EventId}/updatestatus")]
+    public IActionResult UpdateStatus(int EventId, int Status)
+    {
+        if (HttpContext.Session.GetString("Admin") == "Admin")
+        {
+            Event? item = _context.Events.FirstOrDefault(e => e.EventId == EventId);
+            if (item != null)
+            {
+                item.Status = Status;
+                item.UpdatedAt = DateTime.Now;
+                _context.SaveChanges();
+
+                return RedirectToAction("Dashboard", "User");
+            }
+        }
+
+        return Redirect(Request.Headers["Referer"].ToString());
     }
 
     // [HttpGet("blog/{BlogPostId}")]
@@ -97,33 +173,7 @@ public class EventController : Controller
     //     return Redirect(Request.Headers["Referer"].ToString());
     // }
 
-    // [HttpPost("blog/{BlogPostId}/update")]
-    // public IActionResult UpdatePost(BlogPost updatedpost, int BlogPostId)
-    // {
-    //     if (HttpContext.Session.GetString("Admin") == "Admin")
-    //     {
-    //         if (!ModelState.IsValid)
-    //         {
-    //             return RenderUpdatePost(BlogPostId);
-    //         }
 
-    //         BlogPost? OldPost = _context.BlogPosts.FirstOrDefault(b => b.BlogPostId == BlogPostId);
-
-    //         if (OldPost == null)
-    //         {
-    //             return Redirect(Request.Headers["Referer"].ToString());
-    //         }
-    //         OldPost.Title = updatedpost.Title;
-    //         OldPost.MainImgUrl = updatedpost.MainImgUrl;
-    //         OldPost.Content = updatedpost.Content;
-    //         OldPost.UpdatedAt = DateTime.Now;
-
-    //         _context.SaveChanges();
-    //         return RedirectToAction("Dashboard", "User");
-    //     }
-
-    //     return Redirect(Request.Headers["Referer"].ToString());
-    // }
 
     // [HttpPost("blog/newcomment")]
     // public IActionResult NewComment(Comment newComment)

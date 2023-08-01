@@ -1,0 +1,76 @@
+@model List<Event>
+
+<div class="sheet">
+    <button class="collapse-title" type="button" data-bs-toggle="collapse" data-bs-target="#eventList"
+        aria-expanded="false" aria-controls="eventList">
+        <h3>Events</h3>
+    </button>
+    <div class="collapse" id="eventList" style="margin-top:10px">
+        @* <a class="bttn" href="/blog/new" style="color:black">Add a new post</a> *@
+
+        @* View and Edit buttons, show a thumbnail of the image and the title *@
+        @* Viewing the post should also display comments with an option to delete the comment, which can be handled on
+        the blogpost page itself*@
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th class="col-2">Date</th>
+                    <th class="col-4">Details</th>
+                    <th class="col-1">Request sent</th>
+                    <th class="col-1">Status</th>
+                    <th class="col-2">Actions</th>
+                </tr>
+                @foreach (Event item in Model)
+                {
+                    string stat = "";
+                    if (item.Status == -1)
+                    {
+                        stat = "Past";
+                    }
+                    if (item.Status == 0)
+                    {
+                        stat = "Requested";
+                    }
+                    if (item.Status == 1)
+                    {
+                        stat = "Confirmed";
+                    }
+                    if (item.Status == 2)
+                    {
+                        stat = "Cancelled";
+                    }
+                    <tr style="height:75px">
+                        <td><b>@item.Date</b></td>
+                        <td>
+                            <p style="height:75px;overflow:hidden;overflow-wrap:break-word;font-size:small">@item.Details
+                            </p>
+                        </td>
+                        <td>@item.CreatedAt.ToString("MMMM dd, yyyy")</td>
+                        <td>@stat</td>
+                        <td>
+                            <a class="bttn" href="/event/@item.EventId" style="color:black">View</a>
+                            <form asp-controller="Event" asp-action="RenderUpdateEvent" asp-route-EventId="@item.EventId"
+                                method="POST">
+                                <input type="submit" class="bttn" value="Edit">
+                            </form>
+                            <form asp-controller="Event" asp-action="UpdateStatus" asp-route-EventId="@item.EventId"
+                                method="POST">
+                                <input class="bttn" type="submit" value="Update Status">
+                                <select name="Status">
+                                    <option value="hidden"></option>
+                                    <option value="-1">Past</option>
+                                    <option value="0">Requested</option>
+                                    <option value="1">Confirmed</option>
+                                    <option value="2">Cancelled</option>
+                                </select>
+                            </form>
+
+                        </td>
+                    </tr>
+                }
+
+
+            </table>
+        </div>
+    </div>
+</div>

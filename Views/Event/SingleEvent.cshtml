@@ -1,0 +1,23 @@
+@model Event
+
+<div class="sheet">
+    <h5>Date: @Model.Date.ToString("MMMM dd, yyyy h:mm tt")</h5>
+    <p>On site: @Model.OnSite</p>
+    <p>Private: @Model.Private</p>
+    @if(Model.OnSite == false)
+    {
+        <p>@Model.Address</p>
+    }
+    <p>Type of event: @Model.EventType</p>
+    <p>Requester: @Model.RequesterName</p>
+    <p>Requester Email: @Model.RequesterEmail</p>
+    <p>Details: @Model.Details</p>
+    @if(Model.Description!=null)
+    {
+    <p>Description: @Model.Description</p>
+    }
+    else
+    {
+        <p>Description: None</p>
+    }
+</div>

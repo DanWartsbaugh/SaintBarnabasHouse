@@ -39,6 +39,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRcRXZlbnRSZXF1ZXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Event/SingleEvent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRcU2luZ2xlRXZlbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Event/UpdateEvent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRcVXBkYXRlRXZlbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -145,6 +153,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/User/_AllCategories.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxfQWxsQ2F0ZWdvcmllcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/User/_AllEvents.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxfQWxsRXZlbnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/dwart/OneDrive/Desktop/Dojo/csharp/project/SaintBarnabasHouse/Views/User/_AllImages.cshtml]

@@ -29,6 +29,12 @@
 }
 @await Html.PartialAsync("_AllPosts",posts)
 
+@{
+    List<Event> events = ViewBag.AllEvents;
+}
+
+@await Html.PartialAsync("_AllEvents",events)
+
 @await Html.PartialAsync("_ManageUser")
 
 
