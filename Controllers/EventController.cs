@@ -23,7 +23,7 @@ public class EventController : Controller
     [HttpGet("event")]
     public IActionResult Event()
     {
-        List<Event> UpcomingEvents = _context.Events.Where(e => e.Status > 0).OrderBy(e => e.Date).ToList();
+        List<Event> UpcomingEvents = _context.Events.Where(e => e.Status > 0 && e.Private == false).OrderBy(e => e.Date).ToList();
         return View("Event", UpcomingEvents);
     }
 
